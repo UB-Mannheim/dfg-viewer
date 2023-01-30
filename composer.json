@@ -1,8 +1,8 @@
 {
-  "name": "csidirop/dfgviewer",
+  "name": "ub-mannheim/dfgviewer",
   "type": "typo3-cms-extension",
   "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH..",
-  "homepage": "https://github.com/csidirop/dfg-viewer",
+  "homepage": "https://github.com/ub-mannheim/dfg-viewer",
   "keywords": [
     "TYPO3",
     "extension",
@@ -44,8 +44,8 @@
   "license": "GPL-3.0-or-later",
   "require": {
     "typo3/cms-core": "~9.5.31",
-    "csidirop/presentation": "dev-3.3.x-ocr",
-    "slub/slub-digitalcollections": "^2.1"
+    "ub-mannheim/presentation": "dev-3.3.x-ocr",
+    "ub-mannheim/ubma-digitalcollections": "v2.2.x-dev"
   },
   "autoload": {
     "psr-4": {
