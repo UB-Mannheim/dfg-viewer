@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:slub/dfg-viewer.git"
+    "url": "git@github.com:bfallert/dfg-viewer.git"
   },
   "author": "Alexander Bigga",
   "license": "GPL-3.0-or-later",
