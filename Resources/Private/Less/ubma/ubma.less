@@ -1,0 +1,312 @@
+// Anpassungen an UB Mannheim
+
+.control-bar {
+    .header-bar {
+        h1{
+            a {
+                // Logo des df-viewers:
+		background: url(../../../Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
+		background-size: 62px;
+            }
+        }
+	nav {
+		.language-nav {
+			li {
+				a {
+					color: #ABB8CA;
+					
+					&.actlang { 
+						color: #fff;
+					}
+				}
+			}
+		}
+	}
+    }
+}
+
+.document-view {
+	.document-functions {
+		.provider {
+			display: none;
+		}
+
+		ul.document-function-bar {
+			left: 15px;
+		}
+	}
+    .fulltext-container {
+        opacity: 0.95;
+
+        // Not necessary
+        //&:before {
+        //    height: 85px;
+        //}
+
+        #tx-dlf-fulltextselection {
+            padding-top: 80px;
+
+            span.textline {
+                // Shows lines in original wrap
+                display: block;
+            }
+        }
+    }
+}
+
+body {
+	&.fullscreen {
+		.document-view {
+			.document-functions {
+				.provider {
+					// fix position of logo
+					.transform(translateY(-10%));
+
+					// Original state
+					display: flex;
+
+				}
+
+				ul.document-function-bar {
+					// Original state
+					left: 124px;
+				}
+
+			}
+		}
+	}
+}
+
+dt.tx-dlf-metadata-mets.meta_not_show.ausblenden {
+	display: none;
+}
+dd.tx-dlf-metadata-mets.meta_not_show.btn {
+    display: block;
+    background-color: #fff;
+    border-color: #ccc #ccc #bbb;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 1px 2px rgba(0,0,0,.05);
+    font-size: 13px;
+    vertical-align: middle;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px 10px;
+    line-height: 14px;
+    height: 27px;
+    width: max-content;
+    text-align: right;
+    padding-left: 9px;
+    
+    a {
+	color: #232e58;
+    }
+}
+
+
+.tx-dlf-metadata {
+	dl {
+		dd {
+			a {
+				border-bottom: 0.1875rem solid #d1d7df;
+			}
+			
+			&.btn {
+				a {
+					border-bottom: none;
+				}
+			}
+		}
+		
+	}
+}
+
+// Bl�ttern-Buttons Hintergrundfarbe erg�nzt um es vom Text unterscheiden zu k�nnen
+// span ist noch immer schlecht zu erkennen, aber besser wie vorher
+.page-control {
+	&>div.backs.over,
+	&>div.fwds.over {
+		span.fwd,
+		span.last,
+		span.next,
+		span.rwnd,
+		span.first,
+		span.prev {
+			span,
+			a {
+				background-color: #fff;
+				width: 250%;
+				border-radius: 19px;				
+			}
+		}
+	}
+	&>div.fwds.over {
+		span.fwd,
+		span.last,
+		span.next {
+			span,
+			a {
+				padding-left: 10px;
+			}
+		}
+	}
+	&>div.backs.over {
+		span.rwnd,
+		span.first,
+		span.prev {
+			span,
+			a {
+				padding-right: 10px;
+			}
+		}
+	}
+
+	&>div.backs.over,
+	&>div.fwds.over {
+		span.fwd,
+		span.last,
+		span.next,
+		span.rwnd,
+		span.first,
+		span.prev {
+			a {
+				opacity: 0.88;
+			}
+		}
+	}
+}
+
+/* toc im dfgviewer modus */
+ul.toc.newspaper {
+	& > li.active.submenu {
+		& > ul.normal {
+			&:before {
+				top: 16px;
+			}
+
+			& > li.submenu.current {
+				color: hotpink;
+				color: #ff69b4;
+
+				&:before {
+					color: lightpink;
+					color: #ffb6c1;
+					border-left-color: transparent;
+				}
+			}
+		}
+	}
+
+	ul.normal {
+		li {
+			&.submenu {
+				ul.normal {
+					&:before {
+						color: lightblue;
+						left: -20px;
+					}
+					// Monat
+					li.submenu.doNotLinkIt {
+						color: lightgreen;
+
+						&:before {
+							left: -20px;
+						}
+
+						span.a.doNotLinkIt {
+							display: none;
+
+							span {
+								color: green;
+								display: none;
+							}
+
+						}
+
+						ul.doNotLinkIt {
+							&:before {
+								// Verbindungsstrich vor 02.02.1914
+								left: 30px;
+								top:19px
+							}
+
+							li.submenu.doNotLinkIt {
+								ul.doNotLinkIt {
+									li.submenu {
+										// Das ist dann der Tag 02.02.1914
+										left: 0;
+
+										&::before {
+											// auch Unterelemente, damit wird bei einem unterelement der Pfeil weiter rechts gerueckt
+											left: 28px;
+											color: brown;
+										}
+										
+										// das erste Elemente also der Tag selbst
+										&.active {
+											//left: 28px;
+										}
+
+										a {
+											padding-left: 50px;
+										}
+
+
+										&.current {
+											ul.normal {
+												// Unterunterelemente einruecken
+												padding-left: 8px;
+
+												&:before {
+													width: 1px;
+													color: #fff;
+												}
+											}
+										}
+										&.active {
+											ul.normal {
+												// Unterunterelemente einruecken
+												padding-left: 8px;
+
+												&:before {
+													width: 1px;
+													color: #fff;
+												}
+											}
+										}
+									}
+								}
+							}
+
+						}
+					}
+
+
+				}
+			}
+		}
+
+		/*
+		ul.normal {
+			ul.doNotLinkIt {
+				&:before {
+					color: hotpink;
+				}
+
+				ul.doNotLinkIt {
+					&:before {
+						color: green;
+					}
+				}
+			}
+		}
+		*/
+	}
+}
+
+
+// Abstand zwischen verschiedenen Metadaten-Blöcken
+dl.tx-dlf-metadata-titledata {
+    & + & {
+        margin-top: 20px;
+    }
+}
