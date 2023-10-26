@@ -8,9 +8,11 @@ config {
   removeDefaultJS = 1
 
   # concatenate all Javascript files by default
-  concatenateJs = 1
+  # in Mannheim no concatenate
+  concatenateJs = 0
   # concatenate all CSS files by default
-  concatenateCss = 1
+  # in Mannheim no concatenate
+  concatenateCss = 0
 
   #Cache
   cache_clearAtMidnight = 1
