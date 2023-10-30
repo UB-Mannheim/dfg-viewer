@@ -1,14 +1,14 @@
 {
-    "name": "slub/dfgviewer",
-    "type": "typo3-cms-extension",
-    "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
-    "homepage": "https://github.com/slub/dfg-viewer",
-    "keywords": [
-        "TYPO3",
-        "extension",
-        "dfgviewer"
-    ],
-    "authors": [
+  "name": "bfallert/dfgviewer",
+  "type": "typo3-cms-extension",
+  "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
+  "homepage": "https://github.com/bfallert/dfg-viewer",
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "dfgviewer"
+  ],
+  "authors": [
         {
             "name": "Alexander Bigga",
             "email": "typo3@slub-dresden.de",
@@ -40,12 +40,13 @@
             "role": "Developer"
         }
     ],
+
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "8.1 - 8.3",
         "typo3/cms-core": "^11.5.41|^12.4.24",
         "kitodo/presentation": "@dev",
-        "slub/slub-digitalcollections": "^4.0|dev-master"
+        "slub/slub-digitalcollections": "@dev"
         "kitodo/presentation": "dev-main",
     },
     "require-dev": {
