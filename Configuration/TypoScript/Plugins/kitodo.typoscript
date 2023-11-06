@@ -301,6 +301,80 @@ plugin.tx_dlf_audioplayer {
     }
 }
 
+
+#=======================================================================
+# Übernommen von presentation konfig
+#=======================================================================
+plugin.tx_dlf_pagegrid {
+    settings {
+        paginate {
+            itemsPerPage = 10
+            insertAbove = 1
+            insertBelow = 1
+            lessPages = 1
+            forcedNumberOfLinks = 5
+            pagesBefore = 3
+            pagesAfter = 3
+            section =
+        }
+    }
+}
+
+plugin.tx_dlf_listview {
+    settings {
+        list.paginate {
+            itemsPerPage = 25
+            insertAbove = 1
+            insertBelow = 1
+            maximumNumberOfLinks = 10
+            section = showResults
+        }
+    }
+}
+
+plugin.tx_dlf_collection {
+    settings {
+        list.paginate {
+            itemsPerPage = 25
+            insertAbove = 1
+            insertBelow = 1
+            maximumNumberOfLinks = 10
+            section = showResults
+        }
+    }
+}
+
+plugin.tx_dlf_search {
+    settings {
+        list.paginate {
+            itemsPerPage = 25
+            insertAbove = 1
+            insertBelow = 1
+            maximumNumberOfLinks = 10
+            section = showResults
+        }
+    }
+}
+
+plugin.tx_dlf_tableofcontents {
+    settings {
+        titleReplacements {
+            0 {
+                type = issue
+                fields = type,year
+            }
+            1 {
+                type = volume
+                fields = type,volume
+            }
+        }
+    }
+}
+#=======================================================================
+# Übernommen von presentation konfig
+#=======================================================================
+
+
 # --------------------------------------------------------------------------------------------------------------------
 # 3d object
 # --------------------------------------------------------------------------------------------------------------------
