@@ -37,7 +37,7 @@ plugin.tx_dlf {
                     oai {
                         namespace = http://www.openarchives.org/OAI/2.0/
                         schemaLocation = https://www.openarchives.org/OAI/2.0/OAI-PMH.xsd
-                    }
+    }
                     mets {
                         namespace = http://www.loc.gov/METS/
                         schemaLocation = http://www.loc.gov/standards/mets/mets.xsd
@@ -204,9 +204,13 @@ lib.kitodo.navigation.viewfunction {
 # pdfdownloadtool
 # searchindocumenttool
 
+
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
     settings {
+        fileGrpsImageDownload = DEFAULT
+        fileGrpsDownload = DOWNLOAD,FULLTEXT
+        tools = imagedownloadtool, pdfdownloadtool, imagemanipulationtool, fulltexttool
     }
 }
 
@@ -228,7 +232,7 @@ plugin.tx_dlf_fulltexttool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_fulltexttool {
     settings {
         tools = fulltexttool
-        activateFullTextInitially = 0
+        activateFullTextInitially = 1
         fullTextScrollElement = #tx-dlf-fulltextselection
     }
 }
@@ -244,6 +248,14 @@ plugin.tx_dlf_imagemanipulationtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_imagemanipulationtool {
     settings {
         tools = imagemanipulationtool
+    }
+}
+
+
+plugin.tx_dlf_imagedownloadtool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_imagedownloadtool {
+    settings {
+        tools = imagedownloadtool
     }
 }
 
