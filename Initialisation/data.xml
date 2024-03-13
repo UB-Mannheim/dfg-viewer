@@ -7548,18 +7548,21 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 				</field>
 			</related>
 		</tablerow>
-		
 		<tablerow index="tx_dlf_metadataformat:1" type="array">
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">1</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">32</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">2</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Manifest Type')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7568,7 +7571,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7579,14 +7582,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">2</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">36</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">4</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title/teihdr:persName[@role=&quot;author&quot;]</field>
-				<field index="xpath_sorting"></field>
+				<field index="xpath">concat(./mods:titleInfo/mods:nonSort,&quot; &quot;,./mods:titleInfo/mods:title)</field>
+				<field index="xpath_sorting">./mods:titleInfo/mods:title</field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -7605,14 +7612,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">3</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">42</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate</field>
-				<field index="xpath_sorting">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate/@when</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">4</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:note[@type=&quot;caption&quot;]</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -7620,7 +7631,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7631,13 +7642,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">4</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">3</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origPlace</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">4</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$[label]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7646,7 +7661,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7657,14 +7672,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">5</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">9</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">6</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">concat(./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/teihdr:width,&quot;x&quot;,./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/teihdr:height,./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/@unit)</field>
-				<field index="xpath_sorting"></field>
+				<field index="xpath">./mods:part/mods:detail/mods:number</field>
+				<field index="xpath_sorting">./mods:part[@type=&quot;host&quot;]/@order</field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -7683,13 +7702,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">6</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">11</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">8</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:measure[@type=&quot;leavesCount&quot;]</field>
+				<field index="xpath">./mods:originInfo/*[@encoding=&quot;iso8601&quot; or @encoding=&quot;w3cdtf&quot;][@keyDate=&quot;yes&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7709,13 +7732,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">7</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">13</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:support</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">10</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:name</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7724,7 +7751,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7735,13 +7762,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">8</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">19</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">10</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Author')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7750,7 +7781,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7761,13 +7792,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">9</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">21</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:repository</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">12</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origPlace</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7776,7 +7811,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7787,13 +7822,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">10</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">46</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:settlement</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">12</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Place of publication')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7802,7 +7841,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7813,14 +7852,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">11</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">35</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title/teihdr:persName[@role=&quot;author&quot;]</field>
-				<field index="xpath_sorting"></field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">14</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origDate</field>
+				<field index="xpath_sorting">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:origDate/@when</field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -7828,7 +7871,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7839,13 +7882,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">12</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">45</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:settlement</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">14</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Date of publication')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7854,7 +7901,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7865,13 +7912,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">13</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">12</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">16</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:support</field>
+				<field index="xpath">./mods:language/mods:languageTerm</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7891,13 +7942,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">14</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">10</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">18</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:measure[@type=&quot;leavesCount&quot;]</field>
+				<field index="xpath">./mods:classification</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7917,13 +7972,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">15</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">20</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:repository</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">18</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:collection</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7932,7 +7991,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7943,13 +8002,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">16</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">2</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origPlace</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">18</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Collection')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7958,7 +8021,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -7969,13 +8032,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">17</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">8</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">20</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">concat(./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/teihdr:width,&quot;x&quot;,./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/teihdr:height,./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:physDesc/teihdr:objectDesc/teihdr:supportDesc/teihdr:extent/teihdr:dimensions[@type=&quot;leaves&quot;]/@unit)</field>
+				<field index="xpath">./mods:name[./mods:role/mods:roleTerm=&quot;own&quot;]/mods:displayForm</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -7995,13 +8062,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">18</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">18</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:msIdentifier/teihdr:idno</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">20</field>
+				<field index="encoded" type="integer">2</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:publisher</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8010,7 +8081,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>2</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8021,13 +8092,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">19</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">31</field>
-				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:head/teihdr:title</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">20</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Owner')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8036,7 +8111,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>1</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8047,14 +8122,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">20</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">41</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">22</field>
 				<field index="encoded" type="integer">1</field>
-				<field index="xpath">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate</field>
-				<field index="xpath_sorting">./teihdr:fileDesc/teihdr:sourceDesc/teihdr:msDesc/teihdr:history/teihdr:origin/teihdr:origDate/@when</field>
+				<field index="xpath">./mods:identifier[@type=&quot;purl&quot;]</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -8073,13 +8152,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">21</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">28</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">22</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">//mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;purl&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8099,13 +8182,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">22</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">30</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:nonSort,&quot; &quot;,./mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title)</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">24</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:identifier[@type=&quot;urn&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8114,7 +8201,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8125,13 +8212,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">23</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">32</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">24</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:nonSort,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:partNumber,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:partName)</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;urn&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8151,13 +8242,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">24</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">34</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:name[./mods:role/mods:roleTerm[@authority=&quot;marcrelator&quot;][@type=&quot;code&quot;]=&quot;aut&quot;]/mods:displayForm</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">24</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='URN')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8166,7 +8261,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8177,13 +8272,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">25</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">38</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@keyDate=&quot;yes&quot;]</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">26</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:identifier[@type=&quot;opac&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8192,7 +8291,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8203,13 +8302,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">26</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">42</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">26</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[not(@point)]</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;opac&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8229,13 +8332,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">27</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">44</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[@point=&quot;start&quot;],&quot; &quot;,./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[@point=&quot;end&quot;])</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">28</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:identifier[@type=&quot;ppn&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8244,7 +8351,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8255,13 +8362,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">28</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">25</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">28</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@point=&quot;start&quot;],&quot; &quot;,./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@point=&quot;end&quot;])</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;mmid&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8281,13 +8392,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">29</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">23</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:place/mods:placeTerm</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">30</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:recordInfo/mods:recordIdentifier</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8296,7 +8411,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8307,13 +8422,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">30</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">5</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">30</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:identifier[@type=&quot;vd17&quot;]</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;recordIdentifier&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8333,13 +8452,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">31</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">7</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:identifier[@type=&quot;vd16&quot;]</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">30</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$['@id']</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8348,7 +8471,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8359,14 +8482,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">32</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">15</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:part/mods:detail/mods:number</field>
-				<field index="xpath_sorting">./mods:part[@type=&quot;host&quot;]/@order</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">32</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:identifier[@type=&quot;kitodo&quot;]</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -8374,7 +8501,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8385,14 +8512,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">33</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">17</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">32</field>
 				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:part/mods:detail/mods:number</field>
-				<field index="xpath_sorting">./mods:part[@type=&quot;host&quot;]/@order</field>
+				<field index="xpath">./teihdr:fileDesc/teihdr:publicationStmt/teihdr:idno[@type=&quot;kitodo&quot;]</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -8411,13 +8542,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">34</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">19</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:location/mods:shelfLocator</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">32</field>
+				<field index="encoded" type="integer">5</field>
+				<field index="xpath">$.metadata.[?(@.label=='Kitodo')].value</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8426,7 +8561,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>5</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8437,13 +8572,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">35</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">21</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:location/mods:physicalLocation</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">34</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:subject/mods:cartographics/mods:coordinates</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8452,7 +8591,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8463,13 +8602,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">36</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">24</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@point=&quot;start&quot;],&quot; &quot;,./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@point=&quot;end&quot;])</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">36</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:accessCondition[@type=&quot;use and reproduction&quot;]/@xlink:href</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8478,7 +8621,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8489,14 +8632,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">37</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">14</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:part/mods:detail/mods:number</field>
-				<field index="xpath_sorting">./mods:part[@type=&quot;host&quot;]/@order</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">38</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:accessCondition[@type=&quot;local terms of use&quot;]/@xlink:href</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -8504,7 +8651,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8515,13 +8662,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">38</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">33</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:name[./mods:role/mods:roleTerm[@authority=&quot;marcrelator&quot;][@type=&quot;code&quot;]=&quot;aut&quot;]/mods:displayForm</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">40</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:accessCondition[@type=&quot;restriction on access&quot;]/@xlink:href</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8530,7 +8681,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8541,14 +8692,18 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">39</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">16</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:part/mods:detail/mods:number</field>
-				<field index="xpath_sorting">./mods:part[@type=&quot;host&quot;]/@order</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">42</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:accessCondition[@type=&quot;out of print work&quot;]</field>
+				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -8556,7 +8711,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8567,13 +8722,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">40</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">20</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:location/mods:physicalLocation</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">44</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:accessCondition[@type=&quot;info&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8582,7 +8741,37 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
+							<table>tx_dlf_formats</table>
+						</element>
+					</relations>
+				</field>
+			</related>
+		</tablerow>
+		<tablerow index="tx_dlf_metadataformat:41" type="array">
+			<fieldlist index="data" type="array">
+				<field index="uid" type="integer">41</field>
+				<field index="pid" type="integer">3</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
+				<field index="deleted" type="integer">0</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">46</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:recordInfo/mods:recordInfoNote</field>
+				<field index="xpath_sorting"></field>
+				<field index="mandatory" type="integer">0</field>
+			</fieldlist>
+			<related index="rels" type="array">
+				<field index="encoded" type="array">
+					<type>db</type>
+					<relations index="itemArray" type="array">
+						<element index="0" type="array">
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8593,13 +8782,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">42</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">22</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:place/mods:placeTerm</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">48</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:identifier</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8608,7 +8801,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8619,13 +8812,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">43</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">29</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:nonSort,&quot; &quot;,./mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title)</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">50</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:titleInfo[not(@displayLabel=&quot;alternative&quot;)]/mods:title</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8634,7 +8831,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8645,13 +8842,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">44</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">18</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:location/mods:shelfLocator</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">52</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:titleInfo[@displayLabel=&quot;alternative&quot;]/mods:title</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8660,7 +8861,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8671,13 +8872,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">45</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">31</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:nonSort,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:partNumber,&quot; &quot;,./mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:partName)</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">54</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:location/mods:physicalLocation</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8686,7 +8891,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8697,13 +8902,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">46</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">41</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[not(@point)]</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">56</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:location/mods:url[@displayLabel=&quot;geonames&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8712,7 +8921,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8723,13 +8932,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">47</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">27</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">//mods:relatedItem[@type=&quot;host&quot;]/mods:titleInfo[not(@type=&quot;alternative&quot;)]/mods:title</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">58</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:location/mods:url[@displayLabel=&quot;wikidata&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8738,7 +8951,7 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
@@ -8749,13 +8962,17 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">48</field>
 				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
+				<field index="tstamp" type="integer">1710333636</field>
+				<field index="crdate" type="integer">1710333636</field>
+				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">43</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">concat(./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[@point=&quot;start&quot;],&quot; &quot;,./mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateCreated[@point=&quot;end&quot;])</field>
+				<field index="sys_language_uid" type="integer">0</field>
+				<field index="l18n_parent" type="integer">0</field>
+				<field index="l18n_diffsource"></field>
+				<field index="l10n_state" type="NULL"></field>
+				<field index="parent_id" type="integer">60</field>
+				<field index="encoded" type="integer">1</field>
+				<field index="xpath">./mods:relatedItem/mods:location/mods:url[@displayLabel=&quot;wikipedia&quot;]</field>
 				<field index="xpath_sorting"></field>
 				<field index="mandatory" type="integer">0</field>
 			</fieldlist>
@@ -8764,91 +8981,14 @@ value.wrap = &lt;dd&gt;|&lt;/dd&gt;</field>
 					<type>db</type>
 					<relations index="itemArray" type="array">
 						<element index="0" type="array">
-							<id>2</id>
+							<id>1</id>
 							<table>tx_dlf_formats</table>
 						</element>
 					</relations>
 				</field>
 			</related>
 		</tablerow>
-		<tablerow index="tx_dlf_metadataformat:49" type="array">
-			<fieldlist index="data" type="array">
-				<field index="uid" type="integer">49</field>
-				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
-				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">6</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:identifier[@type=&quot;vd16&quot;]</field>
-				<field index="xpath_sorting"></field>
-				<field index="mandatory" type="integer">0</field>
-			</fieldlist>
-			<related index="rels" type="array">
-				<field index="encoded" type="array">
-					<type>db</type>
-					<relations index="itemArray" type="array">
-						<element index="0" type="array">
-							<id>2</id>
-							<table>tx_dlf_formats</table>
-						</element>
-					</relations>
-				</field>
-			</related>
-		</tablerow>
-		<tablerow index="tx_dlf_metadataformat:50" type="array">
-			<fieldlist index="data" type="array">
-				<field index="uid" type="integer">50</field>
-				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
-				<field index="cruser_id" type="integer">2</field>
-				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">4</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:identifier[@type=&quot;vd17&quot;]</field>
-				<field index="xpath_sorting"></field>
-				<field index="mandatory" type="integer">0</field>
-			</fieldlist>
-			<related index="rels" type="array">
-				<field index="encoded" type="array">
-					<type>db</type>
-					<relations index="itemArray" type="array">
-						<element index="0" type="array">
-							<id>2</id>
-							<table>tx_dlf_formats</table>
-						</element>
-					</relations>
-				</field>
-			</related>
-		</tablerow>
-		<tablerow index="tx_dlf_metadataformat:54" type="array">
-			<fieldlist index="data" type="array">
-				<field index="uid" type="integer">54</field>
-				<field index="pid" type="integer">3</field>
-				<field index="tstamp" type="integer">1620386002</field>
-				<field index="crdate" type="integer">1620386002</field>
-				<field index="cruser_id" type="integer">1</field>
-				<field index="deleted" type="integer">0</field>
-				<field index="parent_id" type="integer">37</field>
-				<field index="encoded" type="integer">2</field>
-				<field index="xpath">./mods:relatedItem[@type=&quot;host&quot;]/mods:originInfo[@eventType=&quot;production&quot; or @eventType=&quot;publication&quot; or not(./mods:edition=&quot;[Electronic ed.]&quot;)]/mods:dateIssued[@keyDate=&quot;yes&quot;]</field>
-				<field index="xpath_sorting"></field>
-				<field index="mandatory" type="integer">0</field>
-			</fieldlist>
-			<related index="rels" type="array">
-				<field index="encoded" type="array">
-					<type>db</type>
-					<relations index="itemArray" type="array">
-						<element index="0" type="array">
-							<id>2</id>
-							<table>tx_dlf_formats</table>
-						</element>
-					</relations>
-				</field>
-			</related>
-		</tablerow>
+
 		<tablerow index="tx_dlf_structures:177" type="array">
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">177</field>
