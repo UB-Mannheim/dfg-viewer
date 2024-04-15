@@ -6,11 +6,11 @@
 			<title></title>
 			<description></description>
 			<notes></notes>
-			<packager_username>typo3@slub-dresden.de</packager_username>
+			<packager_username>test</packager_username>
 			<packager_name></packager_name>
 			<packager_email></packager_email>
-			<TYPO3_version>9.5.26</TYPO3_version>
-			<created>Friday  7. May 2021</created>
+			<TYPO3_version>10.4.38-dev</TYPO3_version>
+			<created>Monday 15. April 2024</created>
 		</meta>
 		<static_tables index="relStaticTables" type="array"></static_tables>
 		<excludeMap type="array"></excludeMap>
@@ -137,8 +137,8 @@
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">1</field>
 				<field index="pid" type="integer">0</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
+				<field index="crdate" type="integer">1713172633</field>
 				<field index="cruser_id" type="integer">0</field>
 				<field index="deleted" type="integer">0</field>
 				<field index="description">This is the local fileadmin/ directory. This storage mount has been created automatically by TYPO3.</field>
@@ -175,7 +175,6 @@
 					<type>flex</type>
 					<flexform index="flexFormRels" type="array">
 						<db_relations index="db" type="array"></db_relations>
-						<file_relations index="file" type="array"></file_relations>
 						<softref_relations index="softrefs" type="array"></softref_relations>
 					</flexform>
 				</field>
@@ -185,23 +184,21 @@
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">1</field>
 				<field index="pid" type="integer">0</field>
-				<field index="tstamp" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
 				<field index="hidden" type="integer">0</field>
 				<field index="sorting" type="integer">256</field>
 				<field index="title">Englisch</field>
 				<field index="flag">gb</field>
 				<field index="language_isocode">en</field>
-				<field index="static_lang_isocode" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array"></related>
 		</tablerow>
-
 		<tablerow index="pages:1" type="array">
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">1</field>
 				<field index="pid" type="integer">0</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
+				<field index="crdate" type="integer">1713172633</field>
 				<field index="cruser_id" type="integer">2</field>
 				<field index="deleted" type="integer">0</field>
 				<field index="hidden" type="integer">0</field>
@@ -218,8 +215,6 @@
 				<field index="t3_origuid" type="integer">0</field>
 				<field index="l10n_diffsource"></field>
 				<field index="t3ver_oid" type="integer">0</field>
-				<field index="t3ver_id" type="integer">0</field>
-				<field index="t3ver_label"></field>
 				<field index="t3ver_wsid" type="integer">0</field>
 				<field index="t3ver_state" type="integer">0</field>
 				<field index="t3ver_stage" type="integer">0</field>
@@ -251,7 +246,7 @@
 				<field index="newUntil" type="integer">0</field>
 				<field index="description" type="NULL"></field>
 				<field index="no_search" type="integer">0</field>
-				<field index="SYS_LASTCHANGED" type="integer">1620333372</field>
+				<field index="SYS_LASTCHANGED" type="integer">0</field>
 				<field index="abstract" type="NULL"></field>
 				<field index="module"></field>
 				<field index="extendToSubpages" type="integer">0</field>
@@ -262,14 +257,13 @@
 				<field index="content_from_pid" type="integer">0</field>
 				<field index="mount_pid" type="integer">0</field>
 				<field index="mount_pid_ol" type="integer">0</field>
-				<field index="alias"></field>
 				<field index="l18n_cfg" type="integer">0</field>
 				<field index="fe_login_mode" type="integer">0</field>
 				<field index="backend_layout"></field>
 				<field index="backend_layout_next_level"></field>
 				<field index="tsconfig_includes">EXT:dfgviewer/Configuration/TsConfig/Page.ts</field>
 				<field index="legacy_overlay_uid" type="integer">0</field>
-				<field index="tx_impexp_origuid" type="integer">457</field>
+				<field index="tx_impexp_origuid" type="integer">1</field>
 				<field index="seo_title"></field>
 				<field index="no_index" type="integer">0</field>
 				<field index="no_follow" type="integer">0</field>
@@ -279,7 +273,10 @@
 				<field index="twitter_title"></field>
 				<field index="twitter_description" type="NULL"></field>
 				<field index="twitter_image" type="integer">0</field>
+				<field index="twitter_card">summary</field>
 				<field index="canonical_link"></field>
+				<field index="sitemap_priority">0.5</field>
+				<field index="sitemap_changefreq"></field>
 				<field index="categories" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array">
@@ -300,8 +297,8 @@
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">1</field>
 				<field index="pid" type="integer">1</field>
-				<field index="tstamp" type="integer">1620399493</field>
-				<field index="crdate" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
+				<field index="crdate" type="integer">1713172633</field>
 				<field index="cruser_id" type="integer">2</field>
 				<field index="deleted" type="integer">0</field>
 				<field index="hidden" type="integer">0</field>
@@ -311,8 +308,6 @@
 				<field index="description"></field>
 				<field index="t3_origuid" type="integer">0</field>
 				<field index="t3ver_oid" type="integer">0</field>
-				<field index="t3ver_id" type="integer">0</field>
-				<field index="t3ver_label"></field>
 				<field index="t3ver_wsid" type="integer">0</field>
 				<field index="t3ver_state" type="integer">0</field>
 				<field index="t3ver_stage" type="integer">0</field>
@@ -331,11 +326,10 @@ config.rootPid = 1
 config.headNavPid = 0
 config.kitodoPageView = 2</field>
 				<field index="config"></field>
-				<field index="nextLevel"></field>
 				<field index="basedOn"></field>
 				<field index="includeStaticAfterBasedOn" type="integer">0</field>
 				<field index="static_file_mode" type="integer">0</field>
-				<field index="tx_impexp_origuid" type="integer">80</field>
+				<field index="tx_impexp_origuid" type="integer">1</field>
 			</fieldlist>
 			<related index="rels" type="array">
 				<field index="include_static_file" type="array">
@@ -361,8 +355,8 @@ config.kitodoPageView = 2</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">2</field>
 				<field index="pid" type="integer">1</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
+				<field index="crdate" type="integer">1713172633</field>
 				<field index="cruser_id" type="integer">2</field>
 				<field index="deleted" type="integer">0</field>
 				<field index="hidden" type="integer">0</field>
@@ -379,8 +373,6 @@ config.kitodoPageView = 2</field>
 				<field index="t3_origuid" type="integer">0</field>
 				<field index="l10n_diffsource"></field>
 				<field index="t3ver_oid" type="integer">0</field>
-				<field index="t3ver_id" type="integer">0</field>
-				<field index="t3ver_label"></field>
 				<field index="t3ver_wsid" type="integer">0</field>
 				<field index="t3ver_state" type="integer">0</field>
 				<field index="t3ver_stage" type="integer">0</field>
@@ -412,25 +404,24 @@ config.kitodoPageView = 2</field>
 				<field index="newUntil" type="integer">0</field>
 				<field index="description"></field>
 				<field index="no_search" type="integer">0</field>
-				<field index="SYS_LASTCHANGED" type="integer">1620333372</field>
+				<field index="SYS_LASTCHANGED" type="integer">0</field>
 				<field index="abstract"></field>
 				<field index="module"></field>
 				<field index="extendToSubpages" type="integer">0</field>
 				<field index="author"></field>
 				<field index="author_email"></field>
 				<field index="nav_title"></field>
-				<field index="nav_hide" type="integer">0</field>
+				<field index="nav_hide" type="integer">1</field>
 				<field index="content_from_pid" type="integer">0</field>
 				<field index="mount_pid" type="integer">0</field>
 				<field index="mount_pid_ol" type="integer">0</field>
-				<field index="alias"></field>
 				<field index="l18n_cfg" type="integer">0</field>
 				<field index="fe_login_mode" type="integer">0</field>
 				<field index="backend_layout"></field>
 				<field index="backend_layout_next_level"></field>
 				<field index="tsconfig_includes"></field>
 				<field index="legacy_overlay_uid" type="integer">0</field>
-				<field index="tx_impexp_origuid" type="integer">458</field>
+				<field index="tx_impexp_origuid" type="integer">2</field>
 				<field index="seo_title"></field>
 				<field index="no_index" type="integer">0</field>
 				<field index="no_follow" type="integer">0</field>
@@ -440,7 +431,10 @@ config.kitodoPageView = 2</field>
 				<field index="twitter_title"></field>
 				<field index="twitter_description" type="NULL"></field>
 				<field index="twitter_image" type="integer">0</field>
+				<field index="twitter_card">summary</field>
 				<field index="canonical_link"></field>
+				<field index="sitemap_priority">0.5</field>
+				<field index="sitemap_changefreq"></field>
 				<field index="categories" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array"></related>
@@ -449,8 +443,8 @@ config.kitodoPageView = 2</field>
 			<fieldlist index="data" type="array">
 				<field index="uid" type="integer">3</field>
 				<field index="pid" type="integer">1</field>
-				<field index="tstamp" type="integer">1620333372</field>
-				<field index="crdate" type="integer">1620333372</field>
+				<field index="tstamp" type="integer">1713172633</field>
+				<field index="crdate" type="integer">1713172633</field>
 				<field index="cruser_id" type="integer">2</field>
 				<field index="deleted" type="integer">0</field>
 				<field index="hidden" type="integer">0</field>
@@ -467,8 +461,6 @@ config.kitodoPageView = 2</field>
 				<field index="t3_origuid" type="integer">0</field>
 				<field index="l10n_diffsource"></field>
 				<field index="t3ver_oid" type="integer">0</field>
-				<field index="t3ver_id" type="integer">0</field>
-				<field index="t3ver_label"></field>
 				<field index="t3ver_wsid" type="integer">0</field>
 				<field index="t3ver_state" type="integer">0</field>
 				<field index="t3ver_stage" type="integer">0</field>
@@ -511,14 +503,13 @@ config.kitodoPageView = 2</field>
 				<field index="content_from_pid" type="integer">0</field>
 				<field index="mount_pid" type="integer">0</field>
 				<field index="mount_pid_ol" type="integer">0</field>
-				<field index="alias"></field>
 				<field index="l18n_cfg" type="integer">0</field>
 				<field index="fe_login_mode" type="integer">0</field>
 				<field index="backend_layout"></field>
 				<field index="backend_layout_next_level"></field>
 				<field index="tsconfig_includes"></field>
 				<field index="legacy_overlay_uid" type="integer">0</field>
-				<field index="tx_impexp_origuid" type="integer">459</field>
+				<field index="tx_impexp_origuid" type="integer">3</field>
 				<field index="seo_title"></field>
 				<field index="no_index" type="integer">0</field>
 				<field index="no_follow" type="integer">0</field>
@@ -528,7 +519,10 @@ config.kitodoPageView = 2</field>
 				<field index="twitter_title"></field>
 				<field index="twitter_description" type="NULL"></field>
 				<field index="twitter_image" type="integer">0</field>
+				<field index="twitter_card">summary</field>
 				<field index="canonical_link"></field>
+				<field index="sitemap_priority">0.5</field>
+				<field index="sitemap_changefreq"></field>
 				<field index="categories" type="integer">0</field>
 			</fieldlist>
 			<related index="rels" type="array"></related>
