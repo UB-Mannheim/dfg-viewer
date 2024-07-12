@@ -13,6 +13,7 @@
       data-namespace-typo3-fluid="true">
 
 
+<f:comment><f:debug>{_all}</f:debug></f:comment>
 <ul class="main{f:if(condition: '{renderImageManipulationTool} == 1', then: ' ImageManipulationTool', else: '')}">
     <f:if condition="{renderAnnotationTool}">
         <f:then>
@@ -174,7 +175,13 @@
             </li>
         </f:then>
     </f:if>
-    
+
+    <f:if condition="{renderSearchInDocumentTool}">
+        <f:then>
+<f:comment><f:debug>{_all}</f:debug></f:comment>
+<f:debug>{_all}</f:debug>
+        </f:then>
+    </f:if>
 
     <f:if condition="{renderSearchInDocumentTool} && {searchInDocument}">
         <f:then>
