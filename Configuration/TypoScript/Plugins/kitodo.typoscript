@@ -266,9 +266,38 @@ plugin.tx_dlf_pdfdownloadtool {
     settings {
         fileGrpsImageDownload = DEFAULT
         fileGrpFulltext = ALTO
-        tools = pdfdownloadtool,tx_dlf_imagedownloadtool,metsdownloadtool,fulltextdownloadtool
+        tools = pdfdownloadtool,tx_dlf_imagedownloadtool,metsdownloadtool,fulltextdownloadtool,searchindocumenttool
+
+        searchUrl = https://playground.bib.uni-mannheim.de
+        documentIdUrlSchema = https://playground.bib.uni-mannheim.de/items/id/record
+        idInputName = tx_dlf[id]
+        pidInputName = tx_dlf[pid]
+        queryInputName = tx_dlf[query]
+        startInputName = tx_dlf[start]
+        pageInputName = tx_dlf[page]
+        highlightWordInputName = tx_dlf[highlight_word]
+        encryptedInputName = tx_dlf[encrypted]
+
     }
 }
+
+
+
+#plugin.tx_dlf_searchindocumenttool < plugin.tx_dlf_toolbox
+#plugin.tx_dlf_searchindocumenttool {
+#    settings {
+#        tools = searchindocumenttool
+#        searchUrl = https://playground.bib.uni-mannheim.de
+#        documentIdUrlSchema = https://playground.bib.uni-mannheim.de/items/id/record
+#        idInputName = tx_dlf[id]
+#        pidInputName = tx_dlf[pid]
+#        queryInputName = tx_dlf[query]
+#        startInputName = tx_dlf[start]
+#        pageInputName = tx_dlf[page]
+#        highlightWordInputName = tx_dlf[highlight_word]
+#        encryptedInputName = tx_dlf[encrypted]
+#    }
+#}
 
 # --------------------------------------------------------------------------------------------------------------------
 # Audio player
