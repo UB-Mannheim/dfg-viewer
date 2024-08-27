@@ -1,71 +1,70 @@
 {
-  "name": "ub-mannheim/dfgviewer",
-  "type": "typo3-cms-extension",
-  "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH..",
-  "homepage": "https://github.com/UB-Mannheim/dfg-viewer",
-  "keywords": [
-    "TYPO3",
-    "extension",
-    "dfgviewer"
-  ],
-  "authors": [
-    {
-      "name": "Sebastian Meyer",
-      "email": "sebastian.meyer@slub-dresden.de",
-      "role": "Developer"
+    "name": "ub-mannheim/dfgviewer",
+    "type": "typo3-cms-extension",
+    "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH..",
+    "homepage": "https://github.com/UB-Mannheim/dfg-viewer",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "dfgviewer"
+    ],
+    "authors": [
+        {
+            "name": "Alexander Bigga",
+            "email": "typo3@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Christos Sidiropoulos",
+            "email": "typo3@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Thomas Jung",
+            "email": "thomas.jung@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Sebastian Meyer",
+            "email": "sebastian.meyer@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Markus Weigelt",
+            "email": "markus.weigelt@slub-dresden.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Beatrycze Volk",
+            "email": "beatrycze.volk@slub-dresden.de",
+            "role": "Developer"
+        }
+    ],
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "typo3/cms-core": "^10.4|^11.5",
+        "ub-mannheim/presentation": "dev-4.x-ocr-devel",
+        "ub-mannheim/ubma-digitalcollections": "dev-slubmaster-devel"
     },
-    {
-      "name": "Alexander Bigga",
-      "email": "typo3@slub-dresden.de",
-      "role": "Developer"
+    "autoload": {
+        "psr-4": {
+            "Slub\\Dfgviewer\\": "Classes/"
+        }
     },
-    {
-      "name": "Thomas Jung",
-      "email": "thomas.jung@slub-dresden.de",
-      "role": "Developer"
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "dfgviewer"
+        }
     },
-    {
-      "name": "Beatrycze Volk",
-      "email": "beatrycze.volk@slub-dresden.de",
-      "role": "Developer"
+    "scripts": {
+        "docs:setup": "./Build/Documentation/sphinx.sh install",
+        "docs:serve": "./Build/Documentation/sphinx.sh serve",
+        "docs:t3": "docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs"
     },
-    {
-      "name": "Erik Konrad",
-      "email": "typo3@slub-dresden.de",
-      "role": "Developer"
-    },
-    {
-      "name": "Christos Sidiropoulos",
-      "email": "christos.sidiropoulos@uni-mannheim.de",
-      "homepage": "https://www.bib.uni-mannheim.de",
-      "role": "Developer"
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
     }
-  ],
-  "license": "GPL-3.0-or-later",
-  "require": {
-    "typo3/cms-core": "^10.4.36|^11.5",
-    "ub-mannheim/presentation": "dev-4.x-ocr-devel",
-    "ub-mannheim/ubma-digitalcollections": "dev-slubmaster-devel"
-  },
-  "autoload": {
-    "psr-4": {
-      "Slub\\Dfgviewer\\": "Classes/"
-    }
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "dfgviewer"
-    }
-  },
-  "scripts": {
-    "docs:setup": "./Build/Documentation/sphinx.sh install",
-    "docs:serve": "./Build/Documentation/sphinx.sh serve",
-    "docs:t3": "docker-compose -f ./Build/Documentation/docker-compose.t3docs.yml run --rm t3docs"
-  },
-  "config": {
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true
-    }
-  }
 }

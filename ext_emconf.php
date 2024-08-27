@@ -26,9 +26,9 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'DFG Viewer - OCR-On-Demand',
     'description' => 'Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.',
     'category' => 'distribution',
-    'author' => 'Christos Sidiropoulos',
-    'author_email' => 'christos.sidiropoulos@uni-mannheim.de',
-    'author_company' => 'Universitätsbibliothek Mannheim',
+    'author' => 'Beatrycze Volk',
+    'author_email' => 'typo3@slub-dresden.de',
+    'author_company' => 'Saxon State and University Library Dresden (SLUB)',
     'shy' => '',
     'priority' => '',
     'module' => '',
@@ -39,11 +39,11 @@ $EM_CONF[$_EXTKEY] = [
     'modify_tables' => '',
     'clearCacheOnLoad' => false,
     'lockType' => '',
-    'version' => '6.0.0-ocr',
+    'version' => '6.1.0-ocr',
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-11.3.99',
-            'dlf' => '4.0.1-ocr',
+            'dlf' => '5.0.0-ocr',
         ],
         'conflicts' => [
         ],
