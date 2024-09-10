@@ -51,7 +51,7 @@
 			<source>No email address given of data provider</source>
 		</trans-unit>
 		<trans-unit id="provider.local_catalogue">
-			<source>Online Public Access Catalog</source>
+			<source>SWB Catalog</source>
 		</trans-unit>
 		<trans-unit id="provider.email_provider">
 			<source>Email to data provider</source>
