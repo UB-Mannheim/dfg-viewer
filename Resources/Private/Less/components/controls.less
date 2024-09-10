@@ -19,6 +19,9 @@
         > li {
             position: relative;
             display: inline-block;
+
+            span.tx-dlf-tools-fulltext a,
+            span.tx-dlf-tools-fulltext span,
             > a, > span {
                 position: relative;
                 display: inline-block;
@@ -106,6 +109,7 @@
                             min-height: 40px;
                             line-height: 40px;
                             white-space: nowrap;
+
                             &:before {
                                 position: absolute;
                                 top: 0;
@@ -116,18 +120,43 @@
                                 background: url(../Images/controlIcons.svg) no-repeat 0 0;
                                 background-size: auto 120px;
                             }
-                            &.download-document:before {
-                                background-position: -360px -40px;
+                            
+                            // alte Formen, müssen alle in neue Form überführt werden
+                            //&.download-document:before {
+                            //    background-position: -360px -40px;
+                            //}
+                            &.tx-dlf-tools-pdf-work {
+                                a {
+                                    &:before {
+                                        background-position: -360px -40px;
+                                    }
+                                }
                             }
-                            &.download-page:before {
-                                background-position: -320px -40px;
+
+                            // alte Formen, müssen alle in neue Form überführt werden
+                            //&.download-page:before {
+                            //    background-position: -320px -40px;
+                            //}
+                            &.tx-dlf-tools-pdf-page {
+                                a {
+                                    &:before {
+                                        background-position: -320px -40px;
+                                    }
+                                }
                             }
-                            &.download-fulltext:before {
-                                background-position: -280px -40px;
+
+                            // alte Formen, müssen alle in neue Form überführt werden
+                            //&.download-fulltext:before {
+                            //    background-position: -280px -40px;
+                            //}
+                            &.tx-dlf-tools-fulltext {
+                                a {
+                                    &:before {
+                                        background-position: -280px -40px;
+                                    }
+                                }
                             }
-                            &.no-fulltext:before {
-                                background-position: -280px -40px;
-                            }
+                            
                             &.local-presentation:before {
                                 background-position: -440px -80px;
                             }
@@ -143,6 +172,7 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
+// aus konflikt: unklar ob uebernahme so hilfreich ist 20.08.2024 * adapt to new structure
                             &.tx-dlf-tools-modeldownload:before,
                             &.tx-dlf-tools-imagedownload:before {
                                 background-position: -320px -40px;
@@ -163,10 +193,27 @@
                         }
                         span {
                             opacity: 0.5;
-                            ::before {
-                                display: none;
+                            
+                            // new
+                            &.tx-dlf-tools-pdf-work {
+                                padding-left: 0;
+                                padding-right: 0;
+                                opacity: 1;
+
+                                &:before {
+                                    //background: none;
+                                    display: none;
+                                }
+                                
+                                &:hover a {
+                                    &:before {
+                                        color: #fff;
+                                    }
+                                }
+                                
                             }
                         }
+                        
                     }
                 }
                 &.open {
@@ -187,8 +234,20 @@
                 }
             }
             &.fulltext {
+                // old version
                 > a, > span {
                     background-position: -120px 0;
+                }
+                // new version
+                ul {
+                    li {
+                        span.tx-dlf-tools-fulltext {
+                            span,
+                            a {
+                                background-position: -120px 0;
+                            }
+                        }
+                    }
                 }
             }
             &.score {
@@ -464,6 +523,9 @@
                 &.tx-dlf-imagemanipulationtool {
                     position: relative;
                     display: inline-block;
+                    //-----------------
+                    // old version
+                    //-----------------
                     > span {
                         opacity: 1;
                         overflow: hidden;
@@ -492,6 +554,46 @@
                                 background: @okay-green;
                                 display: block;
                                 content: " ";
+                            }
+                        }
+                    }
+                    //-----------------
+                    // new version
+                    // ul.main
+                    //-----------------
+                    ul {
+                        li {
+                            opacity: 1;
+                            overflow: hidden;
+                            width: auto;
+                            height: auto;
+                            display: inline;
+                            margin: 0;
+
+                            span.tx-dlf-tools-imagetools {
+                                a {
+                                    position: relative;
+                                    display: inline-block;
+                                    width: 40px;
+                                    height: 40px;
+                                    .text-hide();
+                                    border-radius: 20px;
+                                    margin: 0 5px;
+                                    background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
+
+                                    &.active:before {
+                                        position: absolute;
+                                        top: 2px;
+                                        right: 0px;
+                                        width: 8px;
+                                        height: 8px;
+                                        border-radius: 8px;
+                                        border: 2px solid #fff;
+                                        background: @okay-green;
+                                        display: block;
+                                        content: " ";
+                                    }
+                                }
                             }
                         }
                     }
