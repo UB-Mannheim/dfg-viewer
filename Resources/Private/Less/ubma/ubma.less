@@ -488,7 +488,7 @@ body.dfgviewer {
     &.years-calendar {
         .document-functions,
         .view-functions {
-            display: none
+            display: none;
         }
     }
     &.calendar {
@@ -519,18 +519,34 @@ body.dfgviewer {
             }
         }
 
-        .calendar-view.active {
+        .calendar-view {
             table {
                 tr {
-                    td {
-                        .contains-issues {
-                            //border: 1px solid @light-grey-border;
-                            //border-radius: 9px;
-                            background-color: #e5e5e5;
-                            background-color: #ebedf5;
-                            
-                            &:hover {
-                                transform: scale(1.2);
+                    td.open {
+                        ul.issues {
+                            li {
+                                a {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                table {
+                    tr {
+                        td {
+                            .contains-issues {
+                                //border: 1px solid @light-grey-border;
+                                //border-radius: 9px;
+                                background-color: #e5e5e5;
+                                background-color: #ebedf5;
+                                
+                                &:hover {
+                                    transform: scale(1.2);
+                                }
                             }
                         }
                     }
@@ -547,6 +563,12 @@ body.dfgviewer {
             }
         }
     }
+}
+
+// fix table of content toc scrollebal
+.tx-dlf-tableofcontents.dfgviewer {
+    overflow-y: auto;
+    height: 100%;
 }
 
 /*
