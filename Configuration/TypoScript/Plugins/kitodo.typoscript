@@ -252,6 +252,7 @@ plugin.tx_dlf_imagemanipulationtool {
 }
 
 
+# this is not working
 #plugin.tx_dlf_imagedownloadtool < plugin.tx_dlf_toolbox
 #plugin.tx_dlf_imagedownloadtool {
 #    settings {
@@ -264,7 +265,8 @@ plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
         fileGrpsImageDownload = DEFAULT
-        tools = pdfdownloadtool,tx_dlf_imagedownloadtool
+        fileGrpFulltext = ALTO
+        tools = pdfdownloadtool,tx_dlf_imagedownloadtool,metsdownloadtool,fulltextdownloadtool
     }
 }
 
