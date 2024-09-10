@@ -185,6 +185,15 @@
                                     }
                                 }
                             }
+
+                            &.ma-tools-metsdownload,
+                            &.tx-dlf-tools-fulltextdownload {
+                                a {
+                                    &:before {
+                                        background-position: -320px -40px;
+                                    }
+                                }
+                            }
                             
                             &.local-presentation:before {
                                 background-position: -440px -80px;
@@ -223,7 +232,11 @@
                         span {
                             opacity: 0.5;
                             
-                            // new Icons bereinigen
+                            //------------------------------------------
+                            // new Icons cleanup
+                            //------------------------------------------
+                            &.tx-dlf-tools-fulltextdownload,
+                            &.ma-tools-metsdownload,
                             &.tx-dlf-tools-imagedownload,
                             &.tx-dlf-tools-pdf-work {
                                 padding-left: 0;
