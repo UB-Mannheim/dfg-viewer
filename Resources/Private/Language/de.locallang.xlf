@@ -21,6 +21,10 @@
 				<source><![CDATA[Email to data provider]]></source>
 				<target><![CDATA[Email an Datenprovider]]></target>
 			</trans-unit>
+			<trans-unit id="provider.local_catalogue" approved="yes">
+				<source><![CDATA[Online Public Access Catalog]]></source>
+				<target><![CDATA[SWB Katalog]]></target>
+			</trans-unit>
 			<trans-unit id="provider.local_presentation" approved="yes">
 				<source><![CDATA[Show in local context]]></source>
 				<target><![CDATA[Lokale Präsentation anzeigen]]></target>
