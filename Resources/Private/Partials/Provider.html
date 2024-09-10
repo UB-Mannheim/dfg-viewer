@@ -28,31 +28,38 @@
 <div class="provider">
     <f:if condition="{settings.showProviderLogo}">
         <ul>
+            <f:comment>OwnerLogo</f:comment>
             <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}',
                 logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\',
-                htmlspecialchars:\'FALSE\')}'}">
+                htmlspecialchars:\'FALSE\')}  '}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
                     <li>
-                        <f:link.external uri="{logoUri}" title="{logoTitle}">
+                        <!--Provider.html 15-->
+                        <f:comment> f:link.external uri="{logoUri}" title="{logoTitle}" </f:comment>
+                        <f:link.page pageUid="{rootPageId}" title="UB Mannheim: Digitale Sammlungen" class="dfgviewer-logo">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
-                        </f:link.external>
+                                title="{logoTitle}" alt="Logo der {logoTitle}" />
+                        </f:link.page>
+                        <f:comment> f:link.external </f:comment>
                     </li>
                 </f:if>
             </f:alias>
-            <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorLogo)[1]\')}', logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregator)[1]\')}',
+            <f:comment>aggregatorLogo</f:comment>
+            <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorLogo)[1]\')}', 
+                logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregator)[1]\')}',
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
                     <li>
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                                title="{logoTitle} 28" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
             </f:alias>
+            <f:comment>sponsorLogo</f:comment>
             <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorLogo)[1]\')}',
                 logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsor)[1]\')}',
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\',
@@ -61,7 +68,7 @@
                     <li>
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle}" alt="Logo von {logoTitle}" />
+                                title="{logoTitle} 41" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
