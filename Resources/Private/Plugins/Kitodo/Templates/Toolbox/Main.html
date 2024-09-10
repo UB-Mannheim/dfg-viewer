@@ -121,28 +121,35 @@
 
     <f:if condition="{renderPdfDownloadTool}">
         <f:then>
-            <li>
+            <f:comment><f:debug>{_all}</f:debug></f:comment>
+            <li class="ftdfgviewer">
+                <f:comment>show only if pageLinks > 1</f:comment>
+                <f:if condition="{pageLinks -> f:count()} > 1">
+                    <f:then>
+
                 <span class="tx-dlf-tools-pdf-page">
-                    <f:if condition="{double} === 0">
-                        <f:then>
-                            <f:link.external uri="{pageLinks.0}">
-                                <f:translate key="downloadSinglePage" /> (PDF)
-                            </f:link.external>
-                        </f:then>
-                        <f:else>
-                            <f:link.external uri="{pageLinks.0}">
-                                <f:translate key="downloadLeftPage" /> (PDF)
-                            </f:link.external>
-                            <f:if condition="{pageLinks.1}">
+                            <f:if condition="{double} === 0">
                                 <f:then>
-                                    <f:link.external uri="{pageLinks.1}">
-                                        <f:translate key="downloadRightPage" /> (PDF)
+                                    <f:link.external uri="{pageLinks.0}">
+                                        <f:translate key="downloadSinglePage" /> (PDF)
                                     </f:link.external>
                                 </f:then>
+                                <f:else>
+                                    <f:link.external uri="{pageLinks.0}">
+                                        <f:translate key="downloadLeftPage" /> (PDF)
+                                    </f:link.external>
+                                    <f:if condition="{pageLinks.1}">
+                                        <f:then>
+                                            <f:link.external uri="{pageLinks.1}">
+                                                <f:translate key="downloadRightPage" /> (PDF)
+                                            </f:link.external>
+                                        </f:then>
+                                    </f:if>
+                                </f:else>
                             </f:if>
-                        </f:else>
-                    </f:if>
                 </span>
+                        </f:then>
+                    </f:if>
                 <span class="tx-dlf-tools-pdf-work">
                     <f:if condition="{workLink}">
                         <f:then>
