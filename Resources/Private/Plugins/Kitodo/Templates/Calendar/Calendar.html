@@ -93,8 +93,8 @@
     <div class="list-view">
         <ul>
             <f:for each="{issueData}" as="issueDay">
-                <span class="listview-date">{issueDay.dateString}</span>
                 <li>
+                    <span class="listview-date">{issueDay.dateString}</span>
                     <f:for each="{issueDay.items}" as="item">
                         <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">
                             {item.text}
