@@ -11,7 +11,9 @@ TCEFORM.tt_content {
       altLabels.3 = H3 Überschrift
       altLabels.4 = H4 Überschrift
       altLabels.5 = H5 Überschrift
-      removeItems = 0,1,2,5
+      # in header_layout überschriften entfernen
+      #removeItems = 0,1,2,5
+      removeItems = 0
     }
 
   frame_class {
