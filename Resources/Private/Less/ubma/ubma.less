@@ -118,6 +118,39 @@ body.dfgviewer {
                         transform: scale(1.1);
                 }
                 
+                &.disabled {
+                    border-color: @disabled-grey;
+
+                    &:hover {
+                        transform: none;
+                    }
+                    
+                    span {
+                        color: @disabled-grey;
+
+                        &:hover {
+                            color: @disabled-grey;
+                        }
+
+                    }
+                    
+                    &.first {
+                        span {
+                            &:before {
+                                border-color: @disabled-grey;
+                            }
+                        }
+                    }
+                    &.last {
+                        span {
+                            &:after {
+                                border-color: @disabled-grey;
+                            }
+                        }
+                    }
+                }
+                
+                span,
                 a {
                     display: inline-block;
                     padding-left: 10px;
@@ -134,9 +167,10 @@ body.dfgviewer {
                     
                 }
                 
-                &.last {
+                &.first {
+                    span,
                     a {
-                        &:after {
+                        &:before {
                             content: ' ';
                             border-right: 2px solid @ubma-base;
                             height: 11px;
@@ -145,9 +179,10 @@ body.dfgviewer {
                         }
                     }
                 }
-                &.first {
+                &.last {
+                    span,
                     a {
-                        &:before {
+                        &:after {
                             content: ' ';
                             border-right: 2px solid @ubma-base;
                             height: 11px;
