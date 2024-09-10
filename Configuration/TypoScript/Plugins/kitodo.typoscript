@@ -252,17 +252,19 @@ plugin.tx_dlf_imagemanipulationtool {
 }
 
 
-plugin.tx_dlf_imagedownloadtool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_imagedownloadtool {
-    settings {
-        tools = imagedownloadtool
-    }
-}
+#plugin.tx_dlf_imagedownloadtool < plugin.tx_dlf_toolbox
+#plugin.tx_dlf_imagedownloadtool {
+#    settings {
+#        fileGrpsImageDownload = DEFAULT
+#        tools = tx_dlf_imagedownloadtool
+#    }
+#}
 
 plugin.tx_dlf_pdfdownloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_pdfdownloadtool {
     settings {
-        tools = pdfdownloadtool, imagedownloadtool
+        fileGrpsImageDownload = DEFAULT
+        tools = pdfdownloadtool,tx_dlf_imagedownloadtool
     }
 }
 
