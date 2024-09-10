@@ -424,3 +424,10 @@ page.10.variables {
   isNewspaper.value = newspaper_issue
 }
 [END]
+
+[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == 'object']
+page.10.variables {
+  isObject3D = TEXT
+  isObject3D.value = object
+}
+[END]
