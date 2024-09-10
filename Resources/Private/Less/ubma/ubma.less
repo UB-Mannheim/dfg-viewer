@@ -79,13 +79,96 @@ body {
 
 body.dfgviewer {
     .tx-dlf-pagegrid {
-        ul.pagination {
+        ul.pagination.ubma {
             position: absolute;
-            top: 70px;
+            //top: 70px;
             left: 25px;
+            right: 40px;
+            bottom: 12px;
+            background-color: @light-blue;
+            padding-top: 8px;
+            opacity: 0.95;
+            border-radius: 5px;
 
             li {
-                display: inline;
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid @ubma-base;
+                margin-right: 10px;
+                margin-bottom: 8px;
+                padding: 0;
+                border-radius: 20px;
+                
+                &.current {
+                    a {
+                        color: #fff;
+                        background-color: @ubma-base;
+                        border-radius: 20px;
+                        
+                        &:hover {
+                            //color: @ubma-base;
+                            //background-color: @light-blue;
+                            opacity: 0.6;
+                        }
+                    }
+                }
+                
+                &:hover {
+                        transform: scale(1.1);
+                }
+                
+                a {
+                    display: inline-block;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    width: 100%;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    color: @ubma-base;
+                    
+                        
+                    &:hover {
+                        color: #fff;
+                    }
+                    
+                }
+                
+                &.last {
+                    a {
+                        &:after {
+                            content: ' ';
+                            border-right: 2px solid @ubma-base;
+                            height: 11px;
+                            position: relative;
+                            display: inline-block;
+                        }
+                    }
+                }
+                &.first {
+                    a {
+                        &:before {
+                            content: ' ';
+                            border-right: 2px solid @ubma-base;
+                            height: 11px;
+                            position: relative;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        
+        
+        
+    }
+    .tx-dlf-pagegrid-thumbnail {
+        a {
+            .tx-dlf-pagegrid-pagination {
+                min-height: 12px;
+                display: inline-block;
             }
         }
     }
