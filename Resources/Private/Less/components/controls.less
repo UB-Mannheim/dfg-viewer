@@ -56,6 +56,34 @@
                 }
             }
         }
+
+        &.document-function-bar {
+            li {
+                &.fulltext {
+                    ul {
+                        li {
+                            span {
+                                a.active {
+
+                                    &.active:before {
+                                        position: absolute;
+                                        top: 2px;
+                                        right: 0px;
+                                        width: 8px;
+                                        height: 8px;
+                                        border-radius: 8px;
+                                        border: 2px solid #fff;
+                                        background: @okay-green;
+                                        display: block;
+                                        content: " ";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
