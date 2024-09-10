@@ -127,6 +127,9 @@ $(document).ready(function() {
     $('.tx-dfgviewer-newspaper-calendar').parents('body').addClass('calendar');
     $('.tx-dfgviewer-newspaper-years').parents('body').addClass('calendar');
 
+    // add body class if any calendar is present
+    $('.tx-dfgviewer-newspaper-years').parents('body').addClass('years-calendar');
+
     // Inject view switch functions for calendar/list view (initial show calendar)
     $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a.select-calendar-view, .tx-dfgviewer-newspaper-calendar .calendar-view').addClass('active');
     $('.tx-dfgviewer-newspaper-calendar .calendar-list-selection a').on(mobileEvent, function(event) {
