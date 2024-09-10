@@ -94,11 +94,29 @@
         <ul>
             <f:for each="{issueData}" as="issueDay">
                 <li>
-                    <span class="listview-date">{issueDay.dateString}</span>
+                    <f:comment><f:debug>{issueDay}</f:debug></f:comment>
+                    <f:comment><span class="listview-date">{issueDay.dateString}</span></f:comment>
                     <f:for each="{issueDay.items}" as="item">
+                        <f:if condition="{item.index} > 0">
+                            <f:then>
+                                <f:comment>if more then one elements first Day and date and then the elements</f:comment>
+                                <span class="listview-date">{issueDay.dateString}</span>
+                                <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">
+                                    {item.text}
+                                </f:link.page>
+                            </f:then>
+                            <f:else>
+                                <f:comment>if only one element Day and date as link</f:comment>
+                                <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}" title="{item.text}">
+                                    {issueDay.dateString}
+                                </f:link.page>
+                            </f:else>
+                        </f:if>
+                        <f:comment>
                         <f:link.page pageUid="{settings.targetPid}" additionalParams="{'tx_dlf[id]': item.documentId}">
                             {item.text}
                         </f:link.page>
+                        </f:comment>
                     </f:for>
                 </li>
             </f:for>
