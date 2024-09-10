@@ -99,7 +99,7 @@
 			</trans-unit>
 			<trans-unit id="provider.local_catalogue" approved="yes">
 				<source><![CDATA[Online Public Access Catalog]]></source>
-				<target><![CDATA[Lokaler Katalog]]></target>
+				<target><![CDATA[SWB Katalog]]></target>
 			</trans-unit>
 			<trans-unit id="provider.local_presentation" approved="yes">
 				<source><![CDATA[Show in local context]]></source>
