@@ -22,6 +22,6 @@
     "grunt-terser": "^2.0.0",
     "jit-grunt": "^0.10.0",
     "less": "^3.12.0",
-    "terser": "^5"
+    "terser": "^5.25.0"
   }
 }
