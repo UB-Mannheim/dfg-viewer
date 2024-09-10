@@ -86,6 +86,14 @@ page {
 
       gp-multiview = TEXT
       gp-multiview.data = GP:tx_dlf|multiview
+
+      #temp.backlink = COA
+      gp-back = TEXT
+      gp-back {
+         data = getenv : HTTP_REFERER
+         #data = getIndEnv : HTTP_REFERER
+      }
+      
     }
   }
 }
