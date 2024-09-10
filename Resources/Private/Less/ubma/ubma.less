@@ -475,3 +475,67 @@ dl.tx-dlf-metadata-titledata {
         margin-top: 20px;
     }
 }
+
+/*
+
+// es gibt einen Unterschied, aktuell bei hover in der letzten Zeile verschiebt sich die nächste Woche nach unten
+
+// Tag bei hover oeffnen
+.tx-dfgviewer-newspaper-calendar .calendar-view .month table tr td.days:hover {
+    //background-color: #ccc;
+    // abweichung!
+    padding-bottom: 12px;
+    
+    .contains-issues {
+        transform: scale(1.4);
+        cursor: pointer;
+        position: relative;
+        color: @ubma-base;
+        font-weight: bold;
+        display: block;
+        transition: @Standard_transition;
+        
+        &:before {
+            top: 16px;
+            opacity: 1;
+            transform: translateY(0);
+
+            position: absolute;
+            left: 50%;
+            margin-left: -5px;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-width: 0;
+            border-bottom-color: rgba(35,46,88,0.9);
+            content: " ";
+            transition: @Standard_transition;
+        }
+    }
+    ul.issues {
+        left: 30px;
+        right: 30px;
+        
+        opacity: 1;
+        z-index: 100;
+        transform: scaleY(1);
+        
+        position: absolute;
+        padding: 10px;
+        margin-top: 10px;
+        background: rgba(35,46,88,0.9);
+        
+        transition: @Standard_transition;
+        transform-origin: center top;
+        //transition-delay: 0s;
+        
+        li {
+            margin: 10px 0;
+            
+            a {
+                color: #fff;
+            }
+        }
+    }
+}
+*/
