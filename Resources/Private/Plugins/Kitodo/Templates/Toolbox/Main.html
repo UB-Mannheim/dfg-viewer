@@ -12,7 +12,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<ul>
+<ul class="main">
     <f:if condition="{renderAnnotationTool}">
         <f:then>
             <li>
@@ -36,7 +36,7 @@
 
     <f:if condition="{renderImageManipulationTool}">
         <f:then>
-            <li>
+            <li class="tx-dlf-tools-imagetools-li"><f:comment>Das hier wird verwendet 2023.11.09 Ft</f:comment>
                 <span class="tx-dlf-tools-imagetools" id="tx-dlf-tools-imagetools"
                         data-dic="imagemanipulation-on:{f:translate(key: 'tools.imagemanipulation.on')};imagemanipulation-off:{f:translate(key: 'tools.imagemanipulation.off')};reset:{f:translate(key: 'tools.imagemanipulation.reset')};saturation:{f:translate(key: 'tools.imagemanipulation.saturation')};hue:{f:translate(key: 'tools.imagemanipulation.hue')};contrast:{f:translate(key: 'tools.imagemanipulation.contrast')};brightness:{f:translate(key: 'tools.imagemanipulation.brightness')};invert:{f:translate(key: 'tools.imagemanipulation.invert')};parentContainer:{parentContainer}"
                         title="{f:translate(key: 'tools.imagemanipulation.no-support')}">
