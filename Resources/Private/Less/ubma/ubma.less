@@ -334,7 +334,7 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
     }
 }
 
-/* toc im dfgviewer modus */
+/* toc in dfgviewer modus */
 ul.toc.newspaper {
     & > li.active.submenu {
         & > ul.normal {
@@ -469,10 +469,77 @@ ul.toc.newspaper {
 }
 
 
-// Abstand zwischen verschiedenen Metadaten-Blöcken
+// Distance between diffrent metadata blocks
 dl.tx-dlf-metadata-titledata {
     & + & {
         margin-top: 20px;
+    }
+}
+
+// Hide document-functions in calendar view (year and days)
+body.dfgviewer {
+    &.calendar,
+    &.years-calendar {
+        .document-functions,
+        .view-functions {
+            display: none
+        }
+    }
+    &.calendar {
+        .list-view.active {
+            top: 95px;
+
+            span.listview-date {
+                &:before {
+                    content: ' ';
+                    display: block;
+                }
+            }
+            li {
+                display: inline-block;
+                //padding: 0;
+                width: 100%;
+                text-align: left;
+                border-radius: 0;
+                background-color: unset;
+                
+                &:hover {
+                    transform: none;
+                }
+                &:nth-child(even) {
+                    //background: hotpink;
+                    background: fade(@light-blue, 15%);
+                }
+            }
+        }
+
+        .calendar-view.active {
+            table {
+                tr {
+                    td {
+                        .contains-issues {
+                            //border: 1px solid @light-grey-border;
+                            //border-radius: 9px;
+                            background-color: #e5e5e5;
+                            background-color: #ebedf5;
+                            
+                            &:hover {
+                                transform: scale(1.2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.fulltext-visible {
+        .document-view {
+            .fulltext-container {
+                #tx-dlf-fulltextselection {
+                    padding-top: 92px;
+                }
+            }
+        }
     }
 }
 
