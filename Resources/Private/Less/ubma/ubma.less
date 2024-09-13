@@ -14,8 +14,8 @@
             li {
                 a {
                     color: #ABB8CA;
-                    
-                    &.actlang { 
+
+                    &.actlang {
                         color: #fff;
                     }
                 }
@@ -114,13 +114,13 @@ body.dfgviewer {
                 padding: 0;
                 border-radius: 20px;
                 max-width: 40px;
-                
+
                 &.current {
                     a {
                         color: #fff;
                         background-color: @ubma-base;
                         border-radius: 20px;
-                        
+
                         &:hover {
                             //color: @ubma-base;
                             //background-color: @light-blue;
@@ -128,18 +128,18 @@ body.dfgviewer {
                         }
                     }
                 }
-                
+
                 &:hover {
                         transform: scale(1.1);
                 }
-                
+
                 &.disabled {
                     border-color: @disabled-grey;
 
                     &:hover {
                         transform: none;
                     }
-                    
+
                     span {
                         color: @disabled-grey;
 
@@ -148,7 +148,7 @@ body.dfgviewer {
                         }
 
                     }
-                    
+
                     &.first {
                         span {
                             &:before {
@@ -164,11 +164,11 @@ body.dfgviewer {
                         }
                     }
                 }
-                
+
                 &.dots {
                     border: none;
                     transform: none;
-                    
+
                     span {
                         &:hover {
                             transform: none;
@@ -176,7 +176,7 @@ body.dfgviewer {
                         }
                     }
                 }
-                
+
                 span,
                 a {
                     display: inline-block;
@@ -186,16 +186,16 @@ body.dfgviewer {
                     padding-top: 8px;
                     padding-bottom: 8px;
                     color: @ubma-base;
-                    
+
                     // Ausgeschaltet am 16.01.24
                     // unklar ob Seiteneffekte
                     /*&:hover {
                         color: #fff;
                         color: hotpink;
                     }*/
-                    
+
                 }
-                
+
                 &.first {
                     span,
                     a {
@@ -222,11 +222,11 @@ body.dfgviewer {
                 }
             }
         }
-        
-        
-        
-        
-        
+
+
+
+
+
     }
     .tx-dlf-pagegrid-thumbnail {
         a {
@@ -258,7 +258,7 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
     width: max-content;
     text-align: right;
     padding-left: 9px;
-    
+
     a {
     color: #232e58;
     }
@@ -271,7 +271,7 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
             a {
                 border-bottom: 0.1875rem solid #d1d7df;
             }
-            
+
             &.btn {
                 a {
                     border-bottom: none;
@@ -281,7 +281,7 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
                 margin-left: 20px;
             }
         }
-        
+
     }
 }
 
@@ -300,7 +300,7 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
             a {
                 background-color: #fff;
                 width: 250%;
-                border-radius: 19px;                
+                border-radius: 19px;
             }
         }
     }
@@ -405,7 +405,7 @@ ul.toc.newspaper {
                                             left: 28px;
                                             color: brown;
                                         }
-                                        
+
                                         // das erste Elemente also der Tag selbst
                                         &.active {
                                             //left: 28px;
@@ -436,7 +436,7 @@ ul.toc.newspaper {
                                                     width: 1px;
                                                     color: #fff;
                                                 }
-                                                
+
                                                 li.current {
                                                     // trifft zu viele Teile
                                                     // hierrüber kann die Einrückung nicht korrigiert werden
@@ -482,18 +482,28 @@ dl.tx-dlf-metadata-titledata {
     }
 }
 
+
+// Hide document-functions in calendar view (year and days)
+// funktioniert ohne die per Javascript zugeordnete klasse zum Body
+.document-view.newspaper_year,
+.document-view.newspaper_anchor {
+    .document-functions,
+    .view-functions {
+        display: none;
+    }
+}
 // Hide document-functions in calendar view (year and days)
 body.dfgviewer {
-    &.calendar,
-    &.years-calendar {
-        .document-functions,
-        .view-functions {
-            display: none;
-        }
-    }
+//    &.calendar,
+//    &.years-calendar {
+//        .document-functions,
+//        .view-functions {
+//            display: none;
+//        }
+//    }
     &.calendar {
         .list-view.active {
-            top: 95px;
+//            top: 95px;
 
             span.listview-date {
                 &:before {
@@ -508,7 +518,7 @@ body.dfgviewer {
                 text-align: left;
                 border-radius: 0;
                 background-color: unset;
-                
+
                 &:hover {
                     transform: none;
                 }
@@ -543,7 +553,7 @@ body.dfgviewer {
                                 //border-radius: 9px;
                                 background-color: #e5e5e5;
                                 background-color: #ebedf5;
-                                
+
                                 &:hover {
                                     transform: scale(1.2);
                                 }
@@ -580,7 +590,7 @@ body.dfgviewer {
     //background-color: #ccc;
     // abweichung!
     padding-bottom: 12px;
-    
+
     .contains-issues {
         transform: scale(1.4);
         cursor: pointer;
@@ -589,7 +599,7 @@ body.dfgviewer {
         font-weight: bold;
         display: block;
         transition: @Standard_transition;
-        
+
         &:before {
             top: 16px;
             opacity: 1;
@@ -610,23 +620,23 @@ body.dfgviewer {
     ul.issues {
         left: 30px;
         right: 30px;
-        
+
         opacity: 1;
         z-index: 100;
         transform: scaleY(1);
-        
+
         position: absolute;
         padding: 10px;
         margin-top: 10px;
         background: rgba(35,46,88,0.9);
-        
+
         transition: @Standard_transition;
         transform-origin: center top;
         //transition-delay: 0s;
-        
+
         li {
             margin: 10px 0;
-            
+
             a {
                 color: #fff;
             }
