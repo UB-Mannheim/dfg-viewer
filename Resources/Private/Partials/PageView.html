@@ -1,32 +1,10 @@
-<f:comment>
-    Copyright notice
-
-    (c) Saxon State and University Library Dresden <typo3@slub-dresden.de>
-    All rights reserved
-
-    This script is part of the TYPO3 project. The TYPO3 project is
-    free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 3 of the License, or
-    (at your option) any later version.
-
-    The GNU General Public License can be found at
-    http://www.gnu.org/copyleft/gpl.html.
-
-    This script is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    This copyright notice MUST APPEAR in all copies of the script!
-</f:comment>
-
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
     xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-    <div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')}">
+    <f:comment><f:debug>{isNewspaper}</f:debug></f:comment>
+    <div class="document-view {isNewspaper}">
         <div id="browser-hint" class="hidden">
             <div class="alert">
                 <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
@@ -46,21 +24,25 @@
 
         <f:if condition="{is3dObject} == 1">
             <f:then>
+                <!-- it's a embedded3dviewer! -->
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_embedded3dviewer"/>
             </f:then>
             <f:else>
                 <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
+                        <!-- it's a pagegrid! -->
                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
                     </f:then>
                     <f:else>
                         <f:if condition="{isNewspaper} == 'newspaper_anchor'">
                             <f:then>
+                                <!-- it's a newspaperyears! -->
                                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
                             </f:then>
                             <f:else>
                                 <f:if condition="{isNewspaper} == 'newspaper_year'">
                                     <f:then>
+                                        <!-- it's a newspapercalendar! -->
                                         <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
                                     </f:then>
                                     <f:else>
