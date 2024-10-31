@@ -43,7 +43,7 @@
     "license": "GPL-3.0-or-later",
     "require": {
         "typo3/cms-core": "^10.4|^11.5",
-        "ub-mannheim/presentation": "dev-5.x-dev",
+        "ub-mannheim/presentation": "5.x-dev",
         "ub-mannheim/ubma-digitalcollections": "dev-slubmaster"
     },
     "autoload": {
