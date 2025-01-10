@@ -118,7 +118,7 @@ plugin.tx_dlf_metadata {
         getTitle = 0
         showFull = 1
         rootline = 1
-        separator = #
+        separator = </dd><dd>
     }
 }
 
