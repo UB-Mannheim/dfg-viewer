@@ -4,26 +4,38 @@
     .header-bar {
         h1{
             height: -webkit-fill-available;
-            
+
             a {
                 // Logo des df-viewers:
         background: url(../../../Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
         background-size: 62px;
             }
         }
-    nav {
-        .language-nav {
-            li {
-                a {
-                    color: #ABB8CA;
+        nav {
+            .language-nav {
+                li {
+                    a {
+                        color: #ABB8CA;
 
-                    &.actlang {
-                        color: #fff;
+                        &.actlang {
+                            color: #fff;
+                        }
                     }
                 }
             }
         }
     }
+    .control-bar-content {
+        .toc-wrapper,
+        .metadata-wrapper {
+            .tx-dlf-metadata {
+                .control-bar-container.metadata-basic {
+                    h3 {
+                        margin-top: 3px;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -582,6 +594,24 @@ body.dfgviewer {
     overflow-y: auto;
     height: 100%;
 }
+
+@media screen and  (min-width: 1024px) {
+    .control-bar {
+        .control-bar-content {
+            .metadata-wrapper,
+            .toc-wrapper {
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                h3 {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }   
+}
+
+
 
 /*
 
