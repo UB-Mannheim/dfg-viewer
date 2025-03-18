@@ -203,7 +203,11 @@ lib.kitodo.navigation.pagecontrol < tt_content.list.20.dlf_navigation
 lib.kitodo.navigation.pagecontrol {
     settings {
         pageStep = 10
-        features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        #features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        # measureBack,measureForward wurden Rückgängig gemacht, ggf. später wieder aktivieren
+        # 18.03.2025 Ft
+        features = pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+
     }
 }
 
