@@ -33,6 +33,10 @@
                     h3 {
                         margin-top: 3px;
                     }
+
+                    &.section-hidden {
+                        height: 30px;
+                    }
                 }
             }
         }
@@ -643,6 +647,11 @@ body.dfgviewer {
     }
 }
 
+/* Bei schmalen Bildschirmen wenn untere navigation in gridview zweizeilig wird, unterste Medienreihe seitenzahl noch sichbar*/
+.tx-dlf-pagegrid-list {
+    padding-bottom: 100px;
+}
+
 @media screen and (max-width: 1023px) {
     /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
     .document-functions>ul {
@@ -665,6 +674,14 @@ body.dfgviewer {
                     border-bottom-color: rgba(35,46,88, 0.9);
                     border-top-color: unset;
                 }
+            }
+        }
+    }
+    body.dfgviewer {
+        .tx-dlf-pagegrid {
+            ul.pagination.ubma {
+                bottom: 4px;
+                position: fixed;
             }
         }
     }
