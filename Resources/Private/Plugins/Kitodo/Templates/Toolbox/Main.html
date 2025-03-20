@@ -38,10 +38,11 @@
 
     <f:if condition="{renderImageManipulationTool}">
         <f:then>
-            <li class="tx-dlf-tools-imagetools-li"><f:comment>Das hier wird verwendet 2023.11.09 Ft</f:comment>
+            <li class="tx-dlf-tools-imagetools-li"><f:comment>This is what is used 2025.03.20 Ft</f:comment>
                 <span class="tx-dlf-tools-imagetools" id="tx-dlf-tools-imagetools"
                         data-dic="imagemanipulation-on:{f:translate(key: 'tools.imagemanipulation.on')};imagemanipulation-off:{f:translate(key: 'tools.imagemanipulation.off')};reset:{f:translate(key: 'tools.imagemanipulation.reset')};saturation:{f:translate(key: 'tools.imagemanipulation.saturation')};hue:{f:translate(key: 'tools.imagemanipulation.hue')};contrast:{f:translate(key: 'tools.imagemanipulation.contrast')};brightness:{f:translate(key: 'tools.imagemanipulation.brightness')};invert:{f:translate(key: 'tools.imagemanipulation.invert')};parentContainer:{parentContainer}"
                         title="{f:translate(key: 'tools.imagemanipulation.no-support')}">
+                        <f:comment>Elements here are not output, this is output via imageManipulationControl.js</f:comment>>
                 </span>
             </li>
         </f:then>
