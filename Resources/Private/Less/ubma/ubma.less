@@ -643,6 +643,33 @@ body.dfgviewer {
     }
 }
 
+@media screen and (max-width: 1023px) {
+    /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+    .document-functions>ul {
+        top: 20px;
+        text-align: left;
+        right: unset;
+        bottom: unset;
+
+        & > li.submenu {
+            & > ul {
+                bottom: unset;
+                top: 120px;
+                left: 15px;
+            }
+
+            &.open {
+                &:before {
+                    top: 31px;
+                    border-width: 0 10px 10px 10px;
+                    border-bottom-color: rgba(35,46,88, 0.9);
+                    border-top-color: unset;
+                }
+            }
+        }
+    }
+}
+
 
 
 /*
