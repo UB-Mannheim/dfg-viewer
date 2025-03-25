@@ -414,6 +414,21 @@
     }
 }
 
+/* ==============[ toc (inside the responive wrap ]===== */
+@media screen and (max-width: @tabletLandscapeViewportWidth) {
+
+    /* otherwise no scrollbar in small windows */
+    /*.tx-dlf-metadata, */
+    .control-bar-container {
+        position: relative;
+        overflow: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+        line-height: 1.4;
+    }
+}
+
 /* ==============[ toc (inside the respective wrap > see above) ]========================= */
 ul.toc {
     position: relative;
