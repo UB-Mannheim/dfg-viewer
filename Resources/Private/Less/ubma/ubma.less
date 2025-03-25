@@ -363,7 +363,11 @@ ul.toc.newspaper {
     & > li.active.submenu {
         & > ul.normal {
             &:before {
-                top: 16px;
+                // in toc bestimmt die Höhe des linken Striches 
+                // (bei der Jahreszahl)
+                // bis 24.03.2025
+                //top: 16px;
+                top: 0;
             }
 
             & > li.submenu.current {
@@ -409,7 +413,10 @@ ul.toc.newspaper {
                             &:before {
                                 // Verbindungsstrich vor 02.02.1914
                                 left: 30px;
-                                top:19px
+                                // Verbindungsstrich vor Tagesdatum
+                                // bis 24.03.2025
+                                //top:19px
+                                top: 0;
                             }
 
                             li.submenu.doNotLinkIt {
