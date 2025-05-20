@@ -67,9 +67,11 @@
             </f:comment>
             <f:if condition="{child.ITEM_STATE} == 'ACTIFSUB' && ({child.type} == 'Zeitung' || {child.type} == 'Newspaper')">
                 <f:then>
+		      <f:comment><f:debug>child.ITEM_STATE == ACTIFSUB and Zeitung</f:debug></f:comment>
                     <f:comment><f:debug>{_all}</f:debug></f:comment>
                     <f:comment>aktuell ohne link, aber zumindest den Namen der Zeitschrift und den Typ, wg. Problem mit child.id</f:comment>
                     <f:comment><f:render partial="TableOfContents/Title" arguments="{child: child}" /></f:comment>
+		    <f:comment><f:debug>{child.title}</f:debug></f:comment>
 
                     <f:switch expression="{child.title}">
                         <f:comment>------------------------------------------</f:comment>
@@ -120,15 +122,26 @@
 		    
                 </f:then>
                 <f:else>
+<f:comment>
+		      <f:debug>child.ITEM_STATE != ACTIFSUB</f:debug>
+		      <f:debug>{_all}</f:debug>
+</f:comment>		      
+		      <!-- titel bilden start-->
+		      <!-- child.id: {child.id} child.page: {child.page} -->
+		      <!-- child.ht: {child.ht} -->
+		      <!-- child.ht: {child.points} -->
+                        <f:comment>addQueryString="1" 
+                        addQueryStringMethod="GET"</f:comment>
+
                     <f:link.action 
                         action="main" 
                         pageUid="{settings.targetPid}" 
                         additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
-                        addQueryString="1" 
-                        addQueryStringMethod="GET"
+                        addQueryString="untrusted" 
                         title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
                         <f:render partial="TableOfContents/Title" arguments="{child: child}" />
                     </f:link.action>
+		    <!-- titel bilden ende -->
                 </f:else>
             </f:if>
         </f:else>
