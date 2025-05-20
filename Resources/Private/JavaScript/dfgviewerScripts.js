@@ -29,6 +29,7 @@
 !*/
 
 $(document).ready(function() {
+	//alert("test");
 
     // check mobile device to specify click events
     function mobileCheck() {
@@ -281,6 +282,41 @@ $(document).ready(function() {
             });
         };
     });
+    
+    //--------------------------------------------------------------------------------
+    // Mannheim:
+    // Fehler im TOC Inhaltsverzeichnis korrigieren
+    // der Fehler ist ein falscher inhalt des links auf den Titel oder Band
+    // dieser ist im Fehlerfall eine url und nicht eine Nummer
+    // wenn der link einen parameter ht hat dann ist er falsch
+    //--------------------------------------------------------------------------------
+    $('ul.toc li.tx-dlf-toc-ifsub a').each(function(){
+
+	let url = $(this).attr('href');
+	console.log(url);
+	    
+	const regex = /^(.*?)(https?:\/\/.*?\.xml)(.*?)[\?&]ht=(\d+)[&](.*)$/;
+	// Untersuchen ob https:// und ob parameter ht enthalten ist
+	let match = url.match(regex);
+	    
+	if (match) {
+		let prefix = match[1].trim();      // Text vor der URL
+		let url = match[2];                // URL bis .xml
+		let  queryBeforeHt = match[3];      // Alles zwischen .xml und ht=
+		let htValue = match[4];            // ht-Wert
+		let afterHt = match[5] || "";      // Alles nach ht=	    
+		
+		// url neu zusammensetzen
+		url = prefix + htValue + queryBeforeHt + '?ht=' + htValue + '&' + afterHt;
+		$(this).attr('href', url);
+		console.log("Url korrigiert" + url);
+        };
+
+	
+    });
+    
+    
+    
 });
 
 $(document).keyup(function(e) {
