@@ -46,7 +46,21 @@
 .document-view {
     .document-functions {
         .provider {
-            display: none;
+            //display: none;
+            // new: hide only OwnerLogo
+            //      but show sponsorLogo
+        
+            ul {
+                li {
+                    &.OwnerLogo {
+                        //display: none;
+                        visibility: hidden;
+                    }
+                    &.sponsorLogo {
+                        display: flex;
+                    }
+                }
+            }
         }
 
         ul.document-function-bar {
