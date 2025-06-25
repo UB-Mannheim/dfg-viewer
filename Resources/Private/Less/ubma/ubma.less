@@ -43,6 +43,7 @@
     }
 }
 
+
 .document-view {
     .document-functions {
         .provider {
@@ -102,6 +103,22 @@
     }
 }
 
+@media screen and (min-width: 480px) {
+    body {
+        .document-view {
+            .document-functions {
+                .provider {
+                    .mobile-meta {
+                        padding-right: 100px;
+                        width: 55%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 body {
     &.fullscreen {
         .document-view {
@@ -132,6 +149,8 @@ body {
         }
     }
 }
+
+
 @media screen and (min-width: 480px) {
     body {
         &.fullscreen {
@@ -141,12 +160,32 @@ body {
                         .mobile-controls {
                             bottom: unset;
                         }
+                        .mobile-meta {
+                            //padding-right: 0;
+                        }
                     }
                 }
             }
         }
     }
 }
+@media screen and (max-width: 720px) {
+    body {
+        &.fullscreen {
+            .document-view {
+                .document-functions {
+                    .mobile-meta {
+                        display: none;
+                    }
+                    &>ul {
+                        top: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 
 body.dfgviewer {
