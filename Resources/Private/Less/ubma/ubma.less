@@ -49,8 +49,10 @@
             //display: none;
             // new: hide only OwnerLogo
             //      but show sponsorLogo
-        
-            ul {
+
+            ul.provider-logos {
+                flex: auto;
+
                 li {
                     &.OwnerLogo {
                         //display: none;
@@ -111,17 +113,41 @@ body {
                     // Original state
                     display: flex;
 
+                    ul.provider-logos {
+                        flex: auto;
+                    
+                        li {
+                            &.OwnerLogo {
+                                visibility: visible;
+                            }
+                        }
+                    }
                 }
 
                 ul.document-function-bar {
                     // Original state
                     left: 124px;
                 }
-
             }
         }
     }
 }
+@media screen and (min-width: 480px) {
+    body {
+        &.fullscreen {
+            .document-view {
+                .document-functions {
+                    .provider {
+                        .mobile-controls {
+                            bottom: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 body.dfgviewer {
     .tx-dlf-pagegrid {

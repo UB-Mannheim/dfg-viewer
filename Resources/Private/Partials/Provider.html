@@ -27,7 +27,7 @@
 
 <div class="provider">
     <f:if condition="{settings.showProviderLogo}">
-        <ul>
+        <ul class="provider-logos">
             <f:comment>OwnerLogo</f:comment>
             <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}',
                 logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
