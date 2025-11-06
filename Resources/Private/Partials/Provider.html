@@ -34,7 +34,7 @@
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}  '}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="OwnerLogo">
                         <!--Provider.html 15-->
                         <f:comment> f:link.external uri="{logoUri}" title="{logoTitle}" </f:comment>
                         <f:link.page pageUid="{rootPageId}" title="UB Mannheim: Digitale Sammlungen" class="dfgviewer-logo">
@@ -51,7 +51,7 @@
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="aggregatorLogo">
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
                                 title="{logoTitle} 28" alt="Logo von {logoTitle}" />
@@ -65,10 +65,10 @@
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="sponsorLogo">
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
-                                title="{logoTitle} 41" alt="Logo von {logoTitle}" />
+                                title="{logoTitle}" alt="Logo von {logoTitle}" />
                         </f:link.external>
                     </li>
                 </f:if>
