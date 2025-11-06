@@ -14,7 +14,7 @@
 
 <f:comment><f:debug>{_all}</f:debug></f:comment>
 <f:for each="{children}" as="child">
-    <!-- {child.type} -->
+    <!-- 17: child.type: {child.type} -->
     <f:switch expression="{child.ITEM_STATE}">
         <f:case value="ACT">
             <li class="tx-dlf-toc-act active {child.type}">
@@ -46,7 +46,7 @@
             </f:if>
         </f:case>
         <f:defaultCase>
-            <li class="tx-dlf-toc-no default {child.type}">
+            <li class="tx-dlf-toc-no default {child.type} c50">
         </f:defaultCase>
     </f:switch>
 
@@ -64,45 +64,57 @@
                 problem with the child.id, which in my first test case is a URL and not a number. 
                 At the moment the error does not occur because i have commented out settings in config.yaml
                 Im Moment setze ich die id manuell, diese kann in der Jahresansicht ermittelt werden
+		  child.id ist hier eine URL und nicht eine Zahl! Das verursacht den Fehler!
             </f:comment>
             <f:if condition="{child.ITEM_STATE} == 'ACTIFSUB' && ({child.type} == 'Zeitung' || {child.type} == 'Newspaper')">
                 <f:then>
 		      <f:comment><f:debug>child.ITEM_STATE == ACTIFSUB and Zeitung</f:debug></f:comment>
                     <f:comment><f:debug>{_all}</f:debug></f:comment>
-                    <f:comment>aktuell ohne link, aber zumindest den Namen der Zeitschrift und den Typ, wg. Problem mit child.id</f:comment>
                     <f:comment><f:render partial="TableOfContents/Title" arguments="{child: child}" /></f:comment>
 		    <f:comment><f:debug>{child.title}</f:debug></f:comment>
+		    <f:comment><f:debug>Ausgabe: child.id: {child.id}</f:debug></f:comment>
+		    <f:comment>wenn ich hier angekommen bin dann bin ich in einer Heftausgabe! Jetzt setze ich die Variable newspaper_level auf day und damit kann ich dann wieder das Inhaltsverzeichnis anzeigen</f:comment>
 
+		      <f:variable name="newspaper_level" value="" />
                     <f:switch expression="{child.title}">
                         <f:comment>------------------------------------------</f:comment>
                         <f:comment>   Mannheimer Intelligenzblatt            </f:comment>
                         <f:comment>------------------------------------------</f:comment>
                         <f:case value="Mannheimer Intelligenzblatt">
-                            <f:variable name="xChildId" value="4650" />
+                            <f:comment><f:variable name="xChildId" value="4650" /></f:comment>
+                            <f:variable name="xChildId" value="58789" />
+				<f:variable name="newspaper_level" value="day" />
                         </f:case>
                         <f:comment>------------------------------------------</f:comment>
                         <f:comment>   Der Freimüthige oder Ernst und Scherz  </f:comment>
                         <f:comment>------------------------------------------</f:comment>
                         <f:case value="Der Freimüthige oder Ernst und Scherz">
-                            <f:variable name="xChildId" value="5269" />
+                            <f:comment><f:variable name="xChildId" value="5269" /></f:comment>
+                            <f:variable name="xChildId" value="59408" />
+				<f:variable name="newspaper_level" value="day" />
                         </f:case>
                         <f:comment>------------------------------------------</f:comment>
                         <f:comment>   Allgemeine preußische Staats-Zeitung   </f:comment>
                         <f:comment>------------------------------------------</f:comment>
                         <f:case value="Allgemeine preußische Staats-Zeitung">
-                            <f:variable name="xChildId" value="4640" />
+                            <f:comment><f:variable name="xChildId" value="4640" /></f:comment>
+                            <f:variable name="xChildId" value="60779" />
+				<f:variable name="newspaper_level" value="day" />
                         </f:case>
                         <f:comment>------------------------------------------------------------</f:comment>
                         <f:comment>   Deutscher Reichsanzeiger und Preußischer Staatsanzeiger  </f:comment>
                         <f:comment>------------------------------------------------------------</f:comment>
                         <f:case value="Deutscher Reichsanzeiger und Preußischer Staatsanzeiger">
-                            <f:variable name="xChildId" value="4643" />
+                            <f:comment><f:variable name="xChildId" value="4643" /></f:comment>
+                            <f:variable name="xChildId" value="60774" />
+				<f:variable name="newspaper_level" value="day" />
                         </f:case>
                         <f:comment>------------------------------------------------------------</f:comment>
                         <f:comment>   neue zeitung  </f:comment>
                         <f:comment>------------------------------------------------------------</f:comment>
                         <f:defaultCase>
                             <f:variable name="xChildId" value="---" />
+				<f:variable name="newspaper_level" value="day" />
                         </f:defaultCase>
                     </f:switch>
                     <f:if condition="{xChildId} != '---'">
@@ -172,11 +184,23 @@
                         <f:variable name="cULClass" value="ul" />
                     </f:else>
                 </f:if>
-                <ul class="doNotLinkIt {child.type} {cULClass}">
+                <ul class="doNotLinkIt {child.type} {cULClass} child-175">
             </f:then>
             <f:else>
                 <f:comment><f:debug>{_all}</f:debug></f:comment>
-                <{cULType} class="normal {child.type}">
+		<f:comment>
+		<f:debug>{_all}</f:debug>
+		<f:debug>{child._SUB_MENU.0.type}</f:debug>
+		</f:comment>
+		<f:if condition="{child.type} == 'Zeitung'  && {newspaper_level } != 'day'">
+			<f:then>
+				<f:variable name="hide_newspaper_toc_details" value="hide_newspaper_toc_details" />
+			</f:then>
+			<f:else>
+				<f:variable name="hide_newspaper_toc_details" value="" />
+			</f:else>
+		</f:if>
+		<{cULType} class="normal {child.type} child-188 {hide_newspaper_toc_details} {newspaper_level} {child._SUB_MENU.0.type}">
             </f:else>
         </f:if>
         <f:render partial="TableOfContents/Children" arguments="{children: child._SUB_MENU}" />
