@@ -50,9 +50,20 @@
         </f:defaultCase>
     </f:switch>
 
-    <f:if condition="{child.doNotLinkIt}">
-        <f:then>
+<f:if condition="{child.doNotLinkIt}">
+	<f:then>
             <span class="ma-toc-title a doNotLinkIt {child.type}">
+	    
+<f:if condition="{child.id}">
+	<f:then>
+	<!-- ID Eltern 59: {child.id} {child.type} {child.AnchorDocumentId} -->
+	</f:then>
+</f:if>
+<f:comment>
+		<f:debug>62</f:debug>
+		<f:debug>{_all}</f:debug>
+</f:comment>	
+		<!-- LINE 66: {child.id} {child.type} {child.AnchorDocumentId} -->
                 <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </span>
         </f:then>
@@ -75,50 +86,26 @@
 		    <f:comment><f:debug>Ausgabe: child.id: {child.id}</f:debug></f:comment>
 		    <f:comment>wenn ich hier angekommen bin dann bin ich in einer Heftausgabe! Jetzt setze ich die Variable newspaper_level auf day und damit kann ich dann wieder das Inhaltsverzeichnis anzeigen</f:comment>
 
-		      <f:variable name="newspaper_level" value="" />
-                    <f:switch expression="{child.title}">
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Mannheimer Intelligenzblatt            </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Mannheimer Intelligenzblatt">
-                            <f:comment><f:variable name="xChildId" value="4650" /></f:comment>
-                            <f:variable name="xChildId" value="58789" />
-				<f:variable name="newspaper_level" value="day" />
-                        </f:case>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Der Freimüthige oder Ernst und Scherz  </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Der Freimüthige oder Ernst und Scherz">
-                            <f:comment><f:variable name="xChildId" value="5269" /></f:comment>
-                            <f:variable name="xChildId" value="59408" />
-				<f:variable name="newspaper_level" value="day" />
-                        </f:case>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Allgemeine preußische Staats-Zeitung   </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Allgemeine preußische Staats-Zeitung">
-                            <f:comment><f:variable name="xChildId" value="4640" /></f:comment>
-                            <f:variable name="xChildId" value="60779" />
-				<f:variable name="newspaper_level" value="day" />
-                        </f:case>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:comment>   Deutscher Reichsanzeiger und Preußischer Staatsanzeiger  </f:comment>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:case value="Deutscher Reichsanzeiger und Preußischer Staatsanzeiger">
-                            <f:comment><f:variable name="xChildId" value="4643" /></f:comment>
-                            <f:variable name="xChildId" value="60774" />
-				<f:variable name="newspaper_level" value="day" />
-                        </f:case>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:comment>   neue zeitung  </f:comment>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:defaultCase>
-                            <f:variable name="xChildId" value="---" />
-				<f:variable name="newspaper_level" value="day" />
-                        </f:defaultCase>
-                    </f:switch>
+			<f:variable name="newspaper_level" value="" />
+		       <f:variable name="xChildId" value="{child.AnchorDocumentId}" />
+			<f:variable name="newspaper_level" value="day" />
+		      
                     <f:if condition="{xChildId} != '---'">
                         <f:then>
+				<f:if condition="{child.id}">
+					<f:then>
+					<!-- ID Eltern 130: {child.id}-->
+					<!-- ID Eltern 132: {parentDocumentId}-->
+					</f:then>
+				</f:if>
+				
+<f:comment>
+		<f:debug>138</f:debug>
+		<f:debug>{_all}</f:debug>
+		<f:debug>{child.AnchorDocumentId}</f:debug>
+</f:comment>
+				<!-- 138 Ansicht Detail Titel -->
+				<!-- child.id: '{child.id}' child.type: '{child.type}'  child.AnchorDocumentId: '{child.AnchorDocumentId}' -->
                             <f:link.action 
                                 action="main" 
                                 pageUid="{settings.targetPid}" 
@@ -145,10 +132,48 @@
                         <f:comment>addQueryString="1" 
                         addQueryStringMethod="GET"</f:comment>
 
+<f:if condition="{child.id}">
+	<f:then>
+	<!-- ID Eltern 163: {child.id}-->
+	</f:then>
+</f:if>
+
+<f:comment>
+		<f:debug>173</f:debug>
+		<f:debug>{_all}</f:debug>
+		<f:debug>{child.id}</f:debug>
+		<f:debug>{child.parentDocumentId}</f:debug>
+		<f:debug>{child.AnchorDocumentId}</f:debug>
+</f:comment>	
+
+			<f:comment>Problem mit child.id / points die url statt id sind beseitigen, korrespondiert mit Anpassung in TableOfContentsControler.php </f:comment>
+			<f:if condition="{child.AnchorDocumentId}">
+				<f:then>
+					<!-- child.AnchorDocumentId: {child.AnchorDocumentId} -->
+					<f:variable name="xChildId" value="{child.AnchorDocumentId}" />
+				</f:then>
+				<f:else>
+					<!-- kein child.AnchorDocumentId -->
+					<f:if condition="{child.parentDocumentId}">
+						<f:then>
+							<!-- child.parentDocumentId: {child.parentDocumentId}-->
+							<f:variable name="xChildId" value="{child.parentDocumentId}" />
+						</f:then>
+						<f:else>
+							<!-- keine child.parentDocumentId und child.AnchorDocumentId -->
+							<f:variable name="xChildId" value="{child.id}" />
+						</f:else>
+					</f:if>
+				</f:else>
+			</f:if>
+
+			
+			<!-- 173 Ansicht ZSS und Ztg: Jahre + Kalender  / Mono: Detailansicht + anchor   {child.AnchorDocumentId} -->
+			<!-- child.id: '{child.id}' child.type: '{child.type}'  child.AnchorDocumentId: '{child.AnchorDocumentId}' -->
                     <f:link.action 
                         action="main" 
                         pageUid="{settings.targetPid}" 
-                        additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
+			additionalParams="{f:if(condition:'{xChildId}', then:'{\'tx_dlf[id]\':xChildId, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
                         addQueryString="untrusted" 
                         title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
                         <f:render partial="TableOfContents/Title" arguments="{child: child}" />
