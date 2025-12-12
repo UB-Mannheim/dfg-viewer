@@ -9,7 +9,10 @@ config {
 
   # concatenate all Javascript files by default
   # in Mannheim no concatenate
-  concatenateJs = 0
+  #concatenateJs = 0
+  # 12.12.25, wg. Problem mit uBlock Origin, PageView.js verursacht das Problem
+  concatenateJs = 1
+  
   # concatenate all CSS files by default
   # in Mannheim no concatenate
   concatenateCss = 0
