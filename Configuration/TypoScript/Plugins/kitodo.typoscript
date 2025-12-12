@@ -272,8 +272,8 @@ plugin.tx_dlf_pdfdownloadtool {
         fileGrpFulltext = ALTO
         tools = pdfdownloadtool,tx_dlf_imagedownloadtool,metsdownloadtool,fulltextdownloadtool,searchindocumenttool
 
-        searchUrl = https://playground.bib.uni-mannheim.de
-        documentIdUrlSchema = https://playground.bib.uni-mannheim.de/items/id/record
+        searchUrl = https://digi.bib.uni-mannheim.de
+        documentIdUrlSchema = https://digi.bib.uni-mannheim.de/items/id/record
         idInputName = tx_dlf[id]
         pidInputName = tx_dlf[pid]
         queryInputName = tx_dlf[query]
