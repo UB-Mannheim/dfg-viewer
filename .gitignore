@@ -13,3 +13,6 @@ composer.lock
 Docker/build/extensions
 !Docker/build/extensions/.gitkeep
 Build/yarn.lock
+Build/.yarn
+Build/.yarnrc.yml
+Build/package-lock.json
