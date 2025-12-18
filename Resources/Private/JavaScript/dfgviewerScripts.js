@@ -289,7 +289,7 @@ $(document).ready(function() {
     $('ul.toc li.tx-dlf-toc-ifsub a').each(function(){
 
 	let url = $(this).attr('href');
-	console.log(url);
+	//console.log(url);
 	    
 	const regex = /^(.*?)(https?:\/\/.*?\.xml)(.*?)[\?&]ht=(\d+)[&](.*)$/;
 	// Untersuchen ob https:// und ob parameter ht enthalten ist
@@ -305,7 +305,7 @@ $(document).ready(function() {
 		// url neu zusammensetzen
 		url = prefix + htValue + queryBeforeHt + '?ht=' + htValue + '&' + afterHt;
 		$(this).attr('href', url);
-		console.log("Url korrigiert" + url);
+		//console.log("Url korrigiert" + url);
         };
 
 	
