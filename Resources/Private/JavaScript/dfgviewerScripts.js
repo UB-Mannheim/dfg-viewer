@@ -43,6 +43,9 @@ $(document).ready(function() {
 
     // menu toggles for offcanvas toc and metadata
     $('.offcanvas-toggle').on(mobileEvent, function(event) {
+        // close nav on link or download if opend
+        close_all_submenues();
+
         $(this).parent().toggleClass('open');
     });
 
@@ -52,6 +55,12 @@ $(document).ready(function() {
 
     // active toggle for submenus
     $('.document-functions li.submenu > a').on(mobileEvent, function(event) {
+        // close nav on link or download if opend
+        close_all_submenues('in-secondary-nav');
+
+        // close secondary nav if click on link or download
+        $('nav .secondary-nav').removeClass('open');
+
         $('li.submenu.open a').not(this).parent().removeClass('open');
         $(this).parent().toggleClass('open');
         return false;
@@ -104,6 +113,9 @@ $(document).ready(function() {
     $('nav .nav-toggle').on(mobileEvent, function(event) {
         $(this).toggleClass('active');
         $('nav .viewer-nav').toggleClass('open');
+
+        // close subnav when primary nav if open
+        close_all_submenues('in-primary-nav');
     });
 
     // calendar dropdowns
@@ -174,6 +186,7 @@ $(document).ready(function() {
 
     // enable click on fullscreen button
     $('a.fullscreen').on(mobileEvent, function() {
+        close_all_submenues('all');
         if($('body.fullscreen')[0]) {
             exitFullscreen();
         } else {
@@ -240,6 +253,18 @@ $(document).ready(function() {
         $('body').removeClass('static');
     }, 1000);
 
+    // Closing open menus in different situations
+    $('.tx-dlf-tools-imagetools').on('click', function (event) {
+        close_all_submenues('all');
+    });
+    $('.page-control').on('click', function (event) {
+        close_all_submenues('all');
+    });
+    $('.tx-dlf-map').on('click', function (event) {
+        close_all_submenues('all');
+    });
+
+
 });
 
 $(document).keyup(function(e) {
@@ -286,4 +311,18 @@ function hideBrowserAlert(){
 
 function showLoadingAnimation() {
     $("#overlay").fadeIn(300);
+}
+
+function close_all_submenues(environment = '') {
+    // close nav on link or download if opened
+    if (environment !== 'in-secondary-nav') {
+        // Not with in-seondary-nav otherwise menus can no longer be closed
+        $('li.submenu.open a').parent().removeClass('open');
+    };
+    if ((environment === 'in-secondary-nav') || (environment === 'all') ) {
+        // close subnav if opend
+        $('nav .nav-toggle').removeClass('active');
+        $('nav .secondary-nav').removeClass('open');
+        $('nav ul.viewer-nav').removeClass('open');
+    };
 }
