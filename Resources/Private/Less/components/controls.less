@@ -149,7 +149,7 @@
                                 background-size: auto 120px;
                             }
                             
-                            // alte Formen, müssen alle in neue Form überführt werden
+                            // alte Formen, mÃ¼ssen alle in neue Form Ã¼berfÃ¼hrt werden
                             //&.download-document:before {
                             //    background-position: -360px -40px;
                             //}
@@ -162,7 +162,7 @@
                                 }
                             }
 
-                            // alte Formen, müssen alle in neue Form überführt werden
+                            // alte Formen, mÃ¼ssen alle in neue Form Ã¼berfÃ¼hrt werden
                             //&.download-page:before {
                             //    background-position: -320px -40px;
                             //}
@@ -174,7 +174,7 @@
                                 }
                             }
 
-                            // alte Formen, müssen alle in neue Form überführt werden
+                            // alte Formen, mÃ¼ssen alle in neue Form Ã¼berfÃ¼hrt werden
                             //&.download-fulltext:before {
                             //    background-position: -280px -40px;
                             //}
@@ -185,7 +185,16 @@
                                     }
                                 }
                             }
-                            
+
+                            &.ma-tools-metsdownload,
+                            &.tx-dlf-tools-fulltextdownload {
+                                a {
+                                    &:before {
+                                        background-position: -320px -40px;
+                                    }
+                                }
+                            }
+
                             &.local-presentation:before {
                                 background-position: -440px -80px;
                             }
@@ -201,7 +210,7 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
-// aus konflikt: unklar ob uebernahme so hilfreich ist 20.08.2024 * adapt to new structure
+
                             &.tx-dlf-tools-modeldownload:before,
                             &.tx-dlf-tools-imagedownload:before {
                                 background-position: -320px -40px;
@@ -223,7 +232,11 @@
                         span {
                             opacity: 0.5;
                             
-                            // new Icons bereinigen
+                            //------------------------------------------
+                            // new Icons cleanup
+                            //------------------------------------------
+                            &.tx-dlf-tools-fulltextdownload,
+                            &.ma-tools-metsdownload,
                             &.tx-dlf-tools-imagedownload,
                             &.tx-dlf-tools-pdf-work {
                                 padding-left: 0;

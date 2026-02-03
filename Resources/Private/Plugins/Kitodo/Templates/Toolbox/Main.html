@@ -163,6 +163,17 @@
         </f:then>
     </f:if>
 
+    <f:if condition="{renderMetsDownloadTool}">
+        <f:then>
+            <f:comment><f:debug>{_all}</f:debug></f:comment>
+            <li class="renderMets">
+                <span class="ma-tools-metsdownload">
+                    <f:link.external uri="{metsDownload.url}">METS</f:link.external>
+                </span>
+            </li>
+        </f:then>
+    </f:if>
+
     <f:if condition="{renderSearchInDocumentTool} && {searchInDocument}">
         <f:then>
             <li>
