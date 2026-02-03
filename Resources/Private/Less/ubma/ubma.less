@@ -1,0 +1,844 @@
+// Anpassungen an UB Mannheim
+
+.control-bar {
+    .header-bar {
+        h1{
+            height: -webkit-fill-available;
+
+            a {
+                // Logo des df-viewers:
+        background: url(../../../Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
+        background-size: 62px;
+            }
+        }
+        nav {
+            .language-nav {
+                li {
+                    a {
+                        color: #ABB8CA;
+
+                        &.actlang {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .control-bar-content {
+        .toc-wrapper,
+        .metadata-wrapper {
+            .tx-dlf-metadata {
+                .control-bar-container.metadata-basic {
+                    h3 {
+                        margin-top: 3px;
+                    }
+
+                    &.section-hidden {
+                        height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.document-view {
+    .document-functions {
+        .provider {
+            //display: none;
+            // new: hide only OwnerLogo
+            //      but show sponsorLogo
+
+            ul.provider-logos {
+                flex: auto;
+
+                li {
+                    &.OwnerLogo {
+                        //display: none;
+                        visibility: hidden;
+                    }
+                    &.sponsorLogo {
+                        display: flex;
+                    }
+                }
+            }
+        }
+
+        ul.document-function-bar {
+            left: 15px;
+        }
+    }
+    .fulltext-container {
+        opacity: 0.95;
+
+        // Not necessary
+        //&:before {
+        //    height: 85px;
+        //}
+
+        #tx-dlf-fulltextselection {
+            padding-top: 80px;
+
+            span.textline {
+                // Shows lines in original wrap
+                display: block;
+            }
+        }
+    }
+    ol.tx-dlf-pagegrid-list {
+        li.tx-dlf-pagegrid-cur {
+            border: 1px solid @light-grey-border;
+            background-color: @light-grey;
+            height: auto; // test from Ft; 5.12.23
+
+            a {
+                div.tx-dlf-pagegrid-pagination {
+                    color: @base-blue;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 480px) {
+    body {
+        .document-view {
+            .document-functions {
+                .provider {
+                    .mobile-meta {
+                        padding-right: 100px;
+                        width: 55%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+body {
+    &.fullscreen {
+        .document-view {
+            .document-functions {
+                .provider {
+                    // fix position of logo
+                    .transform(translateY(-10%));
+
+                    // Original state
+                    display: flex;
+
+                    ul.provider-logos {
+                        flex: auto;
+                    
+                        li {
+                            &.OwnerLogo {
+                                visibility: visible;
+                            }
+                        }
+                    }
+                }
+
+                ul.document-function-bar {
+                    // Original state
+                    left: 124px;
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 480px) {
+    body {
+        &.fullscreen {
+            .document-view {
+                .document-functions {
+                    .provider {
+                        .mobile-controls {
+                            bottom: unset;
+                        }
+                        .mobile-meta {
+                            //padding-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 720px) {
+    body {
+        &.fullscreen {
+            .document-view {
+                .document-functions {
+                    .mobile-meta {
+                        display: none;
+                    }
+                    &>ul {
+                        top: 6px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+body.dfgviewer {
+    .tx-dlf-pagegrid {
+        ul.pagination.ubma {
+            position: absolute;
+            //top: 70px;
+            left: 25px;
+            right: 40px;
+            bottom: 12px;
+            background-color: @light-blue;
+            padding-top: 8px;
+            opacity: 0.95;
+            border-radius: 5px;
+
+            li {
+                display: inline-block;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid @ubma-base;
+                margin-right: 10px;
+                margin-bottom: 8px;
+                padding: 0;
+                border-radius: 20px;
+                max-width: 40px;
+
+                &.current {
+                    a {
+                        color: #fff;
+                        background-color: @ubma-base;
+                        border-radius: 20px;
+
+                        &:hover {
+                            //color: @ubma-base;
+                            //background-color: @light-blue;
+                            opacity: 0.6;
+                        }
+                    }
+                }
+
+                &:hover {
+                        transform: scale(1.1);
+                }
+
+                &.disabled {
+                    border-color: @disabled-grey;
+
+                    &:hover {
+                        transform: none;
+                    }
+
+                    span {
+                        color: @disabled-grey;
+
+                        &:hover {
+                            color: @disabled-grey;
+                        }
+
+                    }
+
+                    &.first {
+                        span {
+                            &:before {
+                                border-color: @disabled-grey;
+                            }
+                        }
+                    }
+                    &.last {
+                        span {
+                            &:after {
+                                border-color: @disabled-grey;
+                            }
+                        }
+                    }
+                }
+
+                &.dots {
+                    border: none;
+                    transform: none;
+
+                    span {
+                        &:hover {
+                            transform: none;
+                            color: @ubma-base;
+                        }
+                    }
+                }
+
+                span,
+                a {
+                    display: inline-block;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    width: 100%;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    color: @ubma-base;
+
+                    // Ausgeschaltet am 16.01.24
+                    // unklar ob Seiteneffekte
+                    /*&:hover {
+                        color: #fff;
+                        color: hotpink;
+                    }*/
+
+                }
+
+                &.first {
+                    span,
+                    a {
+                        &:before {
+                            content: ' ';
+                            border-right: 2px solid @ubma-base;
+                            height: 11px;
+                            position: relative;
+                            display: inline-block;
+                        }
+                    }
+                }
+                &.last {
+                    span,
+                    a {
+                        &:after {
+                            content: ' ';
+                            border-right: 2px solid @ubma-base;
+                            height: 11px;
+                            position: relative;
+                            display: inline-block;
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+    }
+    .tx-dlf-pagegrid-thumbnail {
+        a {
+            .tx-dlf-pagegrid-pagination {
+                min-height: 12px;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+
+dt.tx-dlf-metadata-mets.meta_not_show.ausblenden {
+    display: none;
+}
+dd.tx-dlf-metadata-mets.meta_not_show.btn {
+    display: block;
+    background-color: #fff;
+    border-color: #ccc #ccc #bbb;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.2) inset, 0 1px 2px rgba(0,0,0,.05);
+    font-size: 13px;
+    vertical-align: middle;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px 10px;
+    line-height: 14px;
+    height: 27px;
+    width: max-content;
+    text-align: right;
+    padding-left: 9px;
+
+    a {
+    color: #232e58;
+    }
+}
+
+
+.tx-dlf-metadata {
+    dl {
+        dd {
+            a {
+                border-bottom: 0.1875rem solid #d1d7df;
+            }
+
+            &.btn {
+                a {
+                    border-bottom: none;
+                }
+            }
+            &+dd {
+                margin-left: 20px;
+            }
+        }
+
+    }
+}
+
+// Blaettern-Buttons Hintergrundfarbe ergaenzt um es vom Text unterscheiden zu koennen
+// span ist noch immer schlecht zu erkennen, aber besser wie vorher
+.page-control {
+    &>div.backs.over,
+    &>div.fwds.over {
+        span.fwd,
+        span.last,
+        span.next,
+        span.rwnd,
+        span.first,
+        span.prev {
+            span,
+            a {
+                background-color: #fff;
+                width: 250%;
+                border-radius: 19px;
+            }
+        }
+    }
+    &>div.fwds.over {
+        span.fwd,
+        span.last,
+        span.next {
+            span,
+            a {
+                padding-left: 10px;
+            }
+        }
+    }
+    &>div.backs.over {
+        span.rwnd,
+        span.first,
+        span.prev {
+            span,
+            a {
+                padding-right: 10px;
+            }
+        }
+    }
+
+    &>div.backs.over,
+    &>div.fwds.over {
+        span.fwd,
+        span.last,
+        span.next,
+        span.rwnd,
+        span.first,
+        span.prev {
+            a {
+                opacity: 0.88;
+            }
+        }
+    }
+}
+
+/* toc in dfgviewer modus */
+ul.toc.newspaper {
+    & > li.active.submenu {
+        & > ul.normal {
+            &:before {
+                // in toc bestimmt die Höhe des linken Striches 
+                // (bei der Jahreszahl)
+                // bis 24.03.2025
+                //top: 16px;
+                top: 0;
+            }
+
+            & > li.submenu.current {
+                color: hotpink;
+                color: #ff69b4;
+
+                &:before {
+                    color: lightpink;
+                    color: #ffb6c1;
+                    border-left-color: transparent;
+                }
+            }
+        }
+    }
+
+    ul.normal {
+        li {
+            &.submenu {
+                ul.normal {
+                    &:before {
+                        color: lightblue;
+                        left: -20px;
+                    }
+                    // Monat
+                    li.submenu.doNotLinkIt {
+                        color: lightgreen;
+
+                        &:before {
+                            left: -20px;
+                        }
+
+                        span.a.doNotLinkIt {
+                            display: none;
+
+                            span {
+                                color: green;
+                                display: none;
+                            }
+
+                        }
+
+                        ul.doNotLinkIt {
+                            &:before {
+                                // Verbindungsstrich vor 02.02.1914
+                                left: 30px;
+                                // Verbindungsstrich vor Tagesdatum
+                                // bis 24.03.2025
+                                //top:19px
+                                top: 0;
+                            }
+
+                            li.submenu.doNotLinkIt {
+                                ul.doNotLinkIt {
+                                    li.submenu {
+                                        // Das ist dann der Tag 02.02.1914
+                                        left: 0;
+
+                                        &::before {
+                                            // auch Unterelemente, damit wird bei einem unterelement der Pfeil weiter rechts gerueckt
+                                            left: 28px;
+                                            color: brown;
+                                        }
+
+                                        // das erste Elemente also der Tag selbst
+                                        &.active {
+                                            //left: 28px;
+                                        }
+
+                                        a {
+                                            padding-left: 50px;
+                                        }
+
+
+                                        &.current {
+                                            ul.normal {
+                                                // Unterunterelemente einruecken
+                                                padding-left: 8px;
+
+                                                &:before {
+                                                    width: 1px;
+                                                    color: #fff;
+                                                }
+                                            }
+                                        }
+                                        &.active {
+                                            ul.normal {
+                                                // Unterunterelemente einruecken
+                                                padding-left: 8px;
+
+                                                &:before {
+                                                    width: 1px;
+                                                    color: #fff;
+                                                }
+
+                                                li.current {
+                                                    // trifft zu viele Teile
+                                                    // hierrüber kann die Einrückung nicht korrigiert werden
+                                                    //background-color: hotpink;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+	&.hide_newspaper_toc_details {
+	    display: none;
+	}
+
+        /*
+        ul.normal {
+            ul.doNotLinkIt {
+                &:before {
+                    color: hotpink;
+                }
+
+                ul.doNotLinkIt {
+                    &:before {
+                        color: green;
+                    }
+                }
+            }
+        }
+        */
+    }
+}
+
+
+// Distance between diffrent metadata blocks
+dl.tx-dlf-metadata-titledata {
+    & + & {
+        margin-top: 20px;
+    }
+}
+
+
+// Hide document-functions in calendar view (year and days)
+// funktioniert ohne die per Javascript zugeordnete klasse zum Body
+.document-view.newspaper_year,
+.document-view.newspaper_anchor {
+    .document-functions,
+    .view-functions {
+        display: none;
+    }
+}
+// Hide document-functions in calendar view (year and days)
+body.dfgviewer {
+//    &.calendar,
+//    &.years-calendar {
+//        .document-functions,
+//        .view-functions {
+//            display: none;
+//        }
+//    }
+    &.calendar {
+        .list-view.active {
+//            top: 95px;
+
+            span.listview-date {
+                &:before {
+                    content: ' ';
+                    display: block;
+                }
+            }
+            li {
+                display: inline-block;
+                //padding: 0;
+                width: 100%;
+                text-align: left;
+                border-radius: 0;
+                background-color: unset;
+
+                &:hover {
+                    transform: none;
+                }
+                &:nth-child(even) {
+                    //background: hotpink;
+                    background: fade(@light-blue, 15%);
+                }
+            }
+        }
+
+        .calendar-view {
+            table {
+                tr {
+                    td.open {
+                        ul.issues {
+                            li {
+                                a {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.active {
+                table {
+                    tr {
+                        td {
+                            .contains-issues {
+                                //border: 1px solid @light-grey-border;
+                                //border-radius: 9px;
+                                background-color: #e5e5e5;
+                                background-color: #ebedf5;
+
+                                &:hover {
+                                    transform: scale(1.2);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.fulltext-visible {
+        .document-view {
+            .fulltext-container {
+                #tx-dlf-fulltextselection {
+                    padding-top: 92px;
+                }
+            }
+        }
+    }
+}
+
+// fix table of content toc scrollebal
+.tx-dlf-tableofcontents.dfgviewer {
+    overflow-y: auto;
+    height: 100%;
+}
+
+
+/* ==============[ view functions for zoom, rotate and other view related functions ]===== */
+.viewer-selection,
+.view-functions {
+    ul {
+        li.tx-dlf-imagemanipulationtool {
+            ul {
+                li {
+                    span.tx-dlf-tools-imagetools {
+                        a.ubma-imageIcon {
+                            /* display the background for this element */
+                            background-size: auto 120px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and  (min-width: 1024px) {
+    .control-bar {
+        .control-bar-content {
+            .metadata-wrapper,
+            .toc-wrapper {
+                padding-top: 10px;
+                padding-bottom: 10px;
+
+                h3 {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+    .view-functions {
+        ul {
+            right: 0;
+
+            li.tx-dlf-imagemanipulationtool {
+                margin-right: 15px;
+
+            }
+        }
+    }
+}
+
+/* Bei schmalen Bildschirmen wenn untere navigation in gridview zweizeilig wird, unterste Medienreihe seitenzahl noch sichbar*/
+.tx-dlf-pagegrid-list {
+    padding-bottom: 100px;
+}
+
+@media screen and (max-width: 1023px) {
+    /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+    .document-functions>ul {
+        top: 20px;
+        text-align: left;
+        right: unset;
+        bottom: unset;
+
+        & > li.submenu {
+            & > ul {
+                bottom: unset;
+                top: 120px;
+                left: 15px;
+            }
+
+            &.open {
+                &:before {
+                    top: 31px;
+                    border-width: 0 10px 10px 10px;
+                    border-bottom-color: rgba(35,46,88, 0.9);
+                    border-top-color: unset;
+                }
+            }
+        }
+    }
+    body.dfgviewer {
+        .tx-dlf-pagegrid {
+            ul.pagination.ubma {
+                bottom: 4px;
+                position: fixed;
+            }
+        }
+    }
+}
+
+
+
+/*
+
+// es gibt einen Unterschied, aktuell bei hover in der letzten Zeile verschiebt sich die nächste Woche nach unten
+
+// Tag bei hover oeffnen
+.tx-dfgviewer-newspaper-calendar .calendar-view .month table tr td.days:hover {
+    //background-color: #ccc;
+    // abweichung!
+    padding-bottom: 12px;
+
+    .contains-issues {
+        transform: scale(1.4);
+        cursor: pointer;
+        position: relative;
+        color: @ubma-base;
+        font-weight: bold;
+        display: block;
+        transition: @Standard_transition;
+
+        &:before {
+            top: 16px;
+            opacity: 1;
+            transform: translateY(0);
+
+            position: absolute;
+            left: 50%;
+            margin-left: -5px;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-width: 0;
+            border-bottom-color: rgba(35,46,88,0.9);
+            content: " ";
+            transition: @Standard_transition;
+        }
+    }
+    ul.issues {
+        left: 30px;
+        right: 30px;
+
+        opacity: 1;
+        z-index: 100;
+        transform: scaleY(1);
+
+        position: absolute;
+        padding: 10px;
+        margin-top: 10px;
+        background: rgba(35,46,88,0.9);
+
+        transition: @Standard_transition;
+        transform-origin: center top;
+        //transition-delay: 0s;
+
+        li {
+            margin: 10px 0;
+
+            a {
+                color: #fff;
+            }
+        }
+    }
+}
+*/
