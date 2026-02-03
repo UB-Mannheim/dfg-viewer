@@ -264,6 +264,21 @@ $(document).ready(function() {
         close_all_submenues('all');
     });
 
+    // In calendar: if only one issue for this day: click on date open this issue
+    $('.issues').each( function() {
+        var nCountIssues = $(this).find("ul").find("li").length;
+        if (nCountIssues > 1) {
+            //$(this).addClass("testgt");
+        } else {
+            var cAnker = $(this).find("ul").find("li").find("a").attr("href");
+            // Open day with click or touch if only one issue for this day
+            $(this).parent().find(".contains-issues").on("click touch", function() { 
+                window.location.href = cAnker;
+            });
+        };
+    });
+
+
 
 });
 
