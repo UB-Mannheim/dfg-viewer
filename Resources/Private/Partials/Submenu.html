@@ -29,6 +29,7 @@
     <li class="submenu links">
         <a href="#" title="Links">Links</a>
         <ul>
+            <f:comment>
             <li>
                 <f:if
                     condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:presentation)[1]')}">
@@ -48,6 +49,7 @@
                     </f:else>
                 </f:if>
             </li>
+            </f:comment>
             <f:for each="{0: '1', 1: '2', 2: '3'}" as="index">
                 <f:if
                     condition="{dc:xpath(xpath:'(//mets:amdSec/mets:digiprovMD/mets:mdWrap[@OTHERMDTYPE=\'DVLINKS\']/mets:xmlData/dv:links/dv:reference)[{index}]')}">
