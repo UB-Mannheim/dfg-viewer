@@ -279,6 +279,35 @@ $(document).ready(function() {
             });
         };
     });
+    
+    //--------------------------------------------------------------------------------
+    // Mannheim:
+    // Correct error in TOC table of contents: the error is incorrect content in the 
+    // links to the title or volume. In the event of an error, this is a URL and 
+    // not a number. If the link has an ht parameter, then it is incorrect.
+    //--------------------------------------------------------------------------------
+    $('ul.toc li.tx-dlf-toc-ifsub a').each(function(){
+
+	let url = $(this).attr('href');
+	console.log(url);
+	    
+	const regex = /^(.*?)(https?:\/\/.*?\.xml)(.*?)[\?&]ht=(\d+)[&](.*)$/;
+	// Check whether https:// and whether parameter ht is included.
+	let match = url.match(regex);
+	    
+	if (match) {
+		let prefix = match[1].trim();       // Text before the URL
+		let url = match[2];                 // URL until .xml
+		let  queryBeforeHt = match[3];      // Everything between .xml and ht=
+		let htValue = match[4];             // ht-Value
+		let afterHt = match[5] || "";       // All after ht=	    
+
+        // rebuild URL
+		url = prefix + htValue + queryBeforeHt + '?ht=' + htValue + '&' + afterHt;
+		$(this).attr('href', url);
+		//console.log("Url korrigiert" + url);
+        };
+    });
 });
 
 $(document).keyup(function(e) {
