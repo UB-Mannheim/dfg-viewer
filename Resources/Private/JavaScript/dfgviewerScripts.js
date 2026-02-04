@@ -264,7 +264,9 @@ $(document).ready(function() {
         close_all_submenues('all');
     });
 
+    //----------------------------------------------------------------------------
     // In calendar: if only one issue for this day: click on date open this issue
+    //----------------------------------------------------------------------------
     $('.issues').each( function() {
         var nCountIssues = $(this).find("ul").find("li").length;
         if (nCountIssues > 1) {
@@ -277,9 +279,6 @@ $(document).ready(function() {
             });
         };
     });
-
-
-
 });
 
 $(document).keyup(function(e) {
