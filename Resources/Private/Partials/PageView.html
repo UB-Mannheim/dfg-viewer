@@ -26,7 +26,7 @@
     xmlns:dc="http://typo3.org/ns/Slub/SlubDigitalcollections/ViewHelpers" data-namespace-typo3-fluid="true" lang="en">
 
 <f:section name="PageView">
-    <div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')}">
+    <div class="document-view {f:if(condition:'{gp-multiview}', then:'multiview')} {isNewspaper}">
         <div id="browser-hint" class="hidden">
             <div class="alert">
                 <span class="closebtn" onclick="hideBrowserAlert()">&times;</span>
@@ -46,21 +46,25 @@
 
         <f:if condition="{is3dObject} == 1">
             <f:then>
+                <!-- it's a embedded3dviewer! -->
                 <f:cObject typoscriptObjectPath="plugin.tx_dlf_embedded3dviewer"/>
             </f:then>
             <f:else>
                 <f:if condition="{gp-pagegrid} == 1">
                     <f:then>
+                        <!-- it's a pagegrid! -->
                         <f:cObject typoscriptObjectPath="plugin.tx_dlf_pagegrid" />
                     </f:then>
                     <f:else>
                         <f:if condition="{isNewspaper} == 'newspaper_anchor'">
                             <f:then>
+                                <!-- it's a newspaperyears! -->
                                 <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspaperyears" />
                             </f:then>
                             <f:else>
                                 <f:if condition="{isNewspaper} == 'newspaper_year'">
                                     <f:then>
+                                        <!-- it's a newspapercalendar! -->
                                         <f:cObject typoscriptObjectPath="plugin.tx_dfgviewer_newspapercalendar" />
                                     </f:then>
                                     <f:else>
@@ -74,6 +78,7 @@
                                         </div>
                                     </f:else>
                                 </f:if>
+
                             </f:else>
                         </f:if>
                     </f:else>
