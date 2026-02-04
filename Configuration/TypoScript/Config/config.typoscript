@@ -7,6 +7,7 @@ config {
   removeDefaultCss = 0
   removeDefaultJS = 1
 
+  # 12.12.25, wg. Problem mit uBlock Origin, PageView.js verursacht das Problem
   # concatenate all Javascript files by default
   concatenateJs = 1
   # concatenate all CSS files by default
