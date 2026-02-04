@@ -14,8 +14,7 @@
 
 <f:comment><f:debug>{_all}</f:debug></f:comment>
 <f:for each="{children}" as="child">
-    <f:variable name="nIndex" value="{nIndex + 1}" />
-    <!-- {child.type} -->
+    <!-- 17: child.type: {child.type} -->
     <f:switch expression="{child.ITEM_STATE}">
         <f:case value="ACT">
             <li class="tx-dlf-toc-act active {child.type}">
@@ -47,13 +46,14 @@
             </f:if>
         </f:case>
         <f:defaultCase>
-            <li class="tx-dlf-toc-no default {child.type}">
+            <li class="tx-dlf-toc-no default {child.type} c49">
         </f:defaultCase>
     </f:switch>
 
     <f:if condition="{child.doNotLinkIt}">
         <f:then>
             <span class="ma-toc-title a doNotLinkIt {child.type}">
+                <!-- LINE 56: {child.id} {child.type} {child.AnchorDocumentId} -->
                 <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </span>
         </f:then>
@@ -61,51 +61,32 @@
             <f:comment>
                 there is a mistake with newspaper issues 
                 additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
-                if this part is omitted from newspapers, everything seems to work. Otherwise an oop error is displayed. The cause could possibley be a 
+                if this part is omitted from newspapers or periodikas, everything seems to work. Otherwise an oop error is displayed. The cause could possibley be a 
                 problem with the child.id, which in my first test case is a URL and not a number. 
                 At the moment the error does not occur because i have commented out settings in config.yaml
-                Im Moment setze ich die id manuell, diese kann in der Jahresansicht ermittelt werden
+                I fixed the Problem with child.parentDocumentId or child.AnchorDocumentId
+                I use child.AnchorDocumentId for newspapers because child.parentDocumentId has the id to the year
+                Manual setting of the ID is no longer necessary!
             </f:comment>
             <f:if condition="{child.ITEM_STATE} == 'ACTIFSUB' && ({child.type} == 'Zeitung' || {child.type} == 'Newspaper')">
                 <f:then>
+                    <f:comment><f:debug>child.ITEM_STATE == ACTIFSUB and Zeitung</f:debug></f:comment>
                     <f:comment><f:debug>{_all}</f:debug></f:comment>
-                    <f:comment>aktuell ohne link, aber zumindest den Namen der Zeitschrift und den Typ, wg. Problem mit child.id</f:comment>
                     <f:comment><f:render partial="TableOfContents/Title" arguments="{child: child}" /></f:comment>
+                    <f:comment>
+                        When I get here, I'm in a issue!
+                        Now I set the variable newspaper_level to day, which allows me to display the 
+                        table of contents again.
+                    </f:comment>
 
-                    <f:switch expression="{child.title}">
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Mannheimer Intelligenzblatt            </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Mannheimer Intelligenzblatt">
-                            <f:variable name="xChildId" value="4650" />
-                        </f:case>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Der Freimüthige oder Ernst und Scherz  </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Der Freimüthige oder Ernst und Scherz">
-                            <f:variable name="xChildId" value="5269" />
-                        </f:case>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:comment>   Allgemeine preußische Staats-Zeitung   </f:comment>
-                        <f:comment>------------------------------------------</f:comment>
-                        <f:case value="Allgemeine preußische Staats-Zeitung">
-                            <f:variable name="xChildId" value="4640" />
-                        </f:case>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:comment>   Deutscher Reichsanzeiger und Preußischer Staatsanzeiger  </f:comment>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:case value="Deutscher Reichsanzeiger und Preußischer Staatsanzeiger">
-                            <f:variable name="xChildId" value="4643" />
-                        </f:case>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:comment>   neue zeitung  </f:comment>
-                        <f:comment>------------------------------------------------------------</f:comment>
-                        <f:defaultCase>
-                            <f:variable name="xChildId" value="---" />
-                        </f:defaultCase>
-                    </f:switch>
+                    <f:variable name="xChildId" value="{child.AnchorDocumentId}" />
+                    <f:variable name="newspaper_level" value="day" />
+
                     <f:if condition="{xChildId} != '---'">
                         <f:then>
+                            <!-- 103 Ansicht Detail Titel -->
+                            <!-- child.id: '{child.id}' -->
+                            <!-- child.type: '{child.type}'  child.AnchorDocumentId: '{child.AnchorDocumentId}' -->
                             <f:link.action 
                                 action="main" 
                                 pageUid="{settings.targetPid}" 
@@ -117,19 +98,77 @@
                             </f:link.action>
                         </f:then>
                     </f:if>
-
-		    
                 </f:then>
                 <f:else>
+
+                    <f:comment>from condition="{child.ITEM_STATE} == 'ACTIFSUB' && ({child.type} == 'Zeitung' || {child.type} == 'Newspaper')" </f:comment>
+                    <f:comment>
+                        <f:debug>child.ITEM_STATE != ACTIFSUB</f:debug>
+                        <f:debug>{_all}</f:debug>
+                    </f:comment>		      
+                    <!-- create link start 110 -->
+                    <!-- child.ITEM_STATE != ACTIFSUB -->
+                    <!-- child.id: {child.id} child.page: {child.page} -->
+                    <!-- child.type: {child.type} -->
+                    <!-- child.type-index: {child.type-index} -->
+                    <!-- child.ownDocumentId: {child.ownDocumentId} -->
+                    <f:comment>addQueryString="1" 
+                        addQueryStringMethod="GET"
+                    </f:comment>
+
+                    <f:comment>
+                        <f:debug>{_all}</f:debug>
+                    </f:comment>
+
+                    <f:comment>
+                        Problem with child.id / points: remove the URL instead of the ID, corresponds to adjustment 
+                        in TableOfContentsControler.php
+                    </f:comment>
+                    <f:if condition="{child.id}">
+                        <f:then>
+                            <!-- yes Child-Id is available: child.id: {child.id} -->
+                            <f:variable name="xChildId" value="{child.id}" />
+                        </f:then>
+                        <f:else>
+                            <!-- No: child.id: {child.id} is empty -->
+                            <!-- but child.ownDocumentId is available: {child.ownDocumentId} -->
+                            <f:variable name="xChildId" value="{child.ownDocumentId}" />
+                            <f:comment>
+                                    <f:if condition="{child.AnchorDocumentId}">
+                                        <f:then>
+                                            <!-- child.AnchorDocumentId: {child.AnchorDocumentId} -->
+                                            <f:variable name="xChildId" value="{child.AnchorDocumentId}" />
+                                        </f:then>
+                                        <f:else>
+                                            <!-- no child.AnchorDocumentId -->
+                                            <f:if condition="{child.parentDocumentId}">
+                                                <f:then>
+                                                    <!-- child.parentDocumentId: {child.parentDocumentId}-->
+                                                    <f:variable name="xChildId" value="{child.parentDocumentId}" />
+                                                </f:then>
+                                                <f:else>
+                                                    <!-- no child.parentDocumentId and child.AnchorDocumentId -->
+                                                    <f:variable name="xChildId" value="{child.id}" />
+                                                </f:else>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                            </f:comment>
+                        </f:else>
+                    </f:if>
+            
+                    <!-- 161 View ZSS and Ztg: Years + Calendar / Mono: Detailed view + anchor -->
+                    <!-- child.id: '{child.id}' child.type: '{child.type}'  child.AnchorDocumentId: '{child.AnchorDocumentId}' child.ownDocumentId: {child.ownDocumentId} -->
+
                     <f:link.action 
                         action="main" 
                         pageUid="{settings.targetPid}" 
-                        additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
-                        addQueryString="1" 
-                        addQueryStringMethod="GET"
+                        additionalParams="{f:if(condition:'{xChildId}', then:'{\'tx_dlf[id]\':xChildId, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
+                        addQueryString="untrusted" 
                         title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
                         <f:render partial="TableOfContents/Title" arguments="{child: child}" />
                     </f:link.action>
+                    <!-- create link end 175 -->
                 </f:else>
             </f:if>
         </f:else>
@@ -137,14 +176,14 @@
 
     <f:if condition="{settings.basketButton} && {settings.targetBasket}">
         <span class="tx-dlf-basket-button">
-                <f:link.action
-                    pageUid="{settings.targetBasket}"
-                    action="main"
-                    controller="Basket"
-                    additionalParams="{'tx_dlf[addToBasket]':'toc', 'tx_dlf[logId]':child.basketButton.logId, 'tx_dlf[startpage]':child.basketButton.startpage, 'tx_dlf_basket[action]':'add', 'tx_dlf_basket[controller]':'Basket'}"
-                    addQueryString="1">
-                        <f:translate key="basket.addBasket" />
-                </f:link.action>
+            <f:link.action
+                pageUid="{settings.targetBasket}"
+                action="main"
+                controller="Basket"
+                additionalParams="{'tx_dlf[addToBasket]':'toc', 'tx_dlf[logId]':child.basketButton.logId, 'tx_dlf[startpage]':child.basketButton.startpage, 'tx_dlf_basket[action]':'add', 'tx_dlf_basket[controller]':'Basket'}"
+                addQueryString="1">
+                    <f:translate key="basket.addBasket" />
+            </f:link.action>
         </span>
     </f:if>
 
@@ -160,11 +199,19 @@
                         <f:variable name="cULClass" value="ul" />
                     </f:else>
                 </f:if>
-                <ul class="doNotLinkIt {child.type} {cULClass}">
+                <ul class="doNotLinkIt {child.type} {cULClass} child-206">
             </f:then>
             <f:else>
                 <f:comment><f:debug>{_all}</f:debug></f:comment>
-                <{cULType} class="normal {child.type}">
+                <f:if condition="{child.type} == 'Zeitung'  && {newspaper_level } != 'day'">
+                    <f:then>
+                        <f:variable name="hide_newspaper_toc_details" value="hide_newspaper_toc_details" />
+                    </f:then>
+                    <f:else>
+                        <f:variable name="hide_newspaper_toc_details" value="" />
+                    </f:else>
+                </f:if>
+                <{cULType} class="normal {child.type} child-218 {hide_newspaper_toc_details} {newspaper_level} {child._SUB_MENU.0.type}">
             </f:else>
         </f:if>
         <f:render partial="TableOfContents/Children" arguments="{children: child._SUB_MENU}" />
