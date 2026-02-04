@@ -289,7 +289,7 @@ $(document).ready(function() {
     $('ul.toc li.tx-dlf-toc-ifsub a').each(function(){
 
 	let url = $(this).attr('href');
-	console.log(url);
+	//console.log(url);
 	    
 	const regex = /^(.*?)(https?:\/\/.*?\.xml)(.*?)[\?&]ht=(\d+)[&](.*)$/;
 	// Check whether https:// and whether parameter ht is included.
