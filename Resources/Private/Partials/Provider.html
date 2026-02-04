@@ -27,13 +27,13 @@
 
 <div class="provider">
     <f:if condition="{settings.showProviderLogo}">
-        <ul>
+        <ul class="provider-logos">
             <f:alias map="{logoUrl: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerLogo)[1]\')}',
                 logoTitle: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:owner)[1]\')}',
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:ownerSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="OwnerLogo">
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
                                 title="{logoTitle}" alt="Logo von {logoTitle}" />
@@ -45,7 +45,7 @@
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:aggregatorSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="aggregatorLogo">
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
                                 title="{logoTitle}" alt="Logo von {logoTitle}" />
@@ -58,7 +58,7 @@
                 logoUri: '{dc:xpath(xpath:\'(//mets:amdSec/mets:rightsMD/mets:mdWrap[@OTHERMDTYPE=\"DVRIGHTS\"]/mets:xmlData/dv:rights/dv:sponsorSiteURL)[1]\',
                 htmlspecialchars:\'FALSE\')}'}">
                 <f:if condition="{dc:providerLogoCached(logo:'{logoUrl}')}">
-                    <li>
+                    <li class="sponsorLogo">
                         <f:link.external uri="{logoUri}" title="{logoTitle}">
                             <img src="/typo3temp/assets/images/{dc:providerLogoCached(logo:'{logoUrl}')}"
                                 title="{logoTitle}" alt="Logo von {logoTitle}" />
