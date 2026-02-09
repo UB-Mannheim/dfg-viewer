@@ -43,7 +43,7 @@
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "8.1 - 8.4",
-        "typo3/cms-core": "^11.5.41|^12.4.24",
+        "typo3/cms-core": "^11.5.41|^12.4.42",
         "ub-mannheim/presentation": "@dev",
         "ub-mannheim/slub-digitalcollections": "@dev"
     },
