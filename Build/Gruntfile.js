@@ -58,4 +58,5 @@ module.exports = function(grunt) {
 
     grunt.file.setBase('../')
     grunt.registerTask('default', ['less','terser','watch']);
+    grunt.registerTask('docker', ['less', 'terser']);
 };
