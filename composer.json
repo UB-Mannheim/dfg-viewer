@@ -1,8 +1,8 @@
 {
-    "name": "slub/dfgviewer",
+    "name": "ub-mannheim/dfgviewer",
     "type": "typo3-cms-extension",
     "description": "Remote resources navigator for digital libraries. Reads METS/MODS and METS/TEI via OAI-PMH.",
-    "homepage": "https://github.com/slub/dfg-viewer",
+    "homepage": "https://github.com/ub-mannheim/dfg-viewer",
     "keywords": [
         "TYPO3",
         "extension",
@@ -38,14 +38,19 @@
             "name": "Beatrycze Volk",
             "email": "beatrycze.volk@slub-dresden.de",
             "role": "Developer"
+        },
+        {
+            "name": "Bernd Fallert",
+            "email": "bernd.fallert@uni-mannheim.de",
+            "role": "Developer"
         }
     ],
     "license": "GPL-3.0-or-later",
     "require": {
         "php": "8.2 - 8.4",
         "typo3/cms-core": "^12.4|^13.4",
-        "kitodo/presentation": "^7.0|dev-main",
-        "slub/slub-digitalcollections": "^7.0|dev-main"
+        "ub-mannheim/presentation": "@dev",
+        "ub-mannheim/slub-digitalcollections": "@dev"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.2",
