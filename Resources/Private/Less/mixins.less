@@ -23,7 +23,7 @@
   white-space: nowrap;
 }
 
-.text-hide() {
+.text-hide(@hideText: true) when (@hideText = true) {
   font: ~"0/0" 'Open Sans', Helvetica, Arial, sans-serif;
   color: transparent;
   text-shadow: none;
@@ -58,4 +58,17 @@
   -moz-transform: @transform;
   -ms-transform: @transform;
   transform: @transform;
+}
+
+.border-radius(@value: 20px, @flag: true) when (@flag = true) {
+    border-radius: @value;
+}
+.icon-base(@position: relative, @hideText: true, @border-radius: true, @background-posXhoriz: 0) {
+    position: @position;
+    width: 40px;
+    height: 40px;
+    .text-hide(@hideText);
+    .border-radius(20px, @border-radius);
+    background: #fff url(../Images/controlIcons.svg) no-repeat @background-posXhoriz 0;
+    background-size: auto 120px;
 }
