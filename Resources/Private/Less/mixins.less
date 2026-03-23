@@ -63,12 +63,12 @@
 .border-radius(@value: 20px, @flag: true) when (@flag = true) {
     border-radius: @value;
 }
-.icon-base(@position: relative, @hideText: true, @border-radius: true, @background-posXhoriz: 0) {
+.icon-base(@position: relative, @hideText: true, @border-radius: true, @background-posXhoriz: 0, @color: #ffffff) {
     position: @position;
     width: 40px;
     height: 40px;
     .text-hide(@hideText);
     .border-radius(20px, @border-radius);
-    background: #fff url(../Images/controlIcons.svg) no-repeat @background-posXhoriz 0;
+    background: @color url(../Images/controlIcons.svg) no-repeat @background-posXhoriz 0;
     background-size: auto 120px;
 }
