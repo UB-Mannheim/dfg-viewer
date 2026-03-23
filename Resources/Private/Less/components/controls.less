@@ -19,18 +19,19 @@
             position: relative;
             display: inline-block;
             > a, > span {
-                position: relative;
                 display: inline-block;
-                width: 40px;
-                height: 40px;
-                .text-hide();
-                border-radius: 20px;
-                background: #fff url(../Images/controlIcons.svg) no-repeat 0 0;
-                background-size: auto 120px;
+                .icon-base(relative, true, true, 0, #ffffff);
             }
             > span {
                 opacity: 0.5;
             }
+
+            // u.a. Konstruktionen wie bei Fulltext
+            > ul > li > span > a {
+                display: inline-block;
+                .icon-base(relative, true, true, 0);
+            }
+
             @media screen and (min-width: @tabletLandscapeViewportWidth) {
                 a {
                     .no-touchevents & {
@@ -43,6 +44,32 @@
                 }
             }
             @media screen and (min-width: @desktopViewportWidth) {
+            }
+        }
+    }
+    ul.document-submenu {
+        li {
+            &.fulltext {
+                ul {
+                    li {
+                        span {
+                            a.active {
+                                &.active:before {
+                                    position: absolute;
+                                    top: 2px;
+                                    right: 0px;
+                                    width: 8px;
+                                    height: 8px;
+                                    border-radius: 8px;
+                                    border: 2px solid #fff;
+                                    background: @okay-green;
+                                    display: block;
+                                    content: " ";
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -117,7 +144,8 @@
                     opacity: 0;
                     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
                     li {
-                        a {
+                        a,
+                        span > a {
                             position: relative;
                             color: #fff;
                             display: block;
@@ -126,15 +154,30 @@
                             min-height: 40px;
                             line-height: 40px;
                             white-space: nowrap;
+                            &:hover {
+                                background: rgba(255,255,255,0.2);
+                            }
                             &:before {
-                                position: absolute;
                                 top: 0;
                                 left: 0;
-                                width: 40px;
-                                height: 40px;
+                                .icon-base(absolute, false, false, 0, transparent);
                                 content: " ";
-                                background: url(../Images/controlIcons.svg) no-repeat 0 0;
-                                background-size: auto 120px;
+                                //background-color: green;
+                                // Icon before Menu-Items in Links and Download-Submenu
+                            }
+                            &.download-document:before {
+                                background-position: -360px -40px;
+                            }
+                            &.tx-dlf-tools-pdf-work:before,
+                            &.download-page:before {
+                                background-position: -320px -40px;
+                            }
+                            &.tx-dlf-tools-fulltextdownload:before,
+                            &.download-fulltext:before {
+                                background-position: -280px -40px;
+                            }
+                            &.no-fulltext:before {
+                                background-position: -280px -40px;
                             }
                             &.local-presentation:before {
                                 background-position: -440px -80px;
@@ -187,6 +230,11 @@
             }
             &.tx-dlf-tools-fulltext {
                 > a, > span {
+                    background-position: -120px 0;
+                }
+
+                // new construction for fulltext
+                > ul > li > span > a {
                     background-position: -120px 0;
                 }
             }
@@ -426,31 +474,29 @@
                     }
                 }
             }
-            &.tx-dlf-tools-imagemanipulation {
+&.tx-dlf-tools-imagemanipulation {
                 > span {
-                    opacity: 1;
-                }
-                > span > a {
-                    position: relative;
-                    display: inline-block;
-                    width: 40px;
-                    height: 40px;
-                    .text-hide();
-                    border-radius: 20px;
-                    margin: 0 5px;
-                    background: #fff url(../Images/controlIcons.svg) no-repeat -200px 0;
-                    background-size: auto 120px;
-                    &.active:before {
-                        position: absolute;
-                        top: 2px;
-                        right: 0px;
-                        width: 8px;
-                        height: 8px;
-                        border-radius: 8px;
-                        border: 2px solid #fff;
-                        background: @okay-green;
-                        display: block;
-                        content: " ";
+                    overflow: hidden;
+                    width: auto;
+                    height: auto;
+                    display: inline;
+                    margin: 0;
+                    > span > a {
+                        display: inline-block;
+                        .icon-base(relative, true, true, -200px);
+
+                        &.active:before {
+                            position: absolute;
+                            top: 2px;
+                            right: 0px;
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 8px;
+                            border: 2px solid #fff;
+                            background: @okay-green;
+                            display: block;
+                            content: " ";
+                        }
                     }
                 }
             }
@@ -548,14 +594,10 @@
             transition: all .2s ease-in-out;
             margin-right: 24px;
             &:before {
-                position: absolute;
                 top: -19px;
                 left: -36px;
-                width: 40px;
-                height: 40px;
+                .icon-base(absolute, false, false, 0);
                 content: " ";
-                background: url(../Images/controlIcons.svg) no-repeat 0 0;
-                background-size: auto 120px;
             }
             &:after {
                 position: absolute;
@@ -606,13 +648,9 @@
             display: inline-block;
             background: transparent;
             &:before {
-                position: absolute;
                 top: 0;
                 left: 0;
-                width: 40px;
-                height: 40px;
-                background: url(../Images/controlIcons.svg) no-repeat 0 0;
-                background-size: auto 120px;
+                .icon-base(absolute, false, false, 0);
                 content: " ";
             }
         }
@@ -680,13 +718,8 @@
                 display: inline-block;
                 .text-hide();
                 &:before {
-                    position: absolute;
                     bottom: -1px;
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 20px;
-                    background: #fff url(../Images/controlIcons.svg) no-repeat 0 0;
-                    background-size: auto 120px;
+                    .icon-base(absolute, false, true, 0);
                     content: " ";
                 }
             }
