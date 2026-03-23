@@ -1,0 +1,27 @@
+{
+  "name": "dfg-viewer",
+  "description": "This TYPO3 extension provides the configuration and setup for the DFG-Viewer",
+  "main": "gruntfile.js",
+  "scripts": {
+    "watch": "grunt watch",
+    "build": "grunt terser less",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ub-mannheim/dfg-viewer.git"
+  },
+  "author": "Alexander Bigga",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://dfgviewer.de",
+  "devDependencies": {
+    "grunt": "^1.6",
+    "grunt-cli": "^1.5.0",
+    "grunt-contrib-less": "^3.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-terser": "^2.0.0",
+    "jit-grunt": "^0.10.0",
+    "less": "^4.6.7",
+    "terser": "^5"
+  }
+}
