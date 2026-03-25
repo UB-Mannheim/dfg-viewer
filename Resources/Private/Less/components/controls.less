@@ -403,9 +403,11 @@
 
 /* ==============[ view functions for zoom, rotate and other view related functions ]===== */
 .view-functions {
-    ul {
+    ul.image-tools {
         position: relative;
         li {
+            display: none;
+li {
             display: none;
             &.tx-dlf-tools-rotate-left a {
                 background-position: -240px 0;
@@ -422,6 +424,7 @@
             &.tx-dlf-tools-zoom-out a {
                 background-position: -400px 0;
             }
+
             &.sync-view {
                 .sync-view-toggle {
                     background-position: -720px 0;
@@ -474,28 +477,35 @@
                     }
                 }
             }
-&.tx-dlf-tools-imagemanipulation {
-                > span {
-                    overflow: hidden;
-                    width: auto;
-                    height: auto;
-                    display: inline;
-                    margin: 0;
-                    > span > a {
+            &.tx-dlf-tools-imagemanipulation {
+                ul {
+                    li {
+                        position: relative;
                         display: inline-block;
-                        .icon-base(relative, true, true, -200px);
+                        > span {
+                            opacity: 1;
+                            overflow: hidden;
+                            width: auto;
+                            height: auto;
+                            display: inline;
+                            margin: 0;
+                            > a {
+                                display: inline-block;
+                                .icon-base(relative, true, true, -200px);
 
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
+                                &.active:before {
+                                    position: absolute;
+                                    top: 2px;
+                                    right: 0px;
+                                    width: 8px;
+                                    height: 8px;
+                                    border-radius: 8px;
+                                    border: 2px solid #fff;
+                                    background: @okay-green;
+                                    display: block;
+                                    content: " ";
+                                }
+                            }
                         }
                     }
                 }
@@ -504,8 +514,8 @@
         @media screen and (min-width: @tabletLandscapeViewportWidth) {
             position: absolute;
             top: 20px;
-            right: 10px;
-            display: block;
+            //right: 10px;
+            display: inline-flex;
             height: 40px;
             li {
                 display: inline-block;
@@ -596,7 +606,7 @@
             &:before {
                 top: -19px;
                 left: -36px;
-                .icon-base(absolute, false, false, 0);
+                .icon-base(absolute, false, false, 0, transparent);
                 content: " ";
             }
             &:after {
@@ -650,7 +660,7 @@
             &:before {
                 top: 0;
                 left: 0;
-                .icon-base(absolute, false, false, 0);
+                .icon-base(absolute, false, false, 0, transparent);
                 content: " ";
             }
         }

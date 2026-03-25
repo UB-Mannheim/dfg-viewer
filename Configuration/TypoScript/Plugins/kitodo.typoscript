@@ -219,6 +219,29 @@ lib.kitodo.navigation.pagecontrol {
 }
 
 # --------------------------------------------------------------------------------------------------------------------
+# back buttons in page view
+# --------------------------------------------------------------------------------------------------------------------
+lib.kitodo.navigation.pagecontrol-back < tt_content.list.20.dlf_navigation
+lib.kitodo.navigation.pagecontrol-back {
+    settings {
+        pageStep = 10
+        #features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        features = measureBack,pageFirst,pageStepBack,pageBack
+    }
+}
+# --------------------------------------------------------------------------------------------------------------------
+# forward buttons in page view
+# --------------------------------------------------------------------------------------------------------------------
+lib.kitodo.navigation.pagecontrol-fwds < tt_content.list.20.dlf_navigation
+lib.kitodo.navigation.pagecontrol-fwds {
+    settings {
+        pageStep = 10
+        #features = measureBack,measureForward,pageFirst,pageBack,pageStepBack,pageForward,pageStepForward,pageLast
+        features = measureForward,pageForward,pageStepForward,pageLast
+    }
+}
+
+# --------------------------------------------------------------------------------------------------------------------
 # rotate and zoom buttons in page view
 # --------------------------------------------------------------------------------------------------------------------
 lib.kitodo.navigation.viewfunction < tt_content.list.20.dlf_navigation
