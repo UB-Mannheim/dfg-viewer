@@ -414,35 +414,46 @@
 
 /* ==============[ view functions for zoom, rotate and other view related functions ]===== */
 .view-functions {
-    ul {
+    ul.image-tools {
         position: relative;
         li {
             display: none;
-            &.rotate {
-                .rotate-left {
+
+            //&.rotate {
+            &.tx-dlf-navigation-rotate-left {
+                a {
                     background-position: -240px 0;
                 }
-                .rotate-right {
+            }
+            &.tx-dlf-navigation-rotate-right {
+                a {
                     background-position: -240px -40px;
                 }
-                .upend {
+            }
+            &.tx-dlf-navigation-rotate-reset {
+                a {
                     background-position: -280px 0;
                 }
             }
-            &.zoom {
-                .in {
+
+            //&.zoom {
+            &.tx-dlf-navigation-zoom-in {
+                a {
                     background-position: -360px 0;
                 }
-                .out {
+            }
+            &.tx-dlf-navigation-zoom-out {
+                a {
                     background-position: -400px 0;
                 }
             }
+
             &.sync-view {
                 .sync-view-toggle {
                     background-position: -720px 0;
                 }
             }
-            &.pages {
+            &.tx-dlf-navigation-pages {
                 position: relative;
                 top: auto;
                 right: auto;
@@ -453,8 +464,8 @@
                     right: 0;
                 }
             }
-            &.fullscreen {
-                .fullscreen {
+            &.tx-dlf-navigation-fullscreen {
+                a {
                     z-index: auto;
                     background: #fff;
                     &:before,
@@ -492,30 +503,34 @@
                 }
             }
             &.tx-dlf-imagemanipulationtool {
-                position: relative;
-                display: inline-block;
-                > span {
-                    opacity: 1;
-                    overflow: hidden;
-                    width: auto;
-                    height: auto;
-                    display: inline;
-                    margin: 0;
-                    > span > a {
+                ul {
+                    li {
+                        position: relative;
                         display: inline-block;
-                        .icon-base(relative, true, true, -200px);
+                        > span {
+                            opacity: 1;
+                            overflow: hidden;
+                            width: auto;
+                            height: auto;
+                            display: inline;
+                            margin: 0;
+                            > a {
+                                display: inline-block;
+                                .icon-base(relative, true, true, -200px);
 
-                        &.active:before {
-                            position: absolute;
-                            top: 2px;
-                            right: 0px;
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 8px;
-                            border: 2px solid #fff;
-                            background: @okay-green;
-                            display: block;
-                            content: " ";
+                                &.active:before {
+                                    position: absolute;
+                                    top: 2px;
+                                    right: 0px;
+                                    width: 8px;
+                                    height: 8px;
+                                    border-radius: 8px;
+                                    border: 2px solid #fff;
+                                    background: @okay-green;
+                                    display: block;
+                                    content: " ";
+                                }
+                            }
                         }
                     }
                 }
@@ -524,8 +539,8 @@
         @media screen and (min-width: @tabletLandscapeViewportWidth) {
             position: absolute;
             top: 20px;
-            right: 10px;
-            display: block;
+            //right: 10px;
+            display: inline-flex;
             height: 40px;
             li {
                 display: inline-block;
@@ -612,7 +627,7 @@
             &:before {
                 top: -19px;
                 left: -36px;
-                .icon-base(absolute, false, false, 0);
+                .icon-base(absolute, false, false, 0, transparent);
                 content: " ";
             }
             &:after {
@@ -666,7 +681,7 @@
             &:before {
                 top: 0;
                 left: 0;
-                .icon-base(absolute, false, false, 0);
+                .icon-base(absolute, false, false, 0, transparent);
                 content: " ";
             }
         }
@@ -776,9 +791,27 @@
             }
         }
     }
+    span {
+        &.tx-dlf-navigation-first,
+        &.tx-dlf-navigation-prev,
+        &.tx-dlf-navigation-back {
+            position: absolute;
+            bottom: 0;
+            z-index: 110;
+        }
+    }
+
+
+    span.tx-dlf-navigation-first,
+    span.tx-dlf-navigation-prev,
+    span.tx-dlf-navigation-back,
     .backs {
         left: 0;
     }
+
+    span.tx-dlf-navigation-next,
+    span.tx-dlf-navigation-fwd,
+    span.tx-dlf-navigation-last,
     .fwds {
         right: 0;
     }
