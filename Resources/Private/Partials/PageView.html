@@ -93,7 +93,12 @@
                 <f:if condition="{gp-multiview} != 1">
                     <div class="page-control">
                         <f:if condition="{gp-pagegrid} != 1">
-                            <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol" />
+                            <div class="backs">
+                                <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol-back" />
+                            </div>
+                            <div class="fwds">
+                                <f:cObject typoscriptObjectPath="lib.kitodo.navigation.pagecontrol-fwds" />
+                            </div>
                         </f:if>
                     </div>
                 </f:if>
