@@ -14,10 +14,14 @@
         position: absolute;
         text-align: center;
         .text-hide();
-        z-index: 100;
+        // ".submenu.links" over ".page-control .backs" nav, > 110
+        z-index: 112;
         > li {
             position: relative;
             display: inline-block;
+
+            span.tx-dlf-tools-fulltext a,
+            span.tx-dlf-tools-fulltext span,            
             > a, > span {
                 display: inline-block;
                 .icon-base(relative, true, true, 0, #ffffff);
@@ -732,6 +736,7 @@
 }
 
 /* ==============[ page control buttons (fwd/back) ]====================================== */
+.page-control-multiview,
 .page-control {
     position: absolute;
     right: 40px;
@@ -740,8 +745,9 @@
     height: 1px;
     > div {
         position: absolute;
-        bottom: 0;
+        bottom: 50%;
         z-index: 110;
+        //border: 1px solid green;
         span {
             display: none;
             a, span {
@@ -750,21 +756,23 @@
                 .text-hide();
                 &:before {
                     bottom: -1px;
+                    // Icons in Pagenavigation
                     .icon-base(absolute, false, true, 0);
                     content: " ";
                 }
             }
             span {
                 opacity: 0.3;
+                color: hotpink;
             }
-            &.next {
+            &.tx-dlf-navigation-next {
                 display: block;
                 a:before, span:before {
                     right: 0;
                     background-position: -280px -80px;
                 }
             }
-            &.prev {
+            &.tx-dlf-navigation-prev {
                 display: block;
                 a:before, span:before {
                     left: 0;
@@ -791,30 +799,15 @@
             }
         }
     }
-    span {
-        &.tx-dlf-navigation-first,
-        &.tx-dlf-navigation-prev,
-        &.tx-dlf-navigation-back {
-            position: absolute;
-            bottom: 0;
-            z-index: 110;
-        }
-    }
 
-
-    span.tx-dlf-navigation-first,
-    span.tx-dlf-navigation-prev,
-    span.tx-dlf-navigation-back,
     .backs {
         left: 0;
     }
 
-    span.tx-dlf-navigation-next,
-    span.tx-dlf-navigation-fwd,
-    span.tx-dlf-navigation-last,
     .fwds {
         right: 0;
     }
+
     .measureBacks, .measureFwds {
         display: none;
     }
@@ -874,6 +867,7 @@
             &.over {
                 span span {
                     opacity: .3;
+                    color: darkgreen;
                 }
             }
             &.enable-touchevent {
@@ -906,7 +900,7 @@
                             left: 20px;
                         }
                     }
-                    &.prev {
+                    &.tx-dlf-navigation-prev {
                         a, span {
                             top: 0;
                             height: 80px;
@@ -921,6 +915,7 @@
                             }
                         }
                     }
+                    &.tx-dlf-navigation-back,
                     &.rwnd {
                         a, span {
                             top: 0;
@@ -937,7 +932,7 @@
                             opacity: 0;
                         }
                     }
-                    &.first {
+                    &.tx-dlf-navigation-first {
                         a, span {
                             bottom: 0;
                             opacity: 0;
@@ -950,11 +945,12 @@
                 }
                 &.over {
                     span {
-                        &.prev {
+                        &.tx-dlf-navigation-prev {
                             a, span {
                                 color: @base-blue;
                             }
                         }
+                        &.tx-dlf-navigation-back,
                         &.rwnd {
                             a, span {
                                 top: -45px;
@@ -971,7 +967,7 @@
                                 opacity: .3;
                             }
                         }
-                        &.first {
+                        &.tx-dlf-navigation-first {
                             a, span {
                                 bottom: -45px;
                             }
@@ -996,7 +992,7 @@
                             right: 20px;
                         }
                     }
-                    &.next {
+                    &.tx-dlf-navigation-next {
                         a, span {
                             top: 0;
                             height: 80px;
@@ -1011,7 +1007,7 @@
                             }
                         }
                     }
-                    &.fwd {
+                    &.tx-dlf-navigation-fwd {
                         a, span {
                             top: 0;
                             color: fade(@base-blue,0%);
@@ -1023,7 +1019,7 @@
                             }
                         }
                     }
-                    &.last {
+                    &.tx-dlf-navigation-last {
                         a, span {
                             bottom: 0;
                             opacity: 0;
@@ -1040,7 +1036,7 @@
                                 color: @base-blue;
                             }
                         }
-                        &.fwd {
+                        &.tx-dlf-navigation-fwd {
                             a, span {
                                 top: -45px;
                                 color: @base-blue;
@@ -1053,7 +1049,7 @@
                                 }
                             }
                         }
-                        &.last {
+                        &.tx-dlf-navigation-last {
                             a, span {
                                 bottom: -45px;
                             }
@@ -1062,6 +1058,7 @@
                             }
                             span {
                                 opacity: 0.3;
+                                color: lightcyan;
                             }
                         }
                     }
@@ -1093,6 +1090,10 @@
                     a, span {
                         left: 0;
                         padding-left: 50px;
+
+                        &:before {
+                            background-position: -680px -80px;
+                        }
                     }
                 }
             }
@@ -1105,6 +1106,10 @@
                         right: 0;
                         padding-right: 50px;
                         text-align: right;
+
+                        &:before {
+                            background-position: -680px -40px;
+                        }
                     }
                 }
             }
@@ -1163,9 +1168,10 @@ body.dfgviewer.calendar {
     .view-functions {
         display: none;
     }
-
+/*
     .tx-dfgviewer-newspaper-calendar, .tx-dfgviewer-newspaper-years {
         position: relative;
         top: -80px;
     }
+*/
 }

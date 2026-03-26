@@ -257,14 +257,14 @@ body.dfgviewer {
 
                     }
 
-                    &.first {
+                    &.tx-dlf-navigation-first {
                         span {
                             &:before {
                                 border-color: @disabled-grey;
                             }
                         }
                     }
-                    &.last {
+                    &.tx-dlf-navigation-last {
                         span {
                             &:after {
                                 border-color: @disabled-grey;
@@ -304,7 +304,7 @@ body.dfgviewer {
 
                 }
 
-                &.first {
+                &.tx-dlf-navigation-first {
                     span,
                     a {
                         &:before {
@@ -316,7 +316,7 @@ body.dfgviewer {
                         }
                     }
                 }
-                &.last {
+                &.tx-dlf-navigation-last {
                     span,
                     a {
                         &:after {
@@ -396,26 +396,45 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
 // Blaettern-Buttons Hintergrundfarbe ergaenzt um es vom Text unterscheiden zu koennen
 // span ist noch immer schlecht zu erkennen, aber besser wie vorher
 .page-control {
-    &>div.backs.over,
-    &>div.fwds.over {
-        span.fwd,
-        span.last,
-        span.next,
-        span.rwnd,
-        span.first,
-        span.prev {
-            span,
-            a {
-                background-color: #fff;
-                width: 250%;
-                border-radius: 19px;
+    &>div.backs,
+    &>div.fwds {
+        &.over {
+            span.rwnd,
+            span.tx-dlf-navigation-fwd,
+            span.tx-dlf-navigation-last,
+            span.tx-dlf-navigation-next,
+            span.tx-dlf-navigation-first,
+            span.tx-dlf-navigation-back,
+            span.tx-dlf-navigation-prev {
+                span,
+                a {
+                    background-color: #fff;
+                    width: 250%;
+                    border-radius: 19px;
+                }
+            }
+            span.tx-dlf-navigation-fwd,
+            span.tx-dlf-navigation-last,
+            span.tx-dlf-navigation-next,
+            span.tx-dlf-navigation-back,
+            span.tx-dlf-navigation-first,
+            span.tx-dlf-navigation-prev {
+                span,
+                a {
+                    font-size: 14px;
+                    color: @ubma-base;
+                }
+                a {
+                    opacity: 0.88;
+                }
             }
         }
     }
+
     &>div.fwds.over {
-        span.fwd,
-        span.last,
-        span.next {
+        span.tx-dlf-navigation-fwd,
+        span.tx-dlf-navigation-last,
+        span.tx-dlf-navigation-next {
             span,
             a {
                 padding-left: 10px;
@@ -423,26 +442,38 @@ dd.tx-dlf-metadata-mets.meta_not_show.btn {
         }
     }
     &>div.backs.over {
-        span.rwnd,
-        span.first,
-        span.prev {
+        span.tx-dlf-navigation-rwnd,
+        span.tx-dlf-navigation-back,
+        span.tx-dlf-navigation-first,
+        span.tx-dlf-navigation-prev {
             span,
             a {
                 padding-right: 10px;
             }
         }
-    }
+        span.tx-dlf-navigation-back {
+            top: 0px;
 
-    &>div.backs.over,
-    &>div.fwds.over {
-        span.fwd,
-        span.last,
-        span.next,
-        span.rwnd,
-        span.first,
-        span.prev {
-            a {
-                opacity: 0.88;
+            span {
+                vertical-align: middle;
+                display: inline;
+
+                &:before {
+                    background-position: -80px -40px;
+                }
+            }
+        }
+        span.tx-dlf-navigation-first {
+            top: 100px;
+
+            a,
+            span {
+                vertical-align: middle;
+                display: inline;
+
+                //&:before {
+                //    background-position: -80px -80px;
+                //}
             }
         }
     }
