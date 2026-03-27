@@ -71,6 +71,7 @@ rect.active {
     z-index: 9;
 }
 
+/*
 .tx-dlf-navigation-next {
     position: absolute;
     top: 40px;
@@ -80,6 +81,7 @@ rect.active {
     position: absolute;
     top: 20px;
 }
+*/
 
 .sync-views {
     display: none;
