@@ -185,11 +185,11 @@ $(document).ready(function() {
     // if cookie for fullscreen view is present adapt initial page rendering
     if (Cookies.get('tx-dlf-pageview-zoomFullscreen') === 'true') {
         $('body').addClass('fullscreen static');
-        $('a.fullscreen').addClass('active');
+        $('.tx-dlf-navigation-fullscreen a').addClass('active');
     }
 
     // enable click on fullscreen button
-    $('a.fullscreen').on(mobileEvent, function() {
+    $('.tx-dlf-navigation-fullscreen a').on(mobileEvent, function() {
         close_all_submenues('all');
         if($('body.fullscreen')[0]) {
             exitFullscreen();
@@ -292,7 +292,7 @@ $(document).keyup(function(e) {
 function enterFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").addClass('fullscreen');
-    $('a.fullscreen').addClass('active');
+    $('.tx-dlf-navigation-fullscreen a').addClass('active');
     Cookies.set('tx-dlf-pageview-zoomFullscreen', 'true', { sameSite: 'lax' });
 }
 
@@ -300,7 +300,7 @@ function enterFullscreen() {
 function exitFullscreen() {
     setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 220);
     $("body").removeClass('fullscreen');
-    $('a.fullscreen').removeClass('active');
+    $('.tx-dlf-navigation-fullscreen a').removeClass('active');
     Cookies.remove('tx-dlf-pageview-zoomFullscreen');
 }
 
