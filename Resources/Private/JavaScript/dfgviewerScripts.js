@@ -201,7 +201,7 @@ $(document).ready(function() {
     }
 
     // enable click on fullscreen button
-$('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
+    $('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
         close_all_submenues('all');
         if($('body.fullscreen')[0]) {
             exitFullscreen();
