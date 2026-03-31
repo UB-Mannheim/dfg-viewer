@@ -624,6 +624,52 @@ ul.toc.newspaper {
     }
 }
 
+ul {
+    &.toc {
+        &.year {
+            li {
+                &.tx-dlf-tableofcontents-no {
+                    &.tx-dlf-tableofcontents-submenu {
+                        span {
+                            &.ma-toc-title.doNotLinkIt {
+                                &.day,
+                                &.month {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.tx-dlf-tableofcontents-current {
+                    a {
+                        //background-color: rgba(255,255,255,0.6);
+                        background-color: rgba(255,255,255,0.1);
+                    }
+                }
+            }
+            padding-bottom: 0;
+        }
+
+        &.month,
+        &.day {
+            padding-bottom: 0;
+
+            a {
+                // dadurch wird der aktive Tag in die Mitte gerückt??
+                padding: 0;
+                // abstand nach links regeln
+                padding-left: 65px;
+            }
+        }
+
+        &.newspaper {
+            background-color: hotpink;
+        }
+
+
+    }
+}
+
 
 // Distance between diffrent metadata blocks
 dl.tx-dlf-metadata-titledata {
