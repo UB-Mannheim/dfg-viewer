@@ -17,22 +17,22 @@
     <!-- dfgviewer Children 17 child.type {child.type} -->
     <f:switch expression="{child.ITEM_STATE}">
         <f:case value="ACT">
-            <li class="tx-dlf-tableofcontents-active">
+            <li class="tx-dlf-tableofcontents-active {child.type}">
         </f:case>
         <f:case value="CUR">
-            <li class="tx-dlf-tableofcontents-current">
+            <li class="tx-dlf-tableofcontents-current {child.type}">
         </f:case>
         <f:case value="ACTIFSUB">
-            <li class="tx-dlf-tableofcontents-active tx-dlf-tableofcontents-submenu">
+            <li class="tx-dlf-tableofcontents-active tx-dlf-tableofcontents-submenu {child.type}">
         </f:case>
         <f:case value="CURIFSUB">
-            <li class="tx-dlf-tableofcontents-current tx-dlf-tableofcontents-submenu">
+            <li class="tx-dlf-tableofcontents-current tx-dlf-tableofcontents-submenu {child.type}">
         </f:case>
         <f:case value="IFSUB">
-            <li class="tx-dlf-tableofcontents-no tx-dlf-tableofcontents-submenu">
+            <li class="tx-dlf-tableofcontents-no tx-dlf-tableofcontents-submenu {child.type}">
         </f:case>
         <f:defaultCase>
-            <li class="tx-dlf-tableofcontents-no">
+            <li class="tx-dlf-tableofcontents-no {child.type}">
         </f:defaultCase>
     </f:switch>
 
