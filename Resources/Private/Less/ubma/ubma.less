@@ -663,7 +663,15 @@ ul {
         }
 
         &.newspaper {
-            background-color: hotpink;
+            li {
+                &.tx-dlf-tableofcontents-current {
+                    &.tx-dlf-tableofcontents-submenu {
+                        &.year {
+                            background-color: rgba(255,255,255,0.6);;
+                        }
+                    }
+                }
+            }
         }
 
 
