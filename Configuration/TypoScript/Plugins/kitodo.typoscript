@@ -271,6 +271,7 @@ lib.kitodo.navigation.viewfunction {
 # searchInDocumentTool
 # scoreTool
 # zoomTool
+# metsDownloadTool (only ubma)
 
 plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
 plugin.tx_dlf_toolbox {
@@ -311,7 +312,7 @@ plugin.tx_dlf_multiviewaddsourcetool {
 plugin.tx_dlf_downloadtool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_downloadtool {
     settings {
-        tools = pdfDownloadTool,imageDownloadTool,fulltextDownloadTool
+        tools = pdfDownloadTool,imageDownloadTool,fulltextDownloadTool,metsDownloadTool
         showAsList = 1
     }
 }

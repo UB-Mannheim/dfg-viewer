@@ -492,11 +492,9 @@ ul.toc.newspaper {
             }
 
             & > li.submenu.current {
-                color: hotpink;
                 color: #ff69b4;
 
                 &:before {
-                    color: lightpink;
                     color: #ffb6c1;
                     border-left-color: transparent;
                 }
@@ -624,6 +622,7 @@ ul.toc.newspaper {
     }
 }
 
+// Toc new
 ul {
     &.toc {
         &.year {
@@ -642,7 +641,7 @@ ul {
                 }
                 &.tx-dlf-tableofcontents-current {
                     a {
-                        //background-color: rgba(255,255,255,0.6);
+                        // der aktive Tag oder das aktive Element
                         background-color: rgba(255,255,255,0.1);
                     }
                 }
@@ -655,7 +654,7 @@ ul {
             padding-bottom: 0;
 
             a {
-                // dadurch wird der aktive Tag in die Mitte gerückt??
+                // dadurch wird der aktive Tag in die Mitte der Zeile gerückt??
                 padding: 0;
                 // abstand nach links regeln
                 padding-left: 65px;
@@ -663,18 +662,54 @@ ul {
         }
 
         &.newspaper {
-            li {
-                &.tx-dlf-tableofcontents-current {
+            // 1
+            ul {
+                &:before {
+                    left: 18px;
+                }
+                li {
+                    &.tx-dlf-tableofcontents-current {
+                        &.tx-dlf-tableofcontents-submenu {
+                            &.year {
+                                background-color: rgba(255,255,255,0.6);;
+                            }
+                        }
+                    }
                     &.tx-dlf-tableofcontents-submenu {
-                        &.year {
-                            background-color: rgba(255,255,255,0.6);;
+                        ul {
+                            left: -10px;
+                            //background-color: hotpink;
+                        }
+                    }
+                }
+                // 2
+                ul {
+                    &:before {
+                        left: 28px;
+                    }
+                    // 3
+                    ul {
+                        // Position strich links
+                        &:before {
+                            //left: 50px;
+                            left: 38px;
+                        }
+                        // 4
+                        ul {
+                            &:before {
+                                //left: 70px;
+                                left: 48px;
+                            }
+                            ul {
+                                &:before {
+
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
-
     }
 }
 
@@ -805,6 +840,15 @@ body.dfgviewer {
 .tx-dlf-tableofcontents.dfgviewer {
     overflow-y: auto;
     height: 100%;
+}
+
+
+.tx-dlf-pagegrid-list {
+    li {
+        img {
+            max-height: 250px;
+        }
+    }
 }
 
 

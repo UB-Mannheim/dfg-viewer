@@ -198,8 +198,27 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
+                            &.tx-dlf-tools-modeldownload:before,
+                            &.tx-dlf-tools-imagedownload:before,
+                            &.tx-dlf-tools-metsdownloadtool:before {
+                                background-position: -320px -40px;
+                            }
+                            &.tx-dlf-tools-imagedownload {
+                                opacity: 1;
+                                a {
+                                    position: relative;
+                                    left: -40px;
+                                }
+                            }
+                            &.tx-dlf-tools-modeldownload {
+                                opacity: 1;
+                            }
                         }
                         span {
+                            opacity: 0.5;
+                            ::before {
+                                display: none;
+                            }
                             &.tx-dlf-tools-pdf-work:before {
                                 background-position: -360px -40px;
                             }
