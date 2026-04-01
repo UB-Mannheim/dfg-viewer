@@ -45,10 +45,10 @@
         </f:then>
         <f:else>
             <f:comment>
-                there is a mistake with newspaper issues 
-                additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}" 
-                if this part is omitted from newspapers or periodikas, everything seems to work. Otherwise an oop error is displayed. The cause could possibley be a 
-                problem with the child.id, which in my first test case is a URL and not a number. 
+                there is a mistake with newspaper issues
+                additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}"
+                if this part is omitted from newspapers or periodikas, everything seems to work. Otherwise an oop error is displayed. The cause could possibley be a
+                problem with the child.id, which in my first test case is a URL and not a number.
                 At the moment the error does not occur because i have commented out settings in config.yaml
                 I fixed the Problem with child.parentDocumentId or child.AnchorDocumentId
                 I use child.AnchorDocumentId for newspapers because child.parentDocumentId has the id to the year
@@ -61,6 +61,7 @@
                 additionalParams="{f:if(condition:'{child.id}', then:'{\'id\':child.id, \'page\':child.page}', else: '{\'page\':child.page}')}"
                 excludedParams="{0: 'measure', 1: 'multiview'}"
                 section="{child.section}"
+                class="{child.type}"
                 title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
                     <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </kitodo:link>
