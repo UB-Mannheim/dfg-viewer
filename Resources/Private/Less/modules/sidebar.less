@@ -588,6 +588,41 @@
         }
         ul {
             position: relative;
+
+            &.toc.year {
+                &:before {
+                    left: 18px;
+                }
+                ul.toc.month {
+                    left: 0;
+
+                    &:before {
+                        left: 18px;
+                    }
+
+                    ul.toc.day {
+                        &:before {
+                            left: 18px;
+                        }
+                        li {
+                            &.tx-dlf-tableofcontents-submenu.issue {
+                                &:before {
+                                    left: 20px;
+                                }
+                            }
+                        }
+
+                        ul.toc.issue {
+                            &:before {
+                                left: 18px;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+
             &:before {
                 position: absolute;
                 top: -5px;
@@ -604,17 +639,6 @@
                     display: none;
                 }
                 &.tx-dlf-tableofcontents-submenu {
-                    &:before {
-                        position: absolute;
-                        top: 12px;
-                        left: 10px;
-                        width: 0;
-                        height: 0;
-                        content: " ";
-                        border: 5px solid transparent;
-                        border-right-width: 0;
-                        border-left-color: #fff;
-                    }
 
                     &.day {
                         &:before {
@@ -625,15 +649,26 @@
                     &.month {
                         &:before {
                             display: none;
-                            //color: hotpink;
+                            color: hotpink;
                         }
                     }
-
                     &.year {
                         &:before {
                             //display: none;
                             color: hotpink;
                         }
+                    }
+
+                    &:before {
+                        position: absolute;
+                        top: 12px;
+                        left: 10px;
+                        width: 0;
+                        height: 0;
+                        content: " ";
+                        border: 5px solid transparent;
+                        border-right-width: 0;
+                        border-left-color: #fff;
                     }
 
                 }
