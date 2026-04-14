@@ -1,0 +1,182 @@
+REBASE LOG - Di 14. Jul 11:32:35 CEST 2026
+=========================================
+Commit: d9589ee (fix page navigation)
+Konflikt: controls.less
+Loesung: HEAD + .rwnd Selektor ergänzt
+
+
+=========================================
+Commit: 76023d9 (fix fullscreen function)
+Konflikt: dfgviewerScripts.js
+Loesung: HEAD behalten
+Branch verwendete: .tx-dlf-navigation-fullscreen a
+HEAD verwendete: li.tx-dlf-tools-fullscreen a
+Zusätzlich: a.fullscreen im Event-Handler (HEAD)
+
+diff --cc Resources/Private/JavaScript/dfgviewerScripts.js
+index 87d0b3b,92ef8d7..0000000
+--- a/Resources/Private/JavaScript/dfgviewerScripts.js
++++ b/Resources/Private/JavaScript/dfgviewerScripts.js
+@@@ -189,7 -189,7 +189,7 @@@ $(document).ready(function() 
+      }
+  
+      // enable click on fullscreen button
+- $('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
+ -    $('.tx-dlf-navigation-fullscreen a').on(mobileEvent, function() {
+++    $('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
+          close_all_submenues('all');
+          if($('body.fullscreen')[0]) {
+              exitFullscreen();
+
+=========================================
+Commit: 78ddf67 (add function renderMetsDownloadTool and getMets)
+Konflikt: kitodo.typoscript
+Loesung: HEAD + metsDownloadTool ergaenzt
+Branch当时的tools: pdfdownloadtool,imagedownloadtool,fulltextdownloadtool,metsdownloadtool
+HEAD当时的tools: pdfDownloadTool,imageDownloadTool,fulltextDownloadTool
+Ergebnis: pdfDownloadTool,imageDownloadTool,fulltextDownloadTool,metsDownloadTool
+
+diff --cc Configuration/TypoScript/Plugins/kitodo.typoscript
+index 127a2a2,dc6a1f2..0000000
+--- a/Configuration/TypoScript/Plugins/kitodo.typoscript
++++ b/Configuration/TypoScript/Plugins/kitodo.typoscript
+@@@ -258,19 -258,19 +258,20 @@@ lib.kitodo.navigation.viewfunction 
+  
+  # Available tools:
+  
+ -# annotationtool
+ -# audiovideotool
+ -# fulltextdownloadtool
+ -# fulltexttool
+ -# imagedownloadtool
+ -# imagemanipulationtool
+ -# modeldownloadtool
+ -# multiviewaddsourcetool
+ -# pdfdownloadtool
+ -# searchindocumenttool
+ -# scoretool
+ -# viewerselectiontool
+ -# metsdownloadtool (only ubma)
+ +# annotationTool
+ +# audioVideoTool
+ +# fulltextDownloadTool
+ +# fulltextTool
+ +# imageDownloadTool
+ +# imageManipulationTool
+ +# modelDownloadTool
+ +# multiViewAddSourceTool
+ +# pdfDownloadTool
+ +# rotationTool
+ +# searchInDocumentTool
+ +# scoreTool
+ +# zoomTool
+++# metsDownloadTool (only ubma)
+  
+  plugin.tx_dlf_toolbox < tt_content.list.20.dlf_toolbox
+  plugin.tx_dlf_toolbox {
+@@@ -311,8 -311,7 +312,8 @@@ plugin.tx_dlf_multiviewaddsourcetool 
+  plugin.tx_dlf_downloadtool < plugin.tx_dlf_toolbox
+  plugin.tx_dlf_downloadtool {
+      settings {
+-         tools = pdfDownloadTool,imageDownloadTool,fulltextDownloadTool
+ -        tools = pdfdownloadtool,imagedownloadtool,fulltextdownloadtool,metsdownloadtool
+++        tools = pdfDownloadTool,imageDownloadTool,fulltextDownloadTool,metsDownloadTool
+ +        showAsList = 1
+      }
+  }
+  
+
+=========================================
+Commit: 7b42664 (add icon for metsdownloadtool)
+Konflikt: controls.less
+Loesung: HEAD + metsdownloadtool Styles ergaenzt
+
+diff --cc Resources/Private/Less/components/controls.less
+index bf4c8a5,6ed70c6..0000000
+--- a/Resources/Private/Less/components/controls.less
++++ b/Resources/Private/Less/components/controls.less
+@@@ -198,20 -198,32 +198,39 @@@
+                              &.persistence-page:before {
+                                  background-position: -320px -80px;
+                              }
++                             &.tx-dlf-tools-modeldownload:before,
+ -                            &.tx-dlf-tools-imagedownload:before {
+++                            &.tx-dlf-tools-imagedownload:before,
+++                            &.tx-dlf-tools-metsdownloadtool:before {
++                                 background-position: -320px -40px;
++                             }
++                             &.tx-dlf-tools-imagedownload {
+ -                                // override opacity from span
+ -                                // because tx-dlf-tools-imagedownload is the only one here with span
++                                 opacity: 1;
+ -                                // move over the empty space the hidden `::before` left:
++                                 a {
++                                     position: relative;
++                                     left: -40px;
++                                 }
++                             }
++                             &.tx-dlf-tools-modeldownload {
++                                 opacity: 1;
++                             }
+ -                            &.tx-dlf-tools-metsdownloadtool:before {
+ -                                background-position: -320px -40px;
+ -                            }
+                          }
+                          span {
++                             opacity: 0.5;
++                             ::before {
++                                 display: none;
++                             }
+ +                            &.tx-dlf-tools-pdf-work:before {
+ +                                background-position: -360px -40px;
+ +                            }
+ +                            &.tx-dlf-tools-modeldownload:before,
+ +                            &.tx-dlf-tools-imagedownload:before,
+ +                            &.tx-dlf-tools-pdf-page:before {
+ +                                background-position: -320px -40px;
+ +                            }
+ +                            &.tx-dlf-tools-fulltextdownload:before,
+ +                            &.tx-dlf-tools-fulltext-not-available:before {
+ +                                background-position: -280px -40px;
+ +                            }
+                          }
+                      }
+                  }
+
+=========================================
+Commit: 0688395 (fix toc active and current)
+Konflikt: sidebar.less
+Loesung: Branch behalten (formatiert mit & Prefix)
+
+diff --cc Resources/Private/Less/modules/sidebar.less
+index 4e3d9f3,6271dc3..0000000
+--- a/Resources/Private/Less/modules/sidebar.less
++++ b/Resources/Private/Less/modules/sidebar.less
+@@@ -568,8 -568,9 +568,9 @@@ ul.tx-dlf-tableofcontents-list 
+                  .transform(rotate(90deg));
+              }
+          }
+-         .tx-dlf-tableofcontents-current {
+-             & > a, & > span.a {
+ -        &.tx-dlf-tableofcontents-current {
+++&.tx-dlf-tableofcontents-current {
++             & > a span.title /*,
++             & > a, & > span.a*/ {
+                  background: rgba(255,255,255,0.6);
+                  color: @base-blue;
+                  font-weight: 700;
+@@@ -613,8 -614,9 +614,9 @@@
+                      .transform(rotate(90deg));
+                  }
+              }
+-             .tx-dlf-tableofcontents-current {
+-                 & > a, & > span.a {
+ -            &.tx-dlf-tableofcontents-current {
+ -                & > a span.title /*
+++&.tx-dlf-tableofcontents-current {
+++                & > a span.title /*,
++                 & > a, & > span.a*/ {
+                      background: rgba(255,255,255,0.6);
+                      color: @base-blue;
+                      font-weight: 700;
+
