@@ -520,7 +520,7 @@ ul.tx-dlf-tableofcontents-list {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     height: 100%;
-    padding-bottom: 40px;
+
     .metadata-title {
         display: none;
     }
@@ -568,8 +568,9 @@ ul.tx-dlf-tableofcontents-list {
                 .transform(rotate(90deg));
             }
         }
-        .tx-dlf-tableofcontents-current {
-            & > a, & > span.a {
+&.tx-dlf-tableofcontents-current {
+            & > a span.title /*,
+            & > a, & > span.a*/ {
                 background: rgba(255,255,255,0.6);
                 color: @base-blue;
                 font-weight: 700;
@@ -613,8 +614,9 @@ ul.tx-dlf-tableofcontents-list {
                     .transform(rotate(90deg));
                 }
             }
-            .tx-dlf-tableofcontents-current {
-                & > a, & > span.a {
+&.tx-dlf-tableofcontents-current {
+                & > a span.title /*,
+                & > a, & > span.a*/ {
                     background: rgba(255,255,255,0.6);
                     color: @base-blue;
                     font-weight: 700;
@@ -623,13 +625,22 @@ ul.tx-dlf-tableofcontents-list {
         }
         a, span.a { padding-left: 30px; }
         ul {
-            &:before, li.tx-dlf-tableofcontents-submenu:before { left: 30px; }
+            &:before,
+            li.tx-dlf-tableofcontents-submenu:before {
+                left: 30px;
+            }
             a, span.a { padding-left: 50px; }
             ul {
-                &:before, li.tx-dlf-tableofcontents-submenu:before { left: 50px; }
+                &:before,
+                li.tx-dlf-tableofcontents-submenu:before {
+                    left: 50px;
+                }
                 a, span.a { padding-left: 70px; }
                 ul {
-                    &:before, li.tx-dlf-tableofcontents-submenu:before { left: 70px; }
+                    &:before,
+                    li.tx-dlf-tableofcontents-submenu:before {
+                        left: 70px;
+                    }
                     a, span.a { padding-left: 90px; }
                 }
             }
