@@ -514,86 +514,41 @@
 
 
 /* ==============[ toc (inside the respective wrap > see above) ]========================= */
-ul.toc {
-    position: relative;
-    overflow: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    height: 100%;
-
-    .metadata-title {
-        display: none;
-    }
-    a, span.a {
+.toc-wrapper {
+    ul.toc {
         position: relative;
-        padding: 8px 36px 8px 18px;
-        display: block;
-        color: #fff;
         overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        .pagination {
-            position: absolute;
-            right: 6px;
-            font-weight: 700;
-            opacity: 0.4;
-            font-size: 12px;
-            line-height: 16px;
-            text-align: right;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        height: 100%;
+
+        .metadata-title {
+            display: none;
         }
-    }
-    span.a {
-        opacity: 0.5;
-        font-weight: normal;
-    }
-    li {
-        position: relative;
-        &.tx-dlf-tableofcontents-submenu {
-            &:before {
+        a, span.a {
+            position: relative;
+            padding: 8px 36px 8px 18px;
+            display: block;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            .pagination {
                 position: absolute;
-                top: 12px;
-                left: 10px;
-                width: 0;
-                height: 0;
-                content: " ";
-                border: 5px solid transparent;
-                border-right-width: 0;
-                border-left-color: #fff;
-            }
-        }
-        &.tx-dlf-tableofcontents-active {
-            background: rgba(255,255,255,0.1);
-            &:before {
-                left: 8px;
-                .transform(rotate(90deg));
-            }
-        }
-        &.tx-dlf-tableofcontents-current {
-            & > a span.title /*,
-            & > a, & > span.a*/ {
-                background: rgba(255,255,255,0.6);
-                color: @base-blue;
+                right: 6px;
                 font-weight: 700;
+                opacity: 0.4;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: right;
             }
         }
-    }
-    ul {
-        position: relative;
-        &:before {
-            position: absolute;
-            top: -5px;
-            left: 10px;
-            bottom: 0;
-            width: 1px;
-            background: #fff;
-            content: " ";
+        span.a {
+            opacity: 0.5;
+            font-weight: normal;
         }
         li {
             position: relative;
-            .meta-type-icon {
-                // We have no type icons in DFG-Viewer, yet.
-                display: none;
-            }
             &.tx-dlf-tableofcontents-submenu {
                 &:before {
                     position: absolute;
@@ -615,39 +570,130 @@ ul.toc {
                 }
             }
             &.tx-dlf-tableofcontents-current {
-                & > a span.title /*
-                & > a, & > span.a*/ {
-                    background: rgba(255,255,255,0.6);
+                background: rgba(255,255,255,0.6);
+
+                a {
+                    color: @base-blue;
+                }
+
+                & > a span.title,
+                & > a span.pagination
+                /* & > a, & > span.a */ {
+                    //background: rgba(255,255,255,0.6);
                     color: @base-blue;
                     font-weight: 700;
+                    opacity: 0.8;
                 }
             }
         }
-        a, span.a { padding-left: 30px; }
         ul {
-            &:before,
-            li.tx-dlf-tableofcontents-submenu:before {
-                left: 30px;
+            position: relative;
+            &:before {
+                position: absolute;
+                top: -5px;
+                left: 10px;
+                bottom: 0;
+                width: 1px;
+                background: #fff;
+                content: " ";
             }
-            a, span.a { padding-left: 50px; }
+            li {
+                position: relative;
+                .meta-type-icon {
+                    // We have no type icons in DFG-Viewer, yet.
+                    display: none;
+                }
+                &.tx-dlf-tableofcontents-submenu {
+                    &:before {
+                        position: absolute;
+                        top: 12px;
+                        left: 10px;
+                        width: 0;
+                        height: 0;
+                        content: " ";
+                        border: 5px solid transparent;
+                        border-right-width: 0;
+                        border-left-color: #fff;
+                    }
+
+                    &.day {
+                        &:before {
+                            display: none;
+                            color: yellow;
+                        }
+                    }
+                    &.month {
+                        &:before {
+                            display: none;
+                            //color: hotpink;
+                        }
+                    }
+
+                    &.year {
+                        &:before {
+                            //display: none;
+                            color: hotpink;
+                        }
+                    }
+
+                }
+                &.tx-dlf-tableofcontents-active {
+                    background: rgba(255,255,255,0.1);
+                    &:before {
+                        left: 8px;
+                        .transform(rotate(90deg));
+                    }
+
+                    &.tx-dlf-tableofcontents-submenu {
+                        &.day,
+                        &.month {
+                            &:before {
+                                //display: none;
+                                color: green;
+                            }
+                        }
+                    }
+
+
+                }
+                &.tx-dlf-tableofcontents-current {
+                    background: rgba(255,255,255,0.6);
+                    color: @base-blue;
+
+                    & > a span.title,
+                    & > a span.pagination
+                    /* & > a, & > span.a*/ {
+                        color: @base-blue;
+                        font-weight: 700;
+                    }
+                }
+            }
+            a, span.a { padding-left: 30px; }
             ul {
                 &:before,
                 li.tx-dlf-tableofcontents-submenu:before {
-                    left: 50px;
+                    left: 30px;
                 }
-                a, span.a { padding-left: 70px; }
+                a, span.a { padding-left: 50px; }
                 ul {
                     &:before,
                     li.tx-dlf-tableofcontents-submenu:before {
-                        left: 70px;
+                        left: 50px;
                     }
-                    a, span.a { padding-left: 90px; }
+                    a, span.a { padding-left: 70px; }
+                    ul {
+                        &:before,
+                        li.tx-dlf-tableofcontents-submenu:before {
+                            left: 70px;
+                        }
+                        a, span.a { padding-left: 90px; }
+                    }
                 }
             }
         }
-    }
-    @media screen and (min-width: @tabletLandscapeViewportWidth) {
-        font-size: 14px;
+        @media screen and (min-width: @tabletLandscapeViewportWidth) {
+            font-size: 14px;
+        }
     }
 }
 
