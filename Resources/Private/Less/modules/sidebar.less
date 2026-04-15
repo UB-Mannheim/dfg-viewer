@@ -447,15 +447,26 @@
             display: none;
         }
     }
+
+
+
+    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-002) {
+        .metadata-wrapper, .toc-wrapper {
+            //font-size: 13px;
+        }
+        .toc-wrapper {
+            //line-height: 1.9;
+            ul {
+                &.toc {
+                    //font-size: 13px;
+                }
+            }
+        }
+    }
     @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-001) {
         .metadata-wrapper, .toc-wrapper {
             padding-left: 17px;
             padding-right: 17px;
-        }
-    }
-    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-002) {
-        .metadata-wrapper, .toc-wrapper {
-            font-size: 13px;
         }
     }
 
@@ -631,6 +642,13 @@
                                     padding-left: 34px;
                                 }
                             }
+                        }
+
+                        .title {
+                            width: 93%;
+                            display: inline-block;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
                         }
 
                         ul.toc.issue {
