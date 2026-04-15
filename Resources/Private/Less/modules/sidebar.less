@@ -352,11 +352,13 @@
         }
     }
 
+
     @media screen and (min-width: @phoneLandscapeViewportWidth) {
         .metadata-wrapper, .toc-wrapper {
             width: 55%;
         }
     }
+
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         .control-bar-content {
             position: absolute;
@@ -445,6 +447,29 @@
             display: none;
         }
     }
+
+
+
+    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-002) {
+        .metadata-wrapper, .toc-wrapper {
+            //font-size: 13px;
+        }
+        .toc-wrapper {
+            //line-height: 1.9;
+            ul {
+                &.toc {
+                    //font-size: 13px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-001) {
+        .metadata-wrapper, .toc-wrapper {
+            padding-left: 17px;
+            padding-right: 17px;
+        }
+    }
+
 }
 
 .control-bar-collapsed {
@@ -635,30 +660,76 @@
 
             &.toc.year {
                 &:before {
-                    left: 18px;
+                    //left: 18px;
+                    left: @newspaper-left-ul;
                 }
                 ul.toc.month {
                     left: 0;
 
                     &:before {
-                        left: 18px;
+                        left: @newspaper-left-ul;
                     }
 
                     ul.toc.day {
+                        left: 0;
+
                         &:before {
-                            left: 18px;
+                            left: @newspaper-left-ul;
                         }
                         li {
                             &.tx-dlf-tableofcontents-submenu.issue {
                                 &:before {
-                                    left: 20px;
+                                    left: 24px;
+                                    top: 7px;
+                                }
+                                a.issue {
+                                    padding-left: 34px;
                                 }
                             }
                         }
 
+                        .title {
+                            width: 93%;
+                            display: inline-block;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                        }
+
                         ul.toc.issue {
+
+
                             &:before {
-                                left: 18px;
+                                left: @newspaper-left-ul;
+                            }
+
+                            li {
+                                &.tx-dlf-tableofcontents-submenu {
+                                    &:before {
+                                        left: 30px;
+                                        top: 7px;
+                                    }
+
+                                    &.tx-dlf-tableofcontents-active {
+                                        ul.toc {
+                                            li {
+                                                // example Reichsanzeiger 02.01.1936, Erste Beilage / Öffentlicher Anzeiger
+                                                a {
+                                                    padding-left: 46px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                ul.toc {
+                                    &:before {
+                                        left: 32px;
+                                    }
+                                }
+                            }
+
+                            a {
+                                padding-left: 40px;
                             }
                         }
 
@@ -766,6 +837,18 @@
                             left: 70px;
                         }
                         a, span.a { padding-left: 90px; }
+                    }
+                }
+            }
+        }
+        &.newspaper {
+            li {
+                &.tx-dlf-tableofcontents-submenu {
+                    &.year {
+                        &:before {
+                            color: hotpink;
+                            display: none;
+                        }
                     }
                 }
             }
