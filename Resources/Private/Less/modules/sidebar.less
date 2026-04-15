@@ -591,7 +591,9 @@
 
             &.toc.year {
                 &:before {
-                    left: 18px;
+                    //left: 28px;
+                    //left: 18px;
+                    left: @newspaper-left-ul;
                 }
                 ul.toc.month {
                     left: 0;
@@ -601,20 +603,58 @@
                     }
 
                     ul.toc.day {
+                        left: 0;
+
                         &:before {
                             left: 18px;
                         }
                         li {
                             &.tx-dlf-tableofcontents-submenu.issue {
                                 &:before {
-                                    left: 20px;
+                                    left: 24px;
+                                    top: 7px;
+                                }
+                                a.issue {
+                                    padding-left: 34px;
                                 }
                             }
                         }
 
                         ul.toc.issue {
+
+
                             &:before {
                                 left: 18px;
+                            }
+
+                            li {
+                                &.tx-dlf-tableofcontents-submenu {
+                                    &:before {
+                                        left: 30px;
+                                        top: 7px;
+                                    }
+
+                                    &.tx-dlf-tableofcontents-active {
+                                        ul.toc {
+                                            li {
+                                                // example Reichsanzeiger 02.01.1936, Erste Beilage / Öffentlicher Anzeiger
+                                                a {
+                                                    padding-left: 46px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                ul.toc {
+                                    &:before {
+                                        left: 32px;
+                                    }
+                                }
+                            }
+
+                            a {
+                                padding-left: 40px;
                             }
                         }
 
