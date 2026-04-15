@@ -352,11 +352,13 @@
         }
     }
 
+
     @media screen and (min-width: @phoneLandscapeViewportWidth) {
         .metadata-wrapper, .toc-wrapper {
             width: 55%;
         }
     }
+
     @media screen and (min-width: @tabletLandscapeViewportWidth) {
         .control-bar-content {
             position: absolute;
@@ -445,6 +447,18 @@
             display: none;
         }
     }
+    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-001) {
+        .metadata-wrapper, .toc-wrapper {
+            padding-left: 17px;
+            padding-right: 17px;
+        }
+    }
+    @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-002) {
+        .metadata-wrapper, .toc-wrapper {
+            font-size: 13px;
+        }
+    }
+
 }
 
 .control-bar-collapsed {
@@ -591,7 +605,6 @@
 
             &.toc.year {
                 &:before {
-                    //left: 28px;
                     //left: 18px;
                     left: @newspaper-left-ul;
                 }
@@ -599,14 +612,14 @@
                     left: 0;
 
                     &:before {
-                        left: 18px;
+                        left: @newspaper-left-ul;
                     }
 
                     ul.toc.day {
                         left: 0;
 
                         &:before {
-                            left: 18px;
+                            left: @newspaper-left-ul;
                         }
                         li {
                             &.tx-dlf-tableofcontents-submenu.issue {
@@ -624,7 +637,7 @@
 
 
                             &:before {
-                                left: 18px;
+                                left: @newspaper-left-ul;
                             }
 
                             li {
@@ -762,6 +775,18 @@
                             left: 70px;
                         }
                         a, span.a { padding-left: 90px; }
+                    }
+                }
+            }
+        }
+        &.newspaper {
+            li {
+                &.tx-dlf-tableofcontents-submenu {
+                    &.year {
+                        &:before {
+                            color: hotpink;
+                            display: none;
+                        }
                     }
                 }
             }
