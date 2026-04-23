@@ -82,9 +82,19 @@
     </f:if>
 
     <f:if condition="{child._SUB_MENU} && ({child.ITEM_STATE} == 'IFSUB' || {child.ITEM_STATE} == 'ACTIFSUB' || {child.ITEM_STATE} == 'CURIFSUB')">
-        <ul class="toc {child.type}">
-            <f:render partial="TableOfContents/Children" arguments="{children: child._SUB_MENU, viewData: viewData}"/>
-        </ul>
+        <f:comment>if newspaper year and calender no toc</f:comment>
+        <f:if condition="{child.type} == 'newspaper' && ({child._SUB_MENU.0.type} == 'year' || {child._SUB_MENU.0.type} == 'issue') && ({child._SUB_MENU.0.ITEM_STATE} == 'NO')">
+            <f:then>
+                <ul class="toc {child.type} tx-dlf-childtype-{child._SUB_MENU.0.type} tx-dlf-childstate-{child._SUB_MENU.0.ITEM_STATE}">
+                    <!-- AUSGEBLENDET -->
+                </ul>
+            </f:then>
+            <f:else>
+                <ul class="toc {child.type} tx-dlf-childtype-{child._SUB_MENU.0.type} tx-dlf-childstate-{child._SUB_MENU.0.ITEM_STATE}">
+                    <f:render partial="TableOfContents/Children" arguments="{children: child._SUB_MENU, viewData: viewData}"/>
+                </ul>
+            </f:else>
+        </f:if>
     </f:if>
 
     </li>
