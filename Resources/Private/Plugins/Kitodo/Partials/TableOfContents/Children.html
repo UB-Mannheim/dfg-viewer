@@ -56,7 +56,7 @@
             <!-- LINE 57: id:{child.id} type:{child.type} anchorID:{child.AnchorDocumentID} -->
             <f:if condition="{child.AnchorDocumentId}">
                 <f:then>
-                    <f:comment><f:debug>{child}</f:debug></f:comment>
+                    <f:comment>if newspaper or periodika a child.AnchorDocumentId exists, then use this id instead of child.id, because this is in this case a url instead a id</f:comment>
                     <f:variable name="xChildId" value="{child.AnchorDocumentId}" />
                 </f:then>
                 <f:else>
