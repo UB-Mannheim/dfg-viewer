@@ -4,6 +4,7 @@
 		<header>
 			<generator>LFEditor</generator>
 		</header>
+<<<<<<< HEAD
         <body>
             <trans-unit id="digitisation">
                 <source>Digitisation</source>
@@ -106,6 +107,9 @@
             </trans-unit>
             <trans-unit id="sru.search">
                 <source><![CDATA[Search]]></source>
+            </trans-unit>
+            <trans-unit id="ubma.digitalcollection.name" approved="yes">
+                <source>University Library Mannheim: Digital Collections</source>
             </trans-unit>
         </body>
 	</file>
