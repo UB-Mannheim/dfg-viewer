@@ -328,6 +328,82 @@ body.dfgviewer {
                         }
                     }
                 }
+
+                &.last,
+                &.next,
+                &.previous,
+                &.first {
+                    span,
+                    a {
+                        position: relative;
+                        top: -2px;
+                    }
+                }
+                &.last,
+                &.first {
+                    span,
+                    a {
+                        position: relative;
+                        top: -2px;
+                    }
+                }
+
+                &.first {
+                    span,
+                    a {
+                        &:before {
+                            content: ' ';
+                            border-right: 2px solid #232e58;
+                            height: 12px;
+                            position: relative;
+                            display: inline-block;
+                            top: 2px;
+                        }
+                    }
+
+                    &.disabled {
+                        span,
+                        a {
+                            &:before {
+                                content: ' ';
+                                border-right: 2px solid @disabled-grey;
+                                height: 12px;
+                                position: relative;
+                                display: inline-block;
+                                top: 2px;
+                            }
+                        }
+                    }
+                }
+
+                &.last {
+                    span,
+                    a {
+                        &:after {
+                            content: ' ';
+                            border-left: 2px solid #232e58;
+                            height: 12px;
+                            position: relative;
+                            display: inline-block;
+                            top: 2px;
+                        }
+                    }
+
+                    &.disabled {
+                        span,
+                        a {
+                            &:after {
+                                content: ' ';
+                                border-left: 2px solid @disabled-grey;
+                                height: 12px;
+                                position: relative;
+                                display: inline-block;
+                                top: 2px;
+                            }
+                        }
+                    }
+                }
+
             }
         }
 
