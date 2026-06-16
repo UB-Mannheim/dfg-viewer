@@ -85,6 +85,10 @@
 				<source><![CDATA[to top]]></source>
 				<target><![CDATA[nach oben]]></target>
 			</trans-unit>
+			<trans-unit id="ubma.digitalcollection.name" approved="yes">
+				<source><![CDATA[University Library Mannheim: Digital Collections]]></source>
+				<target><![CDATA[Universitätsbibliothek Mannheim: Digitale Sammlungen]]></target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
