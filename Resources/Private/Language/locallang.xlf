@@ -110,6 +110,9 @@
 		<trans-unit id="uri.page">
             <source>Persistent Identifiers (Page)</source>
         </trans-unit>
+        <trans-unit id="ubma.digitalcollection.name" approved="yes">
+            <source>University Library Mannheim: Digital Collections</source>
+        </trans-unit>
 		</body>
 	</file>
 </xliff>
