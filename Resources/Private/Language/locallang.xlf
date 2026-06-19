@@ -113,6 +113,9 @@
         <trans-unit id="ubma.digitalcollection.name" approved="yes">
             <source>University Library Mannheim: Digital Collections</source>
         </trans-unit>
+		<trans-unit id="ubma.no-volume-selected" approved="yes">
+			<source>No volume selected</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

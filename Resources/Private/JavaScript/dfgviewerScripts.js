@@ -282,6 +282,27 @@ $(document).ready(function() {
         };
     });
 
+    // Add an error message if no map element in document viewer is given
+    function checkForChild() {
+        if (document.getElementById('NoImages')) {
+            console.log("keine Grafiken vorhanden!");
+
+            const emptyMessage = ($('html[lang^="de"]')[0])
+                ? 'Kein Band ausgew&auml;hlt. Klicken Sie hier um zum ersten Band dieses Werks zu gelangen.'
+                : 'No volume selected. Click to jump to the first available volume.';
+
+            $('.tx-dlf-pageview').children('.tx-dlf-map').remove();
+            console.log("ergänze empty hinweis");
+            //$('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('.tx-dlf-toc ul li ul li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
+            $('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
+            $('#NoImages').remove();
+        }
+    }
+
+    console.log("setze Check Timeout");
+    // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
+    setTimeout(checkForChild, 500);    
+
 
 });
 
