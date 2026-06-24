@@ -292,12 +292,17 @@ $(document).ready(function() {
                 : 'No volume selected. Click to jump to the first available volume.';
 
             $('.tx-dlf-pageview').children('.tx-dlf-map').remove();
-            console.log("ergänze empty hinweis");
             //$('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('.tx-dlf-toc ul li ul li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
-            $('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
-            $('#NoImages').remove();
-        }
-    }
+            if ($('ul.toc li:first-child a').length) {
+                console.log("ergänze empty hinweis");
+                $('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
+                $('#NoImages').remove();
+            } else {
+                console.log("entferne #NoImages");
+                $('#NoImages').remove();
+            };
+        };
+    };
 
     console.log("setze Check Timeout");
     // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
