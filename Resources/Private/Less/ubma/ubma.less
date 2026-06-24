@@ -112,6 +112,12 @@ ul.tx-dlf-tableofcontents-list span.pagination {
 	position: absolute;
 }
 
+.tx-dlf-pageview {
+    .tx-dlf-empty {
+        padding: 35% 20%;
+    }
+}
+
 @media screen and (min-width: 480px) {
     body {
         .document-view {
@@ -950,6 +956,10 @@ body.dfgviewer {
 // Inhaltsverzeichnis anzeige von leeren Metatags wenn kein titel eingetragen ist.
 ul.toc ul li .meta-type-icon.show {
     display: inline;
+}
+
+ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
+    opacity: 0.6;
 }
 
 @media screen and  (min-width: 1024px) {
