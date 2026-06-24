@@ -15,7 +15,14 @@
     LICENSE.txt file that was distributed with this source code.
 </f:comment>
 
-<div id="tx-dfgviewer-map-0" class="tx-dlf-map"></div>
+<div class="tx-dlf-pageview">
+    <div id="tx-dfgviewer-map-0" class="tx-dlf-map dfgviewer"></div>
+    <f:if condition="{images}">
+        <f:else>
+            <div id="NoImages" class="tx-dlf-empty">{f:translate(key: 'ubma.no-volume-selected', extensionName:'dfgviewer')}</div>
+        </f:else>
+    </f:if>
+</div>
 
 <f:if condition="{scores}">
 <div class="score-container">

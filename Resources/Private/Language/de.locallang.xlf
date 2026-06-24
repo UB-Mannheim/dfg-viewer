@@ -89,6 +89,10 @@
 				<source><![CDATA[University Library Mannheim: Digital Collections]]></source>
 				<target><![CDATA[Universitätsbibliothek Mannheim: Digitale Sammlungen]]></target>
 			</trans-unit>
+			<trans-unit id="ubma.no-volume-selected" approved="yes">
+				<source><![CDATA[No volume selected]]></source>
+				<target><![CDATA[Kein Band ausgewählt]]></target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
