@@ -25,9 +25,9 @@
 				<source><![CDATA[Online Public Access Catalog]]></source>
 				<target><![CDATA[SWB Katalog]]></target>
 			</trans-unit>
-			<trans-unit id="provider.local_presentation" approved="yes">
+			<trans-unit id="S" approved="yes">
 				<source><![CDATA[Show in local context]]></source>
-				<target><![CDATA[Lokale Präsentation anzeigen]]></target>
+				<target><![CDATA[Persistente Identifier]]></target>
 			</trans-unit>
             <trans-unit id="provider.no_email_provider" approved="yes">
                 <source><![CDATA[No email provider available]]></source>
