@@ -21,7 +21,7 @@
                 <source>Email to data provider</source>
             </trans-unit>
             <trans-unit id="provider.local_presentation">
-                <source>Show in local context</source>
+                <source>Persistent Identifiers</source>
             </trans-unit>
             <trans-unit id="provider.no_email_provider">
                 <source>No email provider available</source>
