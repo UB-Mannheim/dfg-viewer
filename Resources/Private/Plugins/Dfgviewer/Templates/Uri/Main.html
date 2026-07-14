@@ -14,12 +14,12 @@
     LICENSE.txt file that was distributed with this source code.
 </f:comment>
 
-<f:for each="{uriBooks}" as="uri">
-    <li><f:link.external class="persistence-document" uri="{uri}"><f:translate key="uri.book" /></f:link.external></li>
-</f:for>
-
 <f:for each="{uriPages}" as="uri">
     <li><f:link.external class="persistence-page" uri="{uri}"><f:translate key="uri.page" /></f:link.external></li>
+</f:for>
+
+<f:for each="{uriBooks}" as="uri">
+    <li><f:link.external class="persistence-document ft-test-2" uri="{uri}"><f:translate key="uri.book" /></f:link.external></li>
 </f:for>
 
 </html>
