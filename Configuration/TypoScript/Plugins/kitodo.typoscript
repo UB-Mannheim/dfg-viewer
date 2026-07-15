@@ -75,6 +75,7 @@ plugin.tx_dlf {
         partialRootPaths {
             10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Partials
             20 = EXT:dfgviewer/Resources/Private/Plugins/Kitodo/Partials
+            30 = EXT:presentation/Resources/Private/Partials
         }
         templateRootPaths {
             10 = EXT:slub_digitalcollections/Resources/Private/Plugins/Kitodo/Templates
@@ -479,6 +480,21 @@ plugin.tx_dlf_viewerselectiontool {
         showAsList = 1
     }
 }
+
+plugin.tx_dlf_searchindocumenttool < plugin.tx_dlf_toolbox
+plugin.tx_dlf_searchindocumenttool {
+    settings {
+        tools = searchInDocumentTool
+        idInputName = tx_dlf[id]
+        pidInputName = tx_dlf[pid]
+        queryInputName = tx_dlf[query]
+        startInputName = tx_dlf[start]
+        pageInputName = tx_dlf[page]
+        highlightWordInputName = tx_dlf[highlight_word]
+        encryptedInputName = tx_dlf[encrypted]
+    }
+}
+
 
 # --------------------------------------------------------------------------------------------------------------------
 # Audio/Video
