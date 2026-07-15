@@ -39,34 +39,44 @@
     <f:if condition="{child.doNotLinkIt}">
         <f:then>
             <span class="a ma-toc-title doNotLinkIt {child.type}">
-                <!-- LINE 42: {child.id} {child.type} {child.AnchorDocumentID} -->
+                <!-- LINE 42: child.ownDocumentId: {child.ownDocumentId}, child.id: {child.id}, child.type: {child.type}, child.AnchorDocumentID: {child.AnchorDocumentID} -->
                 <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </span>
         </f:then>
         <f:else>
             <f:comment>
                 there is a mistake with newspaper issues
-                additionalParams="{f:if(condition:'{child.id}', then:'{\'tx_dlf[id]\':child.id, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}"
+                additionalParams="{f:if(condition:'new {child.ownDocumentId} old {child.id}', then:'{\'tx_dlf[id]\':child.ownDocumentId, \'tx_dlf[page]\':child.page}', else: '{\'tx_dlf[page]\':child.page}')}"
                 if this part is omitted from newspapers or periodikas, everything seems to work. Otherwise an oop error is displayed. The cause could possibley be a
                 problem with the child.id, which in my first test case is a URL and not a number.
                 At the moment the error does not occur because i have commented out settings in config.yaml
-                I fixed the Problem with child.parentDocumentId or child.AnchorDocumentId
-                I use child.AnchorDocumentId for newspapers because child.parentDocumentId has the id to the year
+                I fixed the Problem with child.parentDocumentId or child.AnchorDocumentID
+                I use child.AnchorDocumentID for newspapers because child.parentDocumentId has the id to the year
             </f:comment>
-            <!-- LINE 57: id:{child.id} type:{child.type} anchorID:{child.AnchorDocumentID} -->
-            <f:if condition="{child.AnchorDocumentId}">
+            <!-- LINE 57: child.ownDocumentId: {child.ownDocumentId}, child.id: {child.id}, child.type: {child.type}, child.AnchorDocumentID: {child.AnchorDocumentID} -->
+            <f:if condition="{child.id}">
                 <f:then>
-                    <f:comment>if newspaper or periodika a child.AnchorDocumentId exists, then use this id instead of child.id, because this is in this case a url instead a id</f:comment>
-                    <f:variable name="xChildId" value="{child.AnchorDocumentId}" />
+                    <f:if condition="{child.AnchorDocumentID}">
+                        <f:then>
+                            <f:comment>
+                                if newspaper or periodika a child.AnchorDocumentID exists,
+                                then use this id instead of child.id, because this is in this case a url instead a id!
+                            </f:comment>
+                            <f:variable name="xChildId" value="{child.AnchorDocumentID}" />
+                        </f:then>
+                        <f:else>
+                            <f:variable name="xChildId" value="{child.id}" />
+                        </f:else>
+                    </f:if>
                 </f:then>
                 <f:else>
-                    <f:variable name="xChildId" value="{child.id}" />
+                    <f:variable name="xChildId" value="{child.ownDocumentId}" />
                 </f:else>
             </f:if>
             <kitodo:link
                 viewData="{viewData}"
                 pageUid="{settings.targetPid}"
-                additionalParams="{f:if(condition:'{child.id}', then:'{\'id\':xChildId, \'page\':child.page}', else: '{\'page\':child.page}')}"
+                additionalParams="{f:if(condition:'{xChildId}', then:'{\'id\':xChildId, \'page\':child.page}', else: '{\'page\':child.page}')}"
                 excludedParams="{0: 'measure', 1: 'multiview'}"
                 section="{child.section}"
                 class="{child.type}"
