@@ -18,12 +18,15 @@
 <li class="submenu links">
     <a href="#" title="Links">Links</a>
     <ul>
+        <f:comment>Das ergibt einen doppelten Eintrag, daher diese Version auskommentieren</f:comment>
+        <!-- auskommentierte doppelter providerLocalPresentation -->
+        <f:comment>
         <li>
             <f:variable name="presentationXpath"><dc:xpath xpath='({dvLinksXpath}/dv:presentation)[1]' htmlspecialchars='FALSE' /></f:variable>
             <f:if condition="{presentationXpath}">
                 <f:then>
                     <f:variable name="providerLocalPresentation"><f:translate key='provider.local_presentation' extensionName='dfgviewer' /></f:variable>
-                    <f:link.external uri="{presentationXpath}" class="local-presentation" title="{providerLocalPresentation}">{providerLocalPresentation}</f:link.external>
+                    <f:link.external uri="{presentationXpath}" class="local-presentation dfg" title="{providerLocalPresentation}">{providerLocalPresentation}</f:link.external>
                 </f:then>
                 <f:else>
                     <f:variable name="providerNoLocalPresentation"><f:translate key='provider.no_local_presentation' extensionName='dfgviewer' /></f:variable>
@@ -31,6 +34,7 @@
                 </f:else>
             </f:if>
         </li>
+        </f:comment>
         <f:render partial="Kitodo/DocumentFunctions/Submenu/ReferenceLinks" arguments="{_all}" />
         <li>
             <f:variable name="ownerContactXpath"><dc:xpath xpath='({dvRightsXpath}ownerContact)[1]' htmlspecialchars='FALSE' /></f:variable>
