@@ -15,7 +15,7 @@
     LICENSE.txt file that was distributed with this source code.
 </f:comment>
 
-<div class="tx-dlf-pageview">
+<div class="tx-dlf-pageview dfg">
     <div id="tx-dfgviewer-map-0" class="tx-dlf-map dfgviewer"></div>
     <f:if condition="{images}">
         <f:else>
@@ -23,6 +23,9 @@
         </f:else>
     </f:if>
 </div>
+<!-- gewuenscht PageView/FulltextContainer -->
+<f:render partial="PageView/FulltextContainer" arguments="{_all}" />
+
 
 <f:if condition="{scores}">
 <div class="score-container">
