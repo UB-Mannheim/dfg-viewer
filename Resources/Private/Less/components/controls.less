@@ -75,6 +75,7 @@
 }
 
 /* ==============[ document functions for downloads, doublepage eg. ]===================== */
+//.document-functions ul.document-submenu li.submenu.download.open ul li.tx-dlf-tools-pdfdownload a:before
 .document-functions {
     > ul {
         display: flex;
@@ -151,6 +152,9 @@
                             &.persistence-page:before {
                                 background-position: -320px -80px;
                             }
+
+
+
                         }
                         span {
                             &.local-presentation,
@@ -214,6 +218,42 @@
                                 }
                             }
                         }
+
+                        // von span übernommen und umgewandelt
+                        &.tx-dlf-tools-pdf-work {
+                            a {
+                                &:before {
+                                    background-position: -360px -40px;
+                                }
+                            }
+                        }
+                        .x {
+                            &.tx-dlf-tools-pdf-work {
+                                a {
+                                    &:before {
+                                        background-position: -360px -40px;
+                                    }
+                                }
+                            }
+                            &.tx-dlf-tools-modeldownload,
+                            &.tx-dlf-tools-imagedownload,
+                            &.tx-dlf-tools-pdf-page {
+                                a {
+                                    &:before {
+                                        background-position: -320px -40px;
+                                    }
+                                }
+                            }
+                            &.tx-dlf-tools-fulltextdownload,
+                            &.tx-dlf-tools-fulltext-not-available {
+                                a {
+                                    &:before {
+                                        background-position: -280px -40px;
+                                    }
+                                }
+                            }
+                        }
+                        // von span übernommen und umgewandelt ende
                     }
                 }
                 &.open {
