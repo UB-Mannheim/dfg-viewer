@@ -14,7 +14,8 @@
         position: absolute;
         text-align: center;
         .text-hide();
-        z-index: 100;
+        //z-index: 100;     // damit wird die seitenkontrolle über dem download-Menü angezeigt
+        z-index: 120;       // damit wird die seitenkontrolle hinter dem download-Menü angezeigt
         > li {
             position: relative;
             display: inline-block;
@@ -220,6 +221,9 @@
                         }
 
                         // von span übernommen und umgewandelt
+                        // ganzes Werk herunterladen (PDF)
+                        &.tx-dlf-tools-pdfdownload,
+                        // klären ob verwendet
                         &.tx-dlf-tools-pdf-work {
                             a {
                                 &:before {
@@ -227,33 +231,42 @@
                                 }
                             }
                         }
-                        .x {
-                            &.tx-dlf-tools-pdf-work {
+
+                        // Einzelseite
+                        &.tx-dlf-tools-modeldownload,
+                        &.tx-dlf-tools-imagedownload,
+                        &.tx-dlf-tools-pdf-page {
+                            span {
                                 a {
                                     &:before {
+                                        // background-position: -320px -40px;
                                         background-position: -360px -40px;
                                     }
                                 }
                             }
-                            &.tx-dlf-tools-modeldownload,
-                            &.tx-dlf-tools-imagedownload,
-                            &.tx-dlf-tools-pdf-page {
-                                a {
-                                    &:before {
-                                        background-position: -320px -40px;
-                                    }
-                                }
-                            }
-                            &.tx-dlf-tools-fulltextdownload,
-                            &.tx-dlf-tools-fulltext-not-available {
-                                a {
-                                    &:before {
-                                        background-position: -280px -40px;
-                                    }
+                        }
+
+
+                        // TXT Download
+                        &.tx-dlf-tools-fulltextdownload,
+                        &.tx-dlf-tools-fulltext-not-available {
+                            a {
+                                &:before {
+                                    background-position: -280px -40px;
                                 }
                             }
                         }
-                        // von span übernommen und umgewandelt ende
+
+                        // METS
+                        &.tx-dlf-tools-mets {
+                            a {
+                                &:before {
+                                    background-position: -320px -40px;
+                                }
+                            }
+                        }
+
+
                     }
                 }
                 &.open {
