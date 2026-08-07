@@ -20,6 +20,14 @@
     <f:if condition="{images}">
         <f:else>
             <div id="NoImages" class="tx-dlf-empty">{f:translate(key: 'ubma.no-volume-selected', extensionName:'dfgviewer')}</div>
+            <f:comment>
+                FOUC-Problem. statt per JS (das erst nach dem ersten Paint läuft) das Element server-seitig per <style> zu verstecken. 
+                Da der Style-Block in der DOM-Reihenfolge vor .view-functions steht (Plugin-Output bei PageView.html:64, das Div bei :75), 
+                gilt die CSS-Regel beim ersten Parse-Pass – das Div erscheint nie:
+            </f:comment>
+            <style>
+                .view-functions { display: none; }
+            </style>
         </f:else>
     </f:if>
 </div>
