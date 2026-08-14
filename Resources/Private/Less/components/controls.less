@@ -29,9 +29,19 @@
                 background: #fff url(../Images/controlIcons.svg) no-repeat 0 0;
                 background-size: auto 120px;
             }
+
+            
+            &.submenu.downloads.disabled,
+            ul li.tx-dlf-tools-mets.disabled,
             > span {
                 opacity: 0.5;
             }
+
+            ul li.tx-dlf-tools-fulltextdownload.disabled.hidden,
+            ul li.tx-dlf-tools-pdfdownload.disabled.hidden {
+                display: none;
+            }
+
             @media screen and (min-width: @tabletLandscapeViewportWidth) {
                 a {
                     .no-touchevents & {
