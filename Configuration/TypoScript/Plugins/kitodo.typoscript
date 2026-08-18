@@ -465,13 +465,13 @@ plugin.tx_dlf_downloadtool {
     }
 }
 
-plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
-plugin.tx_dlf_scoretool {
-    settings {
-        tools = scoreTool
-        midiPlayerSoundFont = default
-    }
-}
+#plugin.tx_dlf_scoretool < plugin.tx_dlf_toolbox
+#plugin.tx_dlf_scoretool {
+#    settings {
+#        tools = scoreTool
+#        midiPlayerSoundFont = default
+#    }
+#}
 
 plugin.tx_dlf_viewerselectiontool < plugin.tx_dlf_toolbox
 plugin.tx_dlf_viewerselectiontool {
