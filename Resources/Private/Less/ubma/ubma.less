@@ -95,6 +95,59 @@
                 display: block;
             }
         }
+        div.tx-dlf-toolbox-searchindocument {
+            //background-color: yellow;
+            position: relative;
+            //border: 1px solid green;
+            top: 35px;
+            right: 16px;
+            z-index: 1;
+
+            div.tx-dlf-toolbox-searchindocument-search-toggle {
+                position: absolute;
+                top: -16px;
+                right: 0;
+                width: 40px;
+                height: 40px;
+                background: white url(../Images/controlIcons.svg) no-repeat -560px 0;
+                background-size: auto;
+                background-size: auto 120px;
+                border-radius: 20px;
+                cursor: pointer;
+                display: block;
+
+                &:after {
+                    /*
+                    height: 50px;
+                    background-color: lightblue;
+                    display: inline-block;
+
+                    background-position: -560px 0;
+                    */
+
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 40px;
+                    width: 40px;
+                    text-align: center;
+                    content: "+";
+                    font-size: 42px;
+                    line-height: 32px;
+                    color: #167;
+                    -webkit-transition: all .3s ease-out;
+                    -o-transition: all .3s ease-out;
+                    transition: all .3s ease-out;
+                    opacity: 0;
+                }
+            }
+
+            li.tx-dlf-toolbox-searchindocument {
+                display: none;
+            }
+
+        }
+
     }
     ol.tx-dlf-pagegrid-list {
         li.tx-dlf-pagegrid-cur {
@@ -117,6 +170,246 @@
         }
     }
 }
+
+
+
+
+.tx-dlf-toolbox-searchindocument-search-active {
+    .document-view {
+        .document-functions {
+        }
+        .tx-dlf-toolbox-fulltext-container {
+            div.tx-dlf-toolbox-searchindocument {
+
+                div.tx-dlf-toolbox-searchindocument-search-toggle {
+                    background-position: -560px 40px;
+
+
+                    &:after {
+                        transform: rotate(45deg);
+                        opacity: 1;
+
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        height: 40px;
+                        width: 40px;
+                        text-align: center;
+                        content: "+";
+                        font-size: 42px;
+                        line-height: 32px;
+                        color: #167;
+                        -webkit-transition: all .3s ease-out;
+                        -o-transition: all .3s ease-out;
+                        transition: all .3s ease-out;
+                        //opacity: 0;
+                    }
+                }
+
+                li.tx-dlf-toolbox-searchindocument {
+                    display: inherit;
+
+                    label {
+                        display: none;
+                    }
+                    // Clearing sollte wieder eingeschaltet werden, aber wie,
+                    // ev. knapp über den Suchergenissen, als X
+                    #tx-dlf-toolbox-searchindocument-loading,
+                    #tx-dlf-toolbox-searchindocument-clearing {
+                        display: none !important;
+                    }
+
+                    #tx-dlf-toolbox-searchindocument-form {
+                        height: auto;
+                        background: fade(@base-blue,90%);
+
+                        top: 35px;
+                        position: absolute;
+                        right: 0;
+                        //border: 1px solid green;
+                        width: 600px;
+                        padding: 10px;
+
+
+                        #tx-dlf-toolbox-searchindocument-input-query {
+                            width: 99%;
+                            height: 44px;
+                            font-size: 18px;
+
+                            //.uma-global-content form input[type="file"]:focus, .uma-global-content form input[type="input"]:focus, [type="color"]:focus, [type="date"]:focus, [type="datetime-local"]:focus, [type="datetime"]:focus, [type="email"]:focus, [type="month"]:focus, [type="number"]:focus, [type="password"]:focus, [type="search"]:focus, [type="tel"]:focus, [type="text"]:focus, [type="time"]:focus, [type="url"]:focus, [type="week"]:focus, textarea:focus {
+                            // von Startseite Suchformular übernommen
+                            &:focus {
+                                outline: none;
+                                border: 2px solid #00325d;
+                                background-color: #d9d9f0;
+                                box-shadow: none;
+                                transition: border-color .25s ease-in-out;
+                            }
+
+                            &::placeholder {
+                                color: #777777;
+                                opacity: 0.65;
+                            }
+
+                        }
+
+                        &::before {
+                            position: absolute;
+                            top: -10px;
+                            right: 10px;
+                            width: 0;
+                            height: 0;
+                            border: 10px solid transparent;
+                            border-top-width: 10px;
+                            border-top-style: solid;
+                            border-top-color: transparent;
+                            border-bottom-color: transparent;
+                            border-bottom-color: fade(@base-blue,90%);
+                            border-top: 0;
+                            content: " ";
+                        }
+
+                        input[type="submit"] {
+                            position: absolute;
+                            right: 15px;
+                            width: 40px;
+                            height: 40px;
+                            font-size: 0;
+                            text-shadow: none;
+                            border: 0;
+                            background: white url(../Images/controlIcons.svg) no-repeat -560px -3px;
+                            background-size: auto 120px;
+                            //background-color: #bfe4eb;
+                            background-color: transparent;
+                            //border-radius: 20px 0 0 20px;
+                            top: 13px;
+                        }
+                    }
+
+                    #tx-dlf-toolbox-searchindocument-results {
+                        position: absolute;
+                        top: 99px;
+                        right: 0;
+                        left: auto;
+                        bottom: auto;
+                        background: fade(@base-blue,90%);
+                        padding: 15px 15px 15px 15px;
+                        width: 600px;
+                        max-height: 75vh;
+                        padding-bottom: 60px;
+
+                        // hiermit wird der weiter und zurück button am Ende angezeigt
+                        height: auto;
+                        overflow-y: auto;
+
+                        &:empty {
+                            right: -100px;
+                            left: 2000px;
+                            max-height: 0;
+                        }
+                        &:not(empty) {
+                            right: 0;
+                            left: auto;
+                        }
+
+                        span.structure {
+                            color: #fff;
+                            opacity: 0.6;
+                        }
+                        li.noresult,
+                        span.textsnippet {
+                            color: #fff;
+                            a {
+                                color: #fff;
+                            }
+                        }
+
+                        ul {
+                            // hiermit wird der weiter und zurück button permanent angezeigt
+                            /*
+                            max-height: 70vh;
+                            height: auto;
+                            overflow-y: auto;
+                            */
+
+
+                            li {
+                                margin-top: 10px;
+                                margin-bottom: 10px;
+                                padding-bottom: 10px;
+
+                                border-bottom: 1px solid #d9d9d9;
+                                line-height: 1.2;
+
+                                &:last-of-type {
+                                    margin-bottom: 30px;
+                                }
+
+                            }
+                        }
+
+                        #tx-dlf-toolbox-searchindocument-button-previous,
+                        #tx-dlf-toolbox-searchindocument-button-next {
+                            /* rechte ausrichtung
+                            position: relative;
+                            left: 90%;
+                            */
+                            // center
+                            position: absolute;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+
+                        }
+
+                        #tx-dlf-toolbox-searchindocument-button-previous,
+                        #tx-dlf-toolbox-searchindocument-button-next {
+                            color: #00325d;
+                            background-color: #fff;
+                            border: 2px solid #00325d;
+                            border-radius: 10px;
+                            font-size: 18px;
+                            font-weight: 700;
+                            display: inline-block;
+                            vertical-align: middle;
+                            padding: .5rem 2rem;
+                            margin-top: 13px;
+
+                            &:hover {
+                                color: #fff;
+                                background-color: #00325d;
+                                border-color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Toc */
 // pagination in toc to the right
@@ -921,6 +1214,9 @@ body.dfgviewer {
 .viewer-selection,
 .view-functions {
     ul.image-tools {
+        // Platz für Symbol schaffen
+        right: 60px;
+
         li.tx-dlf-tools-imagemanipulation {
             // umorganisation kommt nicht mehr vor
             ul {
@@ -966,7 +1262,10 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
     }
     .view-functions {
         ul.image-tools {
-            right: 0;
+            //right: 0;
+            // Platz für Symbol schaffen
+            right: 60px;
+
 
             li.tx-dlf-tools-imagemanipulation {
                 margin-right: 15px;

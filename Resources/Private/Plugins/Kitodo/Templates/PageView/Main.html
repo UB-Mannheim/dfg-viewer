@@ -24,8 +24,10 @@
                 FOUC-Problem. statt per JS (das erst nach dem ersten Paint läuft) das Element server-seitig per <style> zu verstecken. 
                 Da der Style-Block in der DOM-Reihenfolge vor .view-functions steht (Plugin-Output bei PageView.html:64, das Div bei :75), 
                 gilt die CSS-Regel beim ersten Parse-Pass – das Div erscheint nie:
+                nicht vorhandene funktionen ausblenden: drehen vergrössern verkleinern
             </f:comment>
             <style>
+                .tx-dlf-toolbox-fulltext-container,
                 .view-functions { display: none; }
             </style>
         </f:else>
@@ -39,7 +41,14 @@
 <div class="score-container">
     <div id="tx-dlf-score-0"></div>
 </div>
+<f:comment>
 <midi-player id="tx-dlf-score-midi-player"></midi-player>
+<script>
+document.getElementById('tx-dlf-score-midi-player')?.addEventListener('click', async () => {
+    if (window.Tone) await Tone.start();
+}, { once: true });
+</script>
+</f:comment>
 </f:if>
 
 <kitodo:jsFooter inlineCode="{viewerConfiguration}" />

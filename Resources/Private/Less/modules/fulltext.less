@@ -6,6 +6,14 @@
  *
  */
 
+// Expose the search highlight color as CSS variables so the image highlight
+// (dlfViewerOLStyles.wordStyle in EXT:dlf) can be adjusted from CSS.
+body.dfgviewer {
+    --dlf-search-highlight-stroke: fade(@search-highlight, 90%);
+    --dlf-search-highlight-fill: fade(@search-highlight, 25%);
+    --dlf-hover-highlight-stroke: fade(@hover-highlight, 90%);
+}
+
 .tx-dlf-toolbox-fulltext-container {
     position: absolute;
     top: 60px;
@@ -74,8 +82,11 @@
             line-height: 1.8;
             .textline {
                 &.highlight {
-                    background: lighten(@light-blue,10%);
+                    background: @hover-highlight;
                 }
+            }
+            .string.highlight {
+                background: @search-highlight;
             }
         }
     }
