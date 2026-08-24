@@ -282,6 +282,19 @@ $(document).ready(function() {
         };
     });
 
+    // Toggle and setup for the 'in document search'
+    // from slub
+    if ($('.tx-dlf-toolbox-searchindocument form')[0]) {
+        $('.tx-dlf-toolbox-searchindocument-search-toggle').on('click', function () {
+            $('body').toggleClass('tx-dlf-toolbox-searchindocument-search-active');
+            //$('.tx-dlf-toolbox-searchindocument').css({top: ($(this).offset().top - 60) + 'px'});
+            $('body.tx-dlf-toolbox-searchindocument-search-active #tx-dlf-toolbox-searchindocument-input-query').trigger('focus');
+        });
+    } else {
+        $('.tx-dlf-toolbox-searchindocument-search-toggle').addClass('disabled');
+    }
+
+
     // Add an error message if no map element in document viewer is given
     function checkForChild() {
         if (document.getElementById('NoImages')) {
@@ -309,7 +322,6 @@ $(document).ready(function() {
         };
     };
 
-    console.log("setze Check Timeout");
     // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
     setTimeout(checkForChild, 500);    
 
@@ -329,8 +341,11 @@ $(document).keyup(function(e) {
     }
     // Check if the F key is pressed and no text input in SRU form is taking place.
     if (e.keyCode == 70 && !$('#tx-dfgviewer-sru-query').is(':focus')) {
-        return enterFullscreen();
+        if (e.keyCode == 70 && !$('#tx-dlf-toolbox-searchindocument-input-query').is(':focus')) {
+            return enterFullscreen();
+        }
     }
+
 
 });
 
