@@ -332,8 +332,9 @@ $(document).ready(function() {
                 $('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
                 $('#NoImages').remove();
                 $('.downloads').addClass("disabled");
-                $('.doublepage').addClass("disabled");                
-                $('.document-submenu li.tx-dlf-tools-mets').addClass("disabled");
+                $('.doublepage').addClass("disabled");
+                $('.doublepage a').on('click', function (e) { e.preventDefault(); });
+                $('.document-submenu li.tx-dlf-tools-mets').addClass("disabled").on('click', function (e) { e.preventDefault(); });
                 $('.document-submenu li.tx-dlf-tools-pdfdownload').addClass("disabled").addClass("hidden");
                 $('.document-submenu li.tx-dlf-tools-fulltextdownload').addClass("disabled").addClass("hidden");
             } else {
