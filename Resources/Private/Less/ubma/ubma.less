@@ -79,10 +79,20 @@
             }
         }
 
-	.document-submenu,
-	ul.document-function-bar {
-	    left: 15px;
-	}
+        .document-submenu,
+        ul.document-function-bar {
+            left: 15px;
+
+            .doublepage {
+                &.disabled {
+                    a {
+                        &.tx-dlf-navigation-doubleOn {
+                            opacity: .5;
+                        }
+                    }
+                }
+            }
+        }
     }
     .tx-dlf-toolbox-fulltext-container {
         opacity: 0.95;
