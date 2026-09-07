@@ -1,15 +1,39 @@
 // Anpassungen an UB Mannheim
 
+html:lang(en) {
+    .control-bar {
+        .header-bar {
+            h1{
+                height: -webkit-fill-available;
+                height: 50px;
+
+                a {
+                    // Logo des df-viewers:
+                    // ersetzt durch ub_d_w.svg
+                    // ersetzt durch logo-ub-digi-w-en.svg (hier engl. Version)
+                    //background: url(/typo3conf/ext/ubma_digi_mini_package/Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
+                    background: url(/typo3conf/ext/ubma_digi_mini_package/Resources/Public/Images/header/logo-ub-digi-w-en.svg) no-repeat 0 0;
+                    //background-size: 62px;
+                    background-size: 160px;
+                }
+            }
+        }
+    }
+}
 .control-bar {
     .header-bar {
         h1{
             height: -webkit-fill-available;
+            height: 50px;
 
             a {
                 // Logo des df-viewers:
-                //background: url(../../../Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
-                background: url(/typo3conf/ext/ubma_digi_mini_package/Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
-                background-size: 62px;
+                // ersetzt durch ub_d_w.svg
+                // ersetzt durch logo-ub-digi-w.svg (hier dt Version)
+                //background: url(/typo3conf/ext/ubma_digi_mini_package/Resources/Public/Images/header/UB_d_w.svg) no-repeat 0 0;
+                background: url(/typo3conf/ext/ubma_digi_mini_package/Resources/Public/Images/header/logo-ub-digi-w.svg) no-repeat 0 0;
+                //background-size: 62px;
+                background-size: 160px;
             }
         }
         nav {
