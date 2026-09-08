@@ -176,8 +176,9 @@
             overflow: visible;
             h1 {
                 top: 15px;
-                left: 30px;
-                max-width: 45%;
+                //left: 30px;
+                //max-width: 45%;
+                max-width: 52%;
                 a {
                     background-size: 100% auto;
                 }
@@ -245,6 +246,12 @@
                 max-width: none;
             }
         }
+        @media screen and (max-width: @desktopLandscapeViewportWidthTocBreak-001) {
+            .control-bar .header-bar h1 {
+                left: 17px;
+            }
+        }
+
     }
 
     /* ==============[ metadata and table of contents (as offcanvas elements in mobile) ]===== */
