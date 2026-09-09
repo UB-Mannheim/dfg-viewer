@@ -456,6 +456,26 @@ ul.tx-dlf-tableofcontents-list span.pagination {
 .tx-dlf-pageview {
     .tx-dlf-empty {
         padding: 35% 20%;
+
+        &.ubma {
+            a {
+                &:before {
+                    display: none;
+                }
+                &:after {
+                    display: none;
+                }
+                span.error-arrow.ubma {
+                    display: inline;
+                    position: relative;
+                    left: -11px;
+                    transform: none;
+                    top: 4px;
+                    font-size: 30px;
+                    opacity: 0.7;
+                }
+            }
+        }
     }
 }
 
