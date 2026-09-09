@@ -99,6 +99,7 @@ $(document).ready(function() {
     // extract title information from the metadata and add it to the top of the sidebar
     ($('.tx-dlf-metadata dl.tx-dlf-metadata-titledata dd.tx-dlf-title')[0]) && $('.tx-dlf-metadata').prepend('<div class="metadata-title"><h2>' + $('.tx-dlf-metadata dl.tx-dlf-metadata-titledata').first().find('dd.tx-dlf-title').text() + '</h2></div>');
 
+    /*
     // if there is no title in the first metadata block, take it from table of contents and clone it to the header and first position
     let header = $('.tx-dlf-metadata .metadata-title h2');
     if (header.text().length < 1) {
@@ -111,6 +112,13 @@ $(document).ready(function() {
         }
 
     }
+    */
+    // TOC-Fallback entfernt: techn. Labels (z.B. "title_page") tauchten als Titel auf.
+    // Ein leerer Header wird stattdessen komplett entfernt.
+    let header = $('.tx-dlf-metadata .metadata-title h2');
+    if (header.text().trim().length < 1) {
+        header.closest('.metadata-title').remove();
+    }    
 
     // add a toggle function for sub metadata "(+ n more)"
     $('dl.tx-dlf-metadata-titledata dd > dl').each(function () {
@@ -319,7 +327,6 @@ $(document).ready(function() {
     // Add an error message if no map element in document viewer is given
     function checkForChild() {
         if (document.getElementById('NoImages')) {
-            console.log("keine Grafiken vorhanden!");
 
             const emptyMessage = ($('html[lang^="de"]')[0])
                 ? 'Kein Band ausgew&auml;hlt. Klicken Sie hier um zum ersten Band dieses Werks zu gelangen.'
@@ -329,7 +336,7 @@ $(document).ready(function() {
             //$('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('.tx-dlf-toc ul li ul li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
             if ($('ul.toc li:first-child a').length) {
                 console.log("ergänze empty hinweis");
-                $('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
+                $('.tx-dlf-pageview').append('<div class="tx-dlf-empty ubma"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow ubma">&larr;</span>' + emptyMessage + '</a></div>');
                 $('#NoImages').remove();
                 $('.downloads').addClass("disabled");
                 $('.doublepage').addClass("disabled");
