@@ -467,7 +467,12 @@
 /* ==============[ view functions for zoom, rotate and other view related functions ]===== */
 .view-functions {
     ul {
-        position: relative;
+        // absolute statt relative: Position soll nie vom In-Flow-Layout
+        // (Hoehe der Pageview/Empty-State-Vollstaende) abhaengen, sonst
+        // "springt" die Bedienleiste beim Laeden spaterer Inhalte
+        position: absolute;
+        top: 20px;
+        right: 10px;
         li {
             display: none;
             &.tx-dlf-tools-rotate-left a {
