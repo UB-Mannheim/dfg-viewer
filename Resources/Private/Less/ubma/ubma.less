@@ -458,7 +458,22 @@ ul.tx-dlf-tableofcontents-list span.pagination {
         padding: 35% 20%;
 
         &.ubma {
+            // textblock exakt auf die sichtbare Mitte (top/bottom + links/rechts),
+            // bei zu kleinen Fenstern scrollbar statt abgeschnitten
+            padding: 20px;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: auto;
+
             a {
+                // fail-safe-Zentrierung (rückt bei zu wenig Platz an die Kante)
+                // und hebt padding-bottom: 60px / padding-top: 300px der Basis auf
+                margin: auto;
+                padding: 0;
+                max-width: 90%;
+
                 &:before {
                     display: none;
                 }
