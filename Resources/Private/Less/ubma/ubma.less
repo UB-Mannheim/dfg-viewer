@@ -1289,6 +1289,10 @@ body.dfgviewer {
 .viewer-selection,
 .view-functions {
     ul.image-tools {
+        // deterministische Position: unabhängig vom In-Flow-Layout,
+        // damit kein Layout-Shift, wenn Pageview/Fulltext nachlädt
+        position: absolute;
+        top: 20px;
         // Platz für Symbol schaffen
         right: 60px;
 
