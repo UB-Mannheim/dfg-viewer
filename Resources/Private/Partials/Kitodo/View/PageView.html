@@ -36,10 +36,230 @@
 
         <div class="view-functions">
             <f:if condition="{gp-pagegrid} != 1">
-                <ul class="image-tools">
+                <ul class="image-tools" style="top: 20px;">
                     <f:cObject typoscriptObjectPath="lib.kitodo.navigation.viewfunction" />
                     <f:cObject typoscriptObjectPath="plugin.tx_dlf_imagemanipulationtool" />
                 </ul>
+<script>
+(function () {
+    /* TEMPORAE DIAGNOSTIK v4 (wird wieder entfernt): erwischt die UR-SACHE des
+       Springens: Class-Mutationen (mit Stacktrace), CSS-Transitions, Resizes,
+       Font-Events, Media-Query-Flips plus Positions-Monitoring (inkl. Such-/
+       Fulltext-Elemente rechts oben). */
+    var sels = ['ul.image-tools', '.view-functions', '.page-control', '.document-view', '.tx-dlf-pageview', '.tx-dlf-map', '.document-functions .provider', '.tx-dlf-toolbox-fulltext-container', '.tx-dlf-toolbox-searchindocument', '.tx-dlf-toolbox-searchindocument-search-toggle', '#tx-dlf-toolbox-fulltext-selection', 'div.tx-dlf-toolbox-searchindocument li'];
+    var els = sels.map(function (s) { return document.querySelector(s); });
+    if (!els[0]) { return; }
+    var t0 = performance.now();
+    function r2(v) { return Math.round(v * 10) / 10; }
+    function now() { return Math.round(performance.now() - t0) + 'ms'; }
+    function tag(el) { try { return el.tagName + (el.id ? '#' + el.id : '') + (el.className ? '.' + String(el.className).trim().split(/\s+/).slice(0, 3).join('.') : ''); } catch (e) { return '?'; } }
+    function stack() { try { return (new Error()).stack.split('\n').slice(2, 6).map(function (l) { return l.trim(); }).join(' | '); } catch (e) { return 'no-stack'; } }
+    var lastBodyClass = '';
+    var lastDwClass = '';
+    var lastRects = {};
+    var firstDone = false;
+    function snapshot(label) {
+        var o = { label: label, t: now(), el: {} };
+        for (var i = 0; i < els.length; i++) {
+            if (!els[i]) { o.el[sels[i]] = 'null'; continue; }
+            try {
+                var rc = els[i].getBoundingClientRect();
+                o.el[sels[i]] = r2(rc.top) + ',' + r2(rc.left) + ' ' + r2(rc.width) + 'x' + r2(rc.height);
+            } catch (e) { o.el[sels[i]] = 'err'; }
+        }
+        o.viewport = innerWidth + 'x' + innerHeight + ' scrollY=' + Math.round(scrollY);
+        o.body_class = document.body.className;
+        o.docview_class = els[3] ? els[3].className : 'null';
+        o.styleSheets = document.styleSheets.length;
+        console.warn('IMGTOOLS-PROBE ' + JSON.stringify(o));
+    }
+    /* 1) Class-Änderungen an body/.document-view mit Stacktrace des Aufrufers */
+    var interesting = function (el) { return el === document.body || String(el.className).indexOf('document-view') !== -1; };
+    var clDesc = Object.getOwnPropertyDescriptor(Element.prototype, 'classList');
+    if (clDesc && clDesc.get) {
+        var origClGet = clDesc.get;
+        var listOwners = new WeakMap();
+        Object.defineProperty(Element.prototype, 'classList', {
+            configurable: true,
+            get: function () {
+                var list = origClGet.call(this);
+                var el = this;
+                var p = listOwners.get(list);
+                if (!p) {
+                    p = new Proxy(list, {
+                        get: function (t, prop) {
+                            var v = Reflect.get(t, prop);
+                            if (typeof v === 'function') {
+                                if (prop === 'add' || prop === 'remove' || prop === 'replace' || prop === 'toggle') {
+                                    return function () {
+                                        var out = v.apply(t, arguments);
+                                        try {
+                                            if (interesting(el)) {
+                                                var args = [];
+                                                for (var k = 0; k < arguments.length; k++) { args.push(String(arguments[k])); }
+                                                console.warn('IMGTOOLS-PROBE CLASS ' + prop + '(' + args.join(',') + ') ' + tag(el) + ' class="' + el.className + '" t=' + now() + ' :: ' + stack());
+                                            }
+                                        } catch (e2) {}
+                                        return out;
+                                    };
+                                }
+                                return function () { return v.apply(t, arguments); };
+                            }
+                            return v;
+                        }
+                    });
+                    listOwners.set(list, p);
+                }
+                return p;
+            }
+        });
+    }
+    var desc = Object.getOwnPropertyDescriptor(Element.prototype, 'className');
+    var origSet = desc && desc.set;
+    if (origSet) {
+        Object.defineProperty(Element.prototype, 'className', {
+            configurable: true,
+            get: desc.get,
+            set: function (v) {
+                origSet.call(this, v);
+                try { if (interesting(this)) { console.warn('IMGTOOLS-PROBE CLASSNAME=' + v + ' ' + tag(this) + ' t=' + now() + ' :: ' + stack()); } } catch (e) {}
+            }
+        });
+    }
+    var origSa = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (n, v) {
+        var out = origSa.apply(this, arguments);
+        try { if (n === 'class' && interesting(this)) { console.warn('IMGTOOLS-PROBE SETATTR class="' + v + '" ' + tag(this) + ' t=' + now() + ' :: ' + stack()); } } catch (e) {}
+        return out;
+    };
+    /* 2) Welches CSS-Property animiert (.document-view hat transition:all .18s) */
+    [els[0], els[1], els[3]].forEach(function (el) {
+        if (!el) { return; }
+        el.addEventListener('transitionrun', function (e) {
+            if (e.target === el) { console.warn('IMGTOOLS-PROBE TRANSITION-run ' + e.propertyName + ' ' + tag(el) + ' t=' + now()); }
+        }, true);
+    });
+    /* 3) Viewport-Resizes (z.B. Scrollbar erscheint -> 25%-Breite verschiebt sich) */
+    var iw = innerWidth, ih = innerHeight;
+    addEventListener('resize', function () {
+        console.warn('IMGTOOLS-PROBE RESIZE ' + iw + 'x' + ih + ' -> ' + innerWidth + 'x' + innerHeight + ' t=' + now());
+        iw = innerWidth; ih = innerHeight;
+    }, true);
+    /* 4) Webfont fertig -> Text-basierte Breiten können sich ändern */
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { console.warn('IMGTOOLS-PROBE FONTS-READY t=' + now()); });
+    }
+    /* 4b) Layout-Shifts seit Navigation starten (erwischt auch Sprünge VOR diesem Skript) */
+    try {
+        new PerformanceObserver(function (list) {
+            list.getEntries().forEach(function (e) {
+                if (e.hadRecentInput) { return; }
+                var nodes = (e.entries || []).map(function (n) {
+                    try {
+                        var fs = n.firstQuads && n.firstQuads.length ? n.firstQuads[0] : null;
+                        var lq = n.lastQuads && n.lastQuads.length ? n.lastQuads[0] : null;
+                        function q(qd) { return qd ? Math.round(qd.x) + ',' + Math.round(qd.y) + ' ' + Math.round(qd.width) + 'x' + Math.round(qd.height) : '?'; }
+                        return { id: n.id || (n.url ? String(n.url).slice(-40) : 'anon'), from: q(fs), to: q(lq) };
+                    } catch (x) { return 'err'; }
+                });
+                console.warn('IMGTOOLS-PROBE CLS value=' + Number(e.value).toFixed(3) + ' @' + Math.round(e.startTime) + 'ms nodes=' + JSON.stringify(nodes));
+            });
+        }).observe({ type: 'layout-shift', buffered: true });
+    } catch (e) {}
+    /* 4c) Alle Ressourcen geladen */
+    addEventListener('load', function () { console.warn('IMGTOOLS-PROBE LOAD t=' + now()); }, true);
+    /* 4d) Font-Lade-Events (Schrift-Swap kann Breiten/Hoehen -> Positionen veraendern) */
+    if (document.fonts && document.fonts.addEventListener) {
+        ['loadingstart', 'loadingprogress', 'loadingdone'].forEach(function (evt) {
+            try {
+                document.fonts.addEventListener(evt, function () {
+                    var fams = '';
+                    try { document.fonts.forEach(function (f) { fams += f.family + ':' + f.status + ' '; }); } catch (e) {}
+                    console.warn('IMGTOOLS-PROBE FONT ' + evt + ' [' + fams.trim() + '] t=' + now());
+                    snapshot('FONT-' + evt);
+                });
+            } catch (e) {}
+        });
+    }
+    /* 4e) Media-Query-Flips (1024/1200px) aendern top/left von .document-view */
+    [1024, 1200].forEach(function (w) {
+        try {
+            var mq = matchMedia('(min-width:' + w + 'px)');
+            var h = function () { console.warn('IMGTOOLS-PROBE MQ-' + w + ' now=' + (mq.matches ? 'match' : 'noman') + ' innerWidth=' + innerWidth + ' t=' + now()); snapshot('MQ-' + w); };
+            if (mq.addEventListener) { mq.addEventListener('change', h); } else { mq.addListener(h); }
+        } catch (e) {}
+    });
+    /* 5b) MutationObserver auf Icon-Leiste + ihrer CSS-Kette: benennt das genaue Change
+       (style/class-Attribut mit oldValue, bzw. hinzu-/wegfallende Kinder) an den Elementen,
+       deren CSS-Regeln die Leiste positionieren. Kein Subtree auf den groesseren Containern
+       (sonst waeren die OL-Canvas-Updates ein Flood) – dort nur attributes class/style. */
+    var moVF = els[1];
+    var moCoarse = [document.body, els[2], els[3], document.querySelector('.main-wrapper')].filter(Boolean);
+    try {
+        var mo = new MutationObserver(function (mts) {
+            mts.forEach(function (m) {
+                var t = m.target;
+                var who = tag(t);
+                var detail;
+                if (m.type === 'attributes') {
+                    detail = m.attributeName + ' ' + JSON.stringify(m.oldValue) + ' -> ' + JSON.stringify(t.getAttribute(m.attributeName));
+                } else {
+                    var ad = [], rm = [];
+                    for (var k = 0; k < m.addedNodes.length; k++) { var n = m.addedNodes[k]; ad.push(n && n.tagName ? tag(n) : String(n).slice(0, 30)); }
+                    for (var j = 0; j < m.removedNodes.length; j++) { var r = m.removedNodes[j]; rm.push(r && r.tagName ? tag(r) : '-'); }
+                    detail = '+[' + ad.join(',') + '] -[' + rm.join(',') + '] @' + (t.parentNode ? tag(t.parentNode) : '?');
+                }
+                var cs; try { cs = getComputedStyle(t); } catch (e) { cs = {}; }
+                console.warn('IMGTOOLS-PROBE MUT ' + m.type + ' ' + who + ' :: ' + detail + ' :: top=' + cs.top + ' left=' + cs.left + ' right=' + cs.right + ' w=' + cs.width + ' t=' + now());
+            });
+        });
+        if (els[0]) mo.observe(els[0], { childList: true, subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ['class', 'style'] });
+        if (moVF) mo.observe(moVF, { childList: true, attributes: true, attributeOldValue: true, attributeFilter: ['class', 'style'] });
+        moCoarse.forEach(function (el) { mo.observe(el, { attributes: true, attributeOldValue: true, attributeFilter: ['class', 'style'] }); });
+    } catch (e) {}
+    /* 5) Positions-Monitoring via rAF – Frame-zu-Frame (schnelle Sprünge) UND
+       Baseline-Drift (erwischt auch sanfte CSS-Transitions, die <2px/Frame bewegen
+       und im Frame-Vergleich unsichtbar bleiben). Meldet die Achse + computedStyle. */
+    var seenVisible = {};
+    var baseRects = {};
+    var jumpReported = {};
+    function cssOf(el) {
+        try {
+            var cs = getComputedStyle(el);
+            return { pos: cs.position, top: cs.top, left: cs.left, right: cs.right, width: cs.width, tdur: cs.transitionDuration };
+        } catch (e) { return {}; }
+    }
+    function sample() {
+        var jumpedSel = null;
+        for (var i = 0; i < els.length; i++) {
+            if (!els[i]) { els[i] = document.querySelector(sels[i]); if (!els[i]) { continue; } }
+            if (els[i].getClientRects().length === 0) { lastRects[sels[i]] = null; baseRects[sels[i]] = null; continue; }
+            if (!lastRects[sels[i]] && seenVisible[sels[i]]) { console.warn('IMGTOOLS-PROBE REAPPEAR ' + sels[i] + ' t=' + now()); }
+            var rc = els[i].getBoundingClientRect();
+            var cur = { top: rc.top, left: rc.left, width: rc.width, height: rc.height };
+            var prev = lastRects[sels[i]];
+            if (prev && (Math.abs(rc.top - prev.top) > 2 || Math.abs(rc.left - prev.left) > 2 || Math.abs(rc.width - prev.width) > 2 || Math.abs(rc.height - prev.height) > 2)) { jumpedSel = sels[i]; }
+            var base = baseRects[sels[i]];
+            if (!base) { baseRects[sels[i]] = cur; }
+            else {
+                var d = Math.max(Math.abs(rc.top - base.top), Math.abs(rc.left - base.left), Math.abs(rc.width - base.width), Math.abs(rc.height - base.height));
+                if (d > 2 && !(jumpReported[sels[i]] && performance.now() - jumpReported[sels[i]] < 2000)) {
+                    jumpReported[sels[i]] = performance.now();
+                    console.warn('IMGTOOLS-PROBE JUMP-BASE ' + sels[i] + ' base=' + JSON.stringify(base) + ' now=' + JSON.stringify(cur) + ' dTop=' + Math.round(rc.top - base.top) + ' dLeft=' + Math.round(rc.left - base.left) + ' css=' + JSON.stringify(cssOf(els[i])) + ' t=' + now());
+                }
+            }
+            lastRects[sels[i]] = cur;
+            seenVisible[sels[i]] = true;
+        }
+        if (document.body.className !== lastBodyClass) { lastBodyClass = document.body.className; snapshot('BODY-CLASS: ' + lastBodyClass); }
+        if (els[3] && els[3].className !== lastDwClass) { lastDwClass = els[3].className; snapshot('DOCVIEW-CLASS: ' + lastDwClass); }
+        if (jumpedSel) { snapshot('JUMP: ' + jumpedSel); }
+        if (!firstDone) { firstDone = true; snapshot('FIRST'); }
+        if (performance.now() - t0 < 120000) { requestAnimationFrame(sample); }
+    }
+    requestAnimationFrame(sample);
+})();
+</script>
             </f:if>
         </div>
         <f:if condition="{gp-multiview} != 1">
