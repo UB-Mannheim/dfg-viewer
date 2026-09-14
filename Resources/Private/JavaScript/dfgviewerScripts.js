@@ -209,7 +209,21 @@ $(document).ready(function() {
     }
 
     // enable click on fullscreen button
-    $('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function() {
+    $('a.fullscreen, li.tx-dlf-tools-fullscreen a').on(mobileEvent, function(e) {
+        var target = (e && e.target) ? e.target : this;
+        console.info('IMGTOOLS-PROBE FS-TRIGGER', JSON.stringify({
+            type: e ? e.type : mobileEvent,
+            isTrusted: (e && e.originalEvent) ? e.originalEvent.isTrusted : 'no-native-event',
+            target_class: target && target.className,
+            body: (document.body && document.body.className) || ''
+        }));
+        // Ignore synthetic/programmatic activations: only a real user action may
+        // toggle fullscreen. Otherwise a stray extension/double-tap event ends
+        // fullscreen a few seconds after load and the top inset re-flows, making
+        // the image-tools bar jump ~20px without the user doing anything.
+        if (e && e.originalEvent && e.originalEvent.isTrusted === false) {
+            return;
+        }
         close_all_submenues('all');
         if($('body.fullscreen')[0]) {
             exitFullscreen();

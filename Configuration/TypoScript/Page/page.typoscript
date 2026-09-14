@@ -68,9 +68,15 @@ page.bodyTag = <body class="website home">
 [END]
 
 [getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
-page {
-  bodyTag = <body class="dfgviewer">
-  10 {
+  # Fullscreen-Status aus Cookie serverseitig initial setzen, damit der Layoutwechsel
+  # nicht erst per JS nach dem ersten Paint stattfindet (Leiste springt sonst ~20px).
+  [request && traverse(request.getCookieParams(), 'tx-dlf-pageview-zoomFullscreen') == 'true']
+    page.bodyTag = <body class="dfgviewer fullscreen static">
+  [ELSE]
+    page.bodyTag = <body class="dfgviewer">
+  [END]
+  page {
+    10 {
     file = EXT:dfgviewer/Resources/Private/Templates/Kitodo.html
 
     variables {
