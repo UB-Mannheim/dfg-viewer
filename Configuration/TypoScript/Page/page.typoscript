@@ -77,6 +77,7 @@ page.bodyTag = <body class="website home">
   # zwang zu einem massenhaften Cold-Render (CacheTtlJitterListener spreizt
   # darueber hinaus die TTL pro Seite). 2 h statt 1 h halbiert die Burst-Frequenz.
   config.cache_period = 7200
+
   # Fullscreen-Status aus Cookie serverseitig initial setzen, damit der Layoutwechsel
   # nicht erst per JS nach dem ersten Paint stattfindet (Leiste springt sonst ~20px).
   [request && traverse(request.getCookieParams(), 'tx-dlf-pageview-zoomFullscreen') == 'true']
