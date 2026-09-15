@@ -1460,7 +1460,7 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
 @media screen and (max-width: 670px) {
     body.dfgviewer {
         .document-view {
-            /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+            /* link liste oben belassen, sonst überdeckt die Blätternavigation im Gridview */
             .document-functions {
                 .provider {
                     max-width: 68%;
@@ -1476,7 +1476,24 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
     }
 }
 
+/* Metadaten: Sprachen in eine Zeile, Sammlungen je eigene Zeile */
+.tx-dlf-metadata {
+    dl dt.language-label,
+    dl dd.language-entry {
+        display: inline;
+    }
+
+    dl dd.language-entry + dd.language-entry {
+        margin-left: 6px;
+    }
+
+    dl dd.collection-entry {
+        display: block;
+    }
+}
+
 /*
+
 
 // es gibt einen Unterschied, aktuell bei hover in der letzten Zeile verschiebt sich die nächste Woche nach unten
 
