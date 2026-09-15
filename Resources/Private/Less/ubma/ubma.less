@@ -1432,7 +1432,49 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
     }
 }
 
+@media screen and (max-width: 970px) {
+    body.dfgviewer {
+        .document-view {
+            /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+            .document-functions {
+                .provider {
+                    max-width: 73%;
 
+                    .mobile-meta {
+                        left: 140px;
+                        width: 89%;
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            .tx-dlf-toolbox-fulltext-container {
+                .tx-dlf-toolbox-searchindocument {
+                    top: -27px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 670px) {
+    body.dfgviewer {
+        .document-view {
+            /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+            .document-functions {
+                .provider {
+                    max-width: 68%;
+
+                    .mobile-meta {
+                        left: 140px;
+                        width: 89%;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}
 
 /*
 
