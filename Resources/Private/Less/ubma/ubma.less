@@ -490,7 +490,113 @@ ul.tx-dlf-tableofcontents-list span.pagination {
                     opacity: 0.7;
                 }
             }
+
+            .tx-dlf-volume-covers {
+                .tx-dlf-volume-covers-grid {
+                    // hebt margin: auto der a-Regel (oben) auf, sonst werden die Covers
+                    // im flex-Kontext vertikal verschoben statt oben an der Kante
+                    a.tx-dlf-volume-cover {
+                        margin: 0;
+                    }
+                }
+            }
         }
+    }
+}
+
+/* Band-Cover-Galerie für mehrbändige Werke (Hauptaufnahme ohne ausgewählten Band) */
+.tx-dlf-pageview {
+    .tx-dlf-empty {
+        &.ubma {
+            .tx-dlf-volume-covers {
+                text-align: left;
+                max-width: 96%;
+                margin: 0 auto;
+
+                &-heading {
+                    text-align: center;
+                    font-size: 1.25em;
+                    font-weight: bold;
+                    margin: 0.5em 0 1em;
+                }
+
+                &-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: flex-start;
+                    gap: 10px 14px;
+                }
+
+                &-extra[hidden] {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.tx-dlf-volume-cover {
+    display: block;
+    text-align: center;
+    width: 104px;
+    margin: 0;                // überschreibt .ubma a { margin: auto }
+    max-width: 100%;          // überschreibt .ubma a { max-width: 90% }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 148px;
+        object-fit: contain;
+        // kurze (quere) Covers an die Box-Top kanten statt vertikal zentrieren
+        object-position: top;
+        background-color: @ubma-white;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+
+    .volume-cover-label {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-top: 4px;
+        font-size: 0.85em;
+        // 1.5 statt 1.2, damit Absteiger (z. B. "g") in der 2. Zeile nicht abgeschnitten werden
+        line-height: 1.5;
+        color: @font-grey;
+    }
+
+    .transition();
+
+    &:hover {
+        .transform(scale(1.1));
+    }
+
+    &:hover,
+    &:focus {
+        .volume-cover-label {
+            color: @base-blue;
+        }
+    }
+}
+
+.volume-covers-toggle {
+    float: none;
+    display: block;
+    margin: 18px auto 0;
+    padding: 6px 18px;
+    border: 1px solid @base-blue;
+    border-radius: 3px;
+    background-color: @ubma-white;
+    color: @base-blue;
+    cursor: pointer;
+    font-size: 0.95em;
+
+    &:hover,
+    &:focus {
+        background-color: @base-blue;
+        color: @ubma-white;
     }
 }
 
