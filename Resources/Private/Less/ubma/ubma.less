@@ -511,6 +511,7 @@ ul.tx-dlf-tableofcontents-list span.pagination {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: flex-start;
         gap: 10px 14px;
     }
 
@@ -531,6 +532,8 @@ ul.tx-dlf-tableofcontents-list span.pagination {
         width: 100%;
         height: 148px;
         object-fit: contain;
+        // kurze (quere) Covers an die Box-Top kanten statt vertikal zentrieren
+        object-position: top;
         border: 1px solid @light-grey-border;
         background-color: @ubma-white;
         padding: 2px;
@@ -538,7 +541,10 @@ ul.tx-dlf-tableofcontents-list span.pagination {
     }
 
     .volume-cover-label {
-        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
         margin-top: 4px;
         font-size: 0.85em;
         line-height: 1.2;
