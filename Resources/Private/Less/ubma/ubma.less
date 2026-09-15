@@ -506,7 +506,9 @@ body.dfgviewer.calendar .document-submenu {
                 .provider {
                     .mobile-meta {
                         padding-right: 100px;
-                        width: 55%;
+                        //width: 55%;
+                        width: 70%;
+                        margin-right: 5%;
                     }
                 }
             }
@@ -558,6 +560,15 @@ body {
                     .provider {
                         .mobile-controls {
                             bottom: unset;
+
+                            li.tx-dlf-tools-fullscreen {
+                                display: none;
+                            }
+
+                            form select {
+                                background: none;
+
+                            }
                         }
                         .mobile-meta {
                             //padding-right: 0;
@@ -1359,26 +1370,54 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
 }
 
 @media screen and (max-width: 1023px) {
-    /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
-    .document-functions>ul {
-        top: 20px;
-        text-align: left;
-        right: unset;
-        bottom: unset;
+    body.dfgviewer {
+        .document-view {
+            /* link liste oben belassen, sonst überdeckt sie die Blätternavigation im Gridview */
+            .document-functions {
+                &>ul {
+                    top: 20px;
+                    text-align: left;
+                    right: unset;
+                    bottom: unset;
 
-        & > li.submenu {
-            & > ul {
-                bottom: unset;
-                top: 120px;
-                left: 15px;
+                    & > li.submenu {
+                        & > ul {
+                            bottom: unset;
+                            top: 120px;
+                            left: 15px;
+                        }
+
+                        &.open {
+                            &:before {
+                                top: 31px;
+                                border-width: 0 10px 10px 10px;
+                                border-bottom-color: rgba(35,46,88, 0.9);
+                                border-top-color: unset;
+                            }
+                        }
+                    }
+                }
+                .provider {
+                    max-width: 84%;
+
+                    .mobile-controls {
+                        li {
+                            &.tx-dlf-tools-fullscreen {
+                                display: none;
+                            }
+                        }
+                        form {
+                            select {
+                                background: none;
+                            }
+                        }
+                    }
+                }
             }
 
-            &.open {
-                &:before {
-                    top: 31px;
-                    border-width: 0 10px 10px 10px;
-                    border-bottom-color: rgba(35,46,88, 0.9);
-                    border-top-color: unset;
+            .tx-dlf-toolbox-fulltext-container {
+                .tx-dlf-toolbox-searchindocument {
+                    top: -27px;
                 }
             }
         }
