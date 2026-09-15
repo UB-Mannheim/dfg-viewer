@@ -557,3 +557,14 @@ page.10.variables {
   isMultivolumeWork.value = 1
 }
 [END]
+
+# Volume cover gallery on the top-level page of multi-volume works
+[getDocumentType({$plugin.tx_dlf.persistence.storagePid}) == 'multivolume_work']
+page.10.variables {
+  isBandCovers = TEXT
+  isBandCovers.value = 1
+  volumeCoversLimit = {$plugin.tx_dfgviewer.volumeCoversLimit : int+}
+  pageViewPid = TEXT
+  pageViewPid.value = {$plugin.tx_dfgviewer.kitodoPageView}
+}
+[END]
