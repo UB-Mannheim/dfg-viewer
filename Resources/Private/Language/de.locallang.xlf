@@ -89,6 +89,22 @@
 				<source><![CDATA[No volume selected]]></source>
 				<target><![CDATA[Kein Band ausgewählt]]></target>
 			</trans-unit>
+			<trans-unit id="ubma.select-volume" approved="yes">
+				<source><![CDATA[Select a volume]]></source>
+				<target><![CDATA[Band auswählen]]></target>
+			</trans-unit>
+			<trans-unit id="ubma.show-all-volumes" approved="yes">
+				<source><![CDATA[Show all volumes]]></source>
+				<target><![CDATA[Alle Bände anzeigen]]></target>
+			</trans-unit>
+			<trans-unit id="ubma.show-fewer-volumes" approved="yes">
+				<source><![CDATA[Show fewer volumes]]></source>
+				<target><![CDATA[Weniger Bände anzeigen]]></target>
+			</trans-unit>
+			<trans-unit id="volume.label.prefix" approved="yes">
+				<source><![CDATA[Volume]]></source>
+				<target><![CDATA[Band]]></target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

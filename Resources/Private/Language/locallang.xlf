@@ -113,6 +113,18 @@
             <trans-unit id="ubma.no-volume-selected" approved="yes">
                 <source>No volume selected</source>
             </trans-unit>
+            <trans-unit id="ubma.select-volume" approved="yes">
+                <source>Select a volume</source>
+            </trans-unit>
+            <trans-unit id="ubma.show-all-volumes" approved="yes">
+                <source>Show all volumes</source>
+            </trans-unit>
+            <trans-unit id="ubma.show-fewer-volumes" approved="yes">
+                <source>Show fewer volumes</source>
+            </trans-unit>
+            <trans-unit id="volume.label.prefix" approved="yes">
+                <source>Volume</source>
+            </trans-unit>
         </body>
 	</file>
 </xliff>

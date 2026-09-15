@@ -494,6 +494,88 @@ ul.tx-dlf-tableofcontents-list span.pagination {
     }
 }
 
+/* Band-Cover-Galerie für mehrbändige Werke (Hauptaufnahme ohne ausgewählten Band) */
+.tx-dlf-empty .tx-dlf-volume-covers {
+    text-align: left;
+    max-width: 96%;
+    margin: 0 auto;
+
+    &-heading {
+        text-align: center;
+        font-size: 1.25em;
+        font-weight: bold;
+        margin: 0.5em 0 1em;
+    }
+
+    &-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 14px;
+    }
+
+    &-extra[hidden] {
+        display: none;
+    }
+}
+
+.tx-dlf-volume-cover {
+    display: block;
+    text-align: center;
+    width: 104px;
+    margin: 0;                // überschreibt .ubma a { margin: auto }
+    max-width: 100%;          // überschreibt .ubma a { max-width: 90% }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 148px;
+        object-fit: contain;
+        border: 1px solid @light-grey-border;
+        background-color: @ubma-white;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+
+    .volume-cover-label {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.85em;
+        line-height: 1.2;
+        color: @font-grey;
+    }
+
+    &:hover,
+    &:focus {
+        img {
+            border-color: @base-blue;
+        }
+
+        .volume-cover-label {
+            color: @base-blue;
+        }
+    }
+}
+
+.volume-covers-toggle {
+    float: none;
+    display: block;
+    margin: 18px auto 0;
+    padding: 6px 18px;
+    border: 1px solid @base-blue;
+    border-radius: 3px;
+    background-color: @ubma-white;
+    color: @base-blue;
+    cursor: pointer;
+    font-size: 0.95em;
+
+    &:hover,
+    &:focus {
+        background-color: @base-blue;
+        color: @ubma-white;
+    }
+}
+
 body.dfgviewer.calendar .document-submenu {
   display: none;
 }

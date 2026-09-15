@@ -1,4 +1,5 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:dv="http://typo3.org/ns/Slub/Dfgviewer/ViewHelpers"
       data-namespace-typo3-fluid="true" lang="en">
 
 <f:comment>
@@ -17,9 +18,46 @@
 <f:section name="MultivolumeWorkPageView">
     <div class="document-view">
         <div class="tx-dlf-pageview">
-            <div class="tx-dlf-empty">
-                <f:comment><a class="tx-dlf-emptyToFirstVol" href="#"><span class="error-arrow ubma">←</span> <f:translate key='empty' extensionName='slub_digitalcollections' /></a></f:comment>
+            <div class="tx-dlf-empty ubma">
                 <div id="NoImages"></div>
+                <f:if condition="{isBandCovers} == 1">
+                    <f:variable name="covers" value="{dv:volumeCovers(limit:'{volumeCoversLimit}')}" />
+                    <f:if condition="{covers.volumes}">
+                        <div class="tx-dlf-volume-covers">
+                            <div class="tx-dlf-volume-covers-heading">{f:translate(key: 'ubma.select-volume', extensionName: 'dfgviewer')}</div>
+                            <div class="tx-dlf-volume-covers-grid">
+                                <f:for each="{covers.volumes}" as="band">
+                                    <f:link.page
+                                        pageUid="{pageViewPid}"
+                                        additionalParams="{tx_dlf:{page:'1', double:'0', id:'{band.uid}', pagegrid:'0'}}"
+                                        class="tx-dlf-volume-cover"
+                                        title="{band.label}">
+                                        <img src="{f:if(condition:'{band.thumbnail}', then:'{band.thumbnail}', else:'EXT:ubma_digi_mini_package/Resources/Public/Images/mehrbaendig.png')}" alt="{band.label}" loading="lazy" />
+                                        <span class="volume-cover-label"><f:format.crop maxCharacters="40" append="&hellip;">{band.label}</f:format.crop></span>
+                                    </f:link.page>
+                                </f:for>
+                                <div class="tx-dlf-volume-covers-extra" hidden>
+                                    <f:for each="{covers.more}" as="band">
+                                        <f:link.page
+                                            pageUid="{pageViewPid}"
+                                            additionalParams="{tx_dlf:{page:'1', double:'0', id:'{band.uid}', pagegrid:'0'}}"
+                                            class="tx-dlf-volume-cover"
+                                            title="{band.label}">
+                                            <img src="{f:if(condition:'{band.thumbnail}', then:'{band.thumbnail}', else:'EXT:ubma_digi_mini_package/Resources/Public/Images/mehrbaendig.png')}" alt="{band.label}" loading="lazy" />
+                                            <span class="volume-cover-label"><f:format.crop maxCharacters="40" append="&hellip;">{band.label}</f:format.crop></span>
+                                        </f:link.page>
+                                    </f:for>
+                                </div>
+                                <f:if condition="{covers.hasMore}">
+                                    <button type="button" class="volume-covers-toggle" aria-expanded="false">
+                                        <span class="volume-covers-toggle-show">{f:translate(key: 'ubma.show-all-volumes', extensionName: 'dfgviewer')}</span>
+                                        <span class="volume-covers-toggle-hide" hidden>{f:translate(key: 'ubma.show-fewer-volumes', extensionName: 'dfgviewer')}</span>
+                                    </button>
+                                </f:if>
+                            </div>
+                        </div>
+                    </f:if>
+                </f:if>
             </div>
         </div>
     </div>

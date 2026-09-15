@@ -343,7 +343,10 @@ $(document).ready(function() {
             //$('.tx-dlf-pageview').append('<div class="tx-dlf-empty"><a class="tx-dlf-emptyToFirstVol" href="' + $('.tx-dlf-toc ul li ul li:first-child a').attr('href') + '"><span class="error-arrow">&larr;</span>' + emptyMessage + '</a></div>');
             if ($('ul.toc li:first-child a').length) {
                 console.log("ergänze empty hinweis");
-                $('.tx-dlf-pageview').append('<div class="tx-dlf-empty ubma"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow ubma">&larr;</span>' + emptyMessage + '</a></div>');
+                // If the volume cover gallery is present, do not add the plain "jump to first volume" link
+                if ($('.tx-dlf-volume-covers').length === 0) {
+                    $('.tx-dlf-pageview').append('<div class="tx-dlf-empty ubma"><a class="tx-dlf-emptyToFirstVol" href="' + $('ul.toc li:first-child a').attr('href') + '"><span class="error-arrow ubma">&larr;</span>' + emptyMessage + '</a></div>');
+                }
                 $('#NoImages').remove();
                 $('.downloads').addClass("disabled");
                 $('.doublepage').addClass("disabled");
@@ -360,6 +363,25 @@ $(document).ready(function() {
 
     // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
     setTimeout(checkForChild, 500);    
+
+    // Toggle between "show all volumes" and "show fewer volumes" on the multi-volume cover gallery
+    $('.volume-covers-toggle').on('click', function () {
+        var $button = $(this);
+        var $extra = $('.tx-dlf-volume-covers-extra');
+        var isExpanded = $button.attr('aria-expanded') === 'true';
+
+        if (isExpanded) {
+            $extra.attr('hidden', '');
+            $button.attr('aria-expanded', 'false');
+            $button.find('.volume-covers-toggle-show').removeAttr('hidden');
+            $button.find('.volume-covers-toggle-hide').attr('hidden', '');
+        } else {
+            $extra.removeAttr('hidden');
+            $button.attr('aria-expanded', 'true');
+            $button.find('.volume-covers-toggle-show').attr('hidden', '');
+            $button.find('.volume-covers-toggle-hide').removeAttr('hidden');
+        }
+    });
 
 
 });
