@@ -624,6 +624,60 @@ ul.toc.newspaper {
     }
 }
 
+ul {
+    &.toc {
+        &.year {
+            li {
+                &.tx-dlf-tableofcontents-no {
+                    &.tx-dlf-tableofcontents-submenu {
+                        span {
+                            &.ma-toc-title.doNotLinkIt {
+                                &.day,
+                                &.month {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+                &.tx-dlf-tableofcontents-current {
+                    a {
+                        //background-color: rgba(255,255,255,0.6);
+                        background-color: rgba(255,255,255,0.1);
+                    }
+                }
+            }
+            padding-bottom: 0;
+        }
+
+        &.month,
+        &.day {
+            padding-bottom: 0;
+
+            a {
+                // dadurch wird der aktive Tag in die Mitte gerückt??
+                padding: 0;
+                // abstand nach links regeln
+                padding-left: 65px;
+            }
+        }
+
+        &.newspaper {
+            li {
+                &.tx-dlf-tableofcontents-current {
+                    &.tx-dlf-tableofcontents-submenu {
+                        &.year {
+                            background-color: rgba(255,255,255,0.6);;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
 
 // Distance between diffrent metadata blocks
 dl.tx-dlf-metadata-titledata {
@@ -713,6 +767,28 @@ body.dfgviewer {
                 }
             }
         }
+
+        .tx-dfgviewer-newspaper-calendar,
+        .tx-dfgviewer-newspaper-calender,
+        .tx-dfgviewer-newspaper-years {
+            padding-top: 30px;
+        }
+        .document-view {
+            .document-functions {
+                .provider {
+                    display: none;
+                }
+            }
+        }
+        ul {
+            &.toc {
+                &.newspaper {
+                    display: none;
+                }
+            }
+        }
+
+
     }
     &.fulltext-visible {
         .document-view {
