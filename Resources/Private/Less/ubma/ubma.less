@@ -72,15 +72,10 @@
 	    left: 15px;
 	}
     }
-    .fulltext-container {
+    .tx-dlf-toolbox-fulltext-container {
         opacity: 0.95;
 
-        // Not necessary
-        //&:before {
-        //    height: 85px;
-        //}
-
-        #tx-dlf-fulltextselection {
+        #tx-dlf-toolbox-fulltext-selection {
             padding-top: 80px;
 
             span.textline {
@@ -100,6 +95,12 @@
                     color: @base-blue;
                     padding-bottom: 10px;
                 }
+            }
+        }
+        li {
+
+            &:hover {
+                transform: scale(1.1);
             }
         }
     }
@@ -229,7 +230,7 @@ body.dfgviewer {
                 border-radius: 20px;
                 max-width: 40px;
 
-                &.current {
+                &.tx-dlf-pagination-current {
                     a {
                         color: #fff;
                         background-color: @ubma-base;
@@ -300,14 +301,6 @@ body.dfgviewer {
                     padding-top: 8px;
                     padding-bottom: 8px;
                     color: @ubma-base;
-
-                    // Ausgeschaltet am 16.01.24
-                    // unklar ob Seiteneffekte
-                    /*&:hover {
-                        color: #fff;
-                        color: hotpink;
-                    }*/
-
                 }
 
                 &.tx-dlf-navigation-first {
@@ -335,26 +328,7 @@ body.dfgviewer {
                     }
                 }
 
-                &.last,
-                &.next,
-                &.previous,
-                &.first {
-                    span,
-                    a {
-                        position: relative;
-                        top: -2px;
-                    }
-                }
-                &.last,
-                &.first {
-                    span,
-                    a {
-                        position: relative;
-                        top: -2px;
-                    }
-                }
-
-                &.first {
+                &.tx-dlf-pagination-first {
                     span,
                     a {
                         &:before {
@@ -382,7 +356,7 @@ body.dfgviewer {
                     }
                 }
 
-                &.last {
+                &.tx-dlf-pagination-last {
                     span,
                     a {
                         &:after {
@@ -412,11 +386,6 @@ body.dfgviewer {
 
             }
         }
-
-
-
-
-
     }
     .tx-dlf-pagegrid-thumbnail {
         a {
@@ -909,8 +878,8 @@ body.dfgviewer {
     }
     &.fulltext-visible {
         .document-view {
-            .fulltext-container {
-                #tx-dlf-fulltextselection {
+            .tx-dlf-toolbox-fulltext-container {
+                #tx-dlf-toolbox-fulltext-selection {
                     padding-top: 92px;
                 }
             }
