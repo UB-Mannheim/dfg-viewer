@@ -635,7 +635,7 @@ function initCoverFreeAreaClamping() {
         o.coverBand = mkDebugEl('top:0;bottom:0;background:rgba(0,90,255,.06);');
         o.edgeL = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
         o.edgeR = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
-        o.info = mkDebugEl('top:8px;background:rgba(0,0,0,.7);color:#cfeecf;padding:6px 8px;white-space:pre;border-radius:3px;');
+        o.info = mkDebugEl('bottom:8px;left:12px;z-index:10000;background:rgba(0,0,0,.72);color:#cfeecf;padding:6px 8px;white-space:pre;border-radius:3px;');
         o.freeBox.appendChild(o.coverBand);
         o.freeBox.appendChild(o.edgeL);
         o.freeBox.appendChild(o.edgeR);
@@ -698,7 +698,6 @@ function initCoverFreeAreaClamping() {
             o.edgeR.style.display = leftPx + coverW > 0 && leftPx + coverW < vpW ? 'block' : 'none';
             o.edgeR.style.left = Math.max(0, leftPx + coverW) + 'px';
 
-            o.info.style.left = (Math.max(free.x, 0) + 8) + 'px';
             o.info.textContent =
                 (debugLastClamped.x ? 'CLAMP-X  ' : '         ') +
                 (debugLastClamped.y ? 'CLAMP-Y  ' : '         ') + '\n' +
