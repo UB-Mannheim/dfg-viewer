@@ -17,20 +17,29 @@
 
 <div class="tx-dlf-pageview dfg">
     <div id="tx-dfgviewer-map-0" class="tx-dlf-map dfgviewer"></div>
-    <f:if condition="{images}">
-        <f:else>
-            <div id="NoImages" class="tx-dlf-empty">{f:translate(key: 'ubma.no-volume-selected', extensionName:'dfgviewer')}</div>
-            <f:comment>
-                FOUC-Problem. statt per JS (das erst nach dem ersten Paint läuft) das Element server-seitig per <style> zu verstecken. 
-                Da der Style-Block in der DOM-Reihenfolge vor .view-functions steht (Plugin-Output bei PageView.html:64, das Div bei :75), 
-                gilt die CSS-Regel beim ersten Parse-Pass – das Div erscheint nie:
-                nicht vorhandene funktionen ausblenden: drehen vergrössern verkleinern
-            </f:comment>
-            <style>
-                .tx-dlf-toolbox-fulltext-container,
-                .view-functions { display: none; }
-            </style>
-        </f:else>
+    <f:if condition="{documentNotFound}">
+        <div id="NoImages" class="tx-dlf-empty">{f:translate(key: 'LLL:EXT:dlf/Resources/Private/Language/locallang.xlf:pageview.notFound')}</div>
+        <style>
+            .tx-dlf-toolbox-fulltext-container,
+            .view-functions { display: none; }
+        </style>
+    <f:else>
+        <f:if condition="{images}">
+            <f:else>
+                <div id="NoImages" class="tx-dlf-empty">{f:translate(key: 'ubma.no-volume-selected', extensionName:'dfgviewer')}</div>
+                <f:comment>
+                    FOUC-Problem. statt per JS (das erst nach dem ersten Paint läuft) das Element server-seitig per <style> zu verstecken.
+                    Da der Style-Block in der DOM-Reihenfolge vor .view-functions steht (Plugin-Output bei PageView.html:64, das Div bei :75),
+                    gilt die CSS-Regel beim ersten Parse-Pass – das Div erscheint nie:
+                    nicht vorhandene funktionen ausblenden: drehen vergrössern verkleinern
+                </f:comment>
+                <style>
+                    .tx-dlf-toolbox-fulltext-container,
+                    .view-functions { display: none; }
+                </style>
+            </f:else>
+        </f:if>
+    </f:else>
     </f:if>
 </div>
 <!-- gewuenscht PageView/FulltextContainer -->
