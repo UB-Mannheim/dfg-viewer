@@ -96,51 +96,51 @@ farbgemarkten Bereichen:
   GRÜNE gestrichelte Box    → freier, nutzbarer Bereich
   BLAUES Band               → das Sichtbare des Covers im Viewport
     · 2 blaue Kanten im Band → linke bzw. rechte Cover-Kante
-  GELBER Teil im blauen Band → Anteil des Covers, der UNTER der Navigation
-    steckt (nicht sichtbar, daher "wird links nicht erreichbar")
-  ROTE gestreifte Flächen im grünen Bereich
-                              → "Dead Zones": Teile des freien Bereichs, die
-                                bei der aktuellen Zoomstufe NICHT erreichbar
-                                sind (Cover würde unter Navigation/Volltext
-                                ragen oder OL-Begrenzung verletzen)
-  2 GELBE gestrichelte Linien → die tatsächlich äußerste erreichbare Position
-    der linken bzw. rechten Cover-Kante (Schnittmenge aus Free-Rect-Clamp und
-    der OpenLayers-eigenen Begrenzung)
-  TEXTFELD unten links      → Live-Messwerte
+   GELBER Teil im blauen Band → Anteil des Covers, der UNTER der Navigation
+     steckt (nicht sichtbar)
+   2 GELBE gestrichelte Linien → die äußerste erreichbare Position der
+     linken bzw. rechten Cover-Kante bei der aktuellen Zoomstufe
+   TEXTFELD unten links      → Live-Messwerte
 ```
 
 Zusätzlich werden im Textfeld (unten links) die aktuellen Messwerte angezeigt:
 
 ```
-CLAMP-X / CLAMP-Y   → ist gerade eine X- bzw. Y-Korrektur aktiv?
-freier Bereich      → Breite x Höhe in CSS-Pixel, inkl. Anteile Navigation/Volltext
-Cover               → Breite x Höhe im Viewport in CSS-Pixel
-band                → Bereich, in dem sich die linke Cover-Kante bewegen kann
-                      (L/R: welche Begrenzung greift hier – "free" =
-                      Free-Rect-Clamp, "OL" = OpenLayers-Selbstbegrenzung)
-dead                → Größe der unerreichenbaren Zonen links/rechts
-Position            → x-Koordinate der linken Cover-Kante
+CLAMP-X           → ist gerade eine X-Korrektur aktiv?
+free              → Breite x Höhe des freien Bereichs in CSS-Pixel,
+                     inkl. Breiten Navigation (nav) / Volltext (ft)
+cover             → Breite x Höhe des Covers im Viewport in CSS-Pixel
+band              → Bereich, in dem sich die linke Cover-Kante bewegen kann
+OL                → Band, das OpenLayers ohne die Constraint-Erweiterung
+                     zulassen würde, plus der damit gewonnene Raum (+L/+R)
+pos               → x-Koordinate der linken Cover-Kante
 ```
 
-> **Warum stoppt das Cover deutlich vor dem TOC-Rahmen?**
-> Es greifen **zwei** unabhängige Begrenzungen, deren **Schnittmenge**
-> den echten bewegbaren Bereich bestimmt:
+> **Erweitertes OL-Constraint (mehr Raum bei kleinen Zoomstufen):**
 >
-> 1. **Free-Rect-Clamp** (dieses Feature): das Cover muss innerhalb des
->    grünen freien Bereichs bleiben bzw. ihn überdecken.
-> 2. **OpenLayers-eigene View-Begrenzung**: Die View wird in
->    `packages/presentation/.../PageView/Utility.js` mit
->    `constrainOnlyCenter: true` erzeugt. OpenLayers erzwingt dadurch, dass
->    der **Mittelpunkt des Viewports immer auf der Bildfläche** liegt –
->    das Bild kann maximal bis zu seiner eigenen Mitte an die Viewport-Mitte
->    herangeschoben werden.
+> Ohne dieses Feature verhindert OpenLayers (View-Einstellung
+> `constrainOnlyCenter: true` in `createOlView`,
+> `packages/presentation/.../PageView/Utility.js`) dass der Viewport-
+> Mittelpunkt vom Bild wegrückt. Bei einem kleinen Cover (weit heraus-
+> gezoomt) darf sich das Bild dadurch nur in einem engen Band um den
+> Viewport-Mittelpunkt bewegen – es stoppte deutlich **vor** dem linken/
+> rechten Rahmen des freien Bereichs.
 >
-> Bei kleinen Zoomstufen (kleines Bild, großer freier Bereich) ist Begrenzung
-> (2) oft die engere, weshalb das Cover "zu früh" vor der TOC-Kante stoppt.
-> Die rote Schraffur zeigt genau diese unerreichenbaren Zonen. Um dieses
-> Verhalten aufzuheben (Cover bis an die TOC-Kante schiebbar machen) müsste
-> das View-Constraint in `createOlView` (`packages/presentation`) deaktiviert
-> werden – das wäre eine Änderung außerhalb von `dfg-viewer`.
+> Das Feature ersetzt diese View-Constraint zur Laufzeit
+> (`extendOlCenterConstraint()` in `initCoverFreeAreaClamping()` in
+> `Resources/Private/JavaScript/dfgviewerScripts.js`) und setzt den
+> erlaubten Wertebereich direkt auf den Band der Variante A: Die Kanten
+> des Covers dürfen den Rand des freien Bereichs erreichen bzw.
+> überschießen. Die OL-Constraint bleibt dabei erhalten (gleiche
+> Aufrufstelle, gleiche Signatur) – nur der zulässige Wertebereich ist
+> erweitert. Damit kann das Cover bei kleinen Zoomstufen den kompletten
+> freien Bereich erreichen.
+>
+> In der Debug-Anzeige zeigt die Zeile `OL : native …` den Band an, den
+> OpenLayers **ohne** Erweiterung zulassen würde; `+L`/`+R` zeigen den
+> gewonnenen zusätzlichen Raum in Pixeln. Da das OL-Constraint jetzt dem
+> Free-Rect-Clamp entspricht, entsteht im grünen Bereich keine „Dead
+> Zone" mehr (rote Schraffur verschwindet).
 
 ### Was sollte man testen?
 

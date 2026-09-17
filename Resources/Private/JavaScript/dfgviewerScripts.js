@@ -464,6 +464,73 @@ function initCoverFreeAreaClamping() {
     // left overlay (toc + metadata)
     var navEl = $('.control-bar')[0];
 
+    /**
+     * Keep OpenLayers' own center constraint (the View is created with
+     * "constrainOnlyCenter": true, which keeps the viewport center on the
+     * image), but widen the *allowed window* from "center inside the image"
+     * to "cover occupies its Variant-A position within the free rect".
+     *
+     * Problem solved: with a small cover the old rule only allowed the cover
+     * to sit in a narrow band around the viewport center, so it stopped well
+     * short of the left/right frame of the free rect. Here the window becomes
+     * exactly the band the free-area clamp defines, so at small zoom levels
+     * the cover can slide the full way to the frames (and the rule still
+     * prevents leaving the free rect).
+     *
+     * OpenLayers reads this constraint live on setCenter/zoom/pan (view
+     * constraints_.center), so patching it changes the behavior everywhere,
+     * not only in our own code. The original constraint is kept as a
+     * fallback for the not-yet-measurable case.
+     */
+    function extendOlCenterConstraint() {
+        if (!view.constraints_ || typeof view.constraints_.center !== 'function') {
+            return;
+        }
+        if (view.__coverConstraintPatched) {
+            return;
+        }
+        view.__coverConstraintPatched = true;
+        var original = view.constraints_.center;
+
+        view.constraints_.center = function (center, resolution, viewportSize, animating, centerShift) {
+            if (!center) {
+                return undefined;
+            }
+            var free = measureFreeArea();
+            var img = view.getProjection ? view.getProjection().getExtent() : null;
+            if (!free || !resolution || !img) {
+                // not measurable yet -> keep native OpenLayers behavior
+                return original(center, resolution, viewportSize, animating, centerShift);
+            }
+
+            var vpW = free.vpW, vpH = free.vpH;
+            // same center anchor offset OpenLayers applies (only != 0 while
+            // the view has padding; ours does not - kept for compatibility)
+            var shiftX = centerShift ? centerShift[0] : 0;
+            var shiftY = centerShift ? centerShift[1] : 0;
+
+            // horizontal: keep the cover's left edge L inside the Variant-A
+            // band (fit if narrower, cover if wider). L <-> center:
+            //   cx = img[0] + (vpW/2 - L) * resolution
+            var coverWpx = (img[2] - img[0]) / resolution;
+            var aX = img[0] + (vpW / 2 - free.x) * resolution + shiftX;
+            var bX = img[0] + (vpW / 2 - (free.x + free.width - coverWpx)) * resolution + shiftX;
+            var x = Math.min(Math.max(center[0], Math.min(aX, bX)), Math.max(aX, bX));
+
+            // vertical: the free band spans the full viewport height [0, vpH],
+            // keep the cover's top edge T inside [0, vpH-coverHpx] (fit) /
+            // [vpH-coverHpx, 0] (cover). T <-> center:
+            //   cy = img[3] + (T - vpH/2) * resolution
+            var coverHpx = (img[3] - img[1]) / resolution;
+            var aY = img[3] + (0 - vpH / 2) * resolution + shiftY;
+            var bY = img[3] + ((vpH - coverHpx) - vpH / 2) * resolution + shiftY;
+            var y = Math.min(Math.max(center[1], Math.min(aY, bY)), Math.max(aY, bY));
+
+            return [x, y];
+        };
+    }
+    extendOlCenterConstraint();
+
     function isFulltextOverlayOpen() {
         return document.body.classList && document.body.classList.contains('fulltext-visible');
     }
@@ -726,59 +793,43 @@ function initCoverFreeAreaClamping() {
                 o.navCoverPart.style.width = navCoverW + 'px';
             }
 
-            // How far can the cover's LEFT edge move at this zoom? Two
-            // independent constraints apply and the reachable band is their
-            // INTERSECTION:
-            //   (1) free-area clamp (this feature): the cover has to stay in /
-            //       cover the green free rect
-            //   (2) OpenLayers' own view constraint (createOlView uses
-            //       "constrainOnlyCenter": true) keeps the viewport center on
-            //       the image, so the image can only slide until its edge
-            //       reaches the viewport center
+            // How far can the cover's LEFT edge move at this zoom?
             //
-            // (1) free-area clamp, expressed as cover left-edge px:
+            // (1) free-area band (target, variant A):
             //       left edge at free-left     -> free.x
             //       right edge at free-right   -> free.x + free.width - coverW
             var fLo = Math.min(free.x, free.x + free.width - coverW);
             var fHi = Math.max(free.x, free.x + free.width - coverW);
             //
-            // (2) OpenLayers constraint, expressed as cover left-edge px:
-            //     "constrainOnlyCenter": true keeps the viewport center point
-            //     on the image, i.e. the viewport center (vpW/2) must lie
-            //     inside the cover on screen [L, L + coverW]:
-            //        L <= vpW/2  and  L >= vpW/2 - coverW
-            var cLo = vpW / 2 - coverW;
-            var cHi = vpW / 2;
+            // (2) OpenLayers constraint: we PATCHED it (extendOlCenterConstraint)
+            //     so its allowed window equals the free-area band, i.e. (2) == (1).
+            //     The *native* (unpatched) OL band, kept only for comparison,
+            //     comes from "constrainOnlyCenter" (viewport center on image):
+            //       native left-edge range = [vpW/2 - coverW, vpW/2]
+            var olNativeMin = vpW / 2 - coverW;
+            var olNativeMax = vpW / 2;
             //
-            // intersection = the band the cover's left edge really can occupy
-            var limMin = Math.max(fLo, cLo);
-            var limMax = Math.min(fHi, cHi);
-
-            // parts of the green free rect the cover can never reach at this
-            // zoom (would go under the overlays / break OL's own constraint)
-            var dzLw = Math.max(0, limMin - free.x);
-            var dzRw = Math.max(0, (free.x + free.width) - (limMax + coverW));
+            // reachable band = intersection of (1) and (2) = the free-area band
+            var limMin = fLo;
+            var limMax = fHi;
             var bandOk = limMin <= limMax;
-            o.deadL.style.display = bandOk && dzLw > 1 ? 'block' : 'none';
-            if (bandOk && dzLw > 1) {
-                o.deadL.style.left = free.x + 'px';
-                o.deadL.style.width = dzLw + 'px';
-            }
-            o.deadR.style.display = bandOk && dzRw > 1 ? 'block' : 'none';
-            if (bandOk && dzRw > 1) {
-                o.deadR.style.left = (limMax + coverW) + 'px';
-                o.deadR.style.width = dzRw + 'px';
-            }
 
-            // the two extremes: leftmost / rightmost position of the band
+            // (with the patched OL constraint) nothing inside the green free
+            // rect is unreachable anymore, so there are no dead zones
+            var dzLw = 0;
+            var dzRw = 0;
+            o.deadL.style.display = 'none';
+            o.deadR.style.display = 'none';
+
+            // the two current extremes (reachable band)
             o.limitL.style.display = bandOk && limMin > -1 && limMin < vpW ? 'block' : 'none';
             o.limitL.style.left = Math.max(0, limMin) + 'px';
             o.limitR.style.display = bandOk && (limMax + coverW) > -1 && (limMax + coverW) < vpW ? 'block' : 'none';
             o.limitR.style.left = Math.max(0, limMax + coverW) + 'px';
 
-            // which constraint actually binds on each side?
-            var bindL = (cLo > fLo) ? 'OL' : 'free';
-            var bindR = (cHi < fHi) ? 'OL' : 'free';
+            // room gained by widening the OL constraint vs the native band
+            var gainedL = Math.max(0, olNativeMin - fLo);
+            var gainedR = Math.max(0, fHi - olNativeMax);
 
             o.info.textContent =
                 (debugLastClamped.x ? 'CLAMP-X  ' : '         ') +
@@ -786,12 +837,9 @@ function initCoverFreeAreaClamping() {
                 'free : ' + Math.round(free.width) + 'x' + Math.round(vpH) + ' px' +
                 ' (nav ' + Math.round(free.x) + ', ft ' + Math.round(rightWidth) + ')\n' +
                 'cover: ' + Math.round(coverW) + 'x' + Math.round(coverH) + ' px\n' +
-                'band : ' + (bandOk ?
-                    'cover left edge ' + Math.round(limMin) + ' .. ' + Math.round(limMax) +
-                    ' px (L:' + bindL + ' R:' + bindR + ')' :
-                    'none (OL + free conflict)') + '\n' +
-                'dead : L ' + Math.round(dzLw) + ' px | R ' + Math.round(dzRw) + ' px ' +
-                '(free but unreachable)\n' +
+                'band : left edge ' + Math.round(limMin) + ' .. ' + Math.round(limMax) + ' px\n' +
+                'OL   : native was ' + Math.round(olNativeMin) + ' .. ' + Math.round(olNativeMax) +
+                ' -> +L ' + Math.round(gainedL) + ' / +R ' + Math.round(gainedR) + ' px\n' +
                 'pos  : ' + Math.round(leftPx) + ' px (cover left)';
         } catch (e) {
             // debug helper must never break the viewer
