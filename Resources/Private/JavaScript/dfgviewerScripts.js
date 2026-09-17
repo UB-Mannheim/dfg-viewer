@@ -624,6 +624,11 @@ function initCoverFreeAreaClamping() {
             coverBand: null,
             edgeL: null,
             edgeR: null,
+            navCoverPart: null,
+            limitL: null,
+            limitR: null,
+            deadL: null,
+            deadR: null,
             info: null
         };
         var o = debugOverlay;
@@ -631,18 +636,34 @@ function initCoverFreeAreaClamping() {
         o.leftBlock = mkDebugEl('top:0;bottom:0;left:0;background:rgba(255,60,60,.15);border-right:2px solid rgba(255,60,60,.9);');
         o.leftBlock.appendChild(document.createTextNode(' Navigation '));
         o.rightBlock = mkDebugEl('top:0;bottom:0;right:0;background:rgba(255,150,0,.15);border-left:2px solid rgba(255,150,0,.9);');
-        o.freeBox = mkDebugEl('top:0;bottom:0;border:2px dashed rgba(0,190,0,.85);');
+        o.freeBox = mkDebugEl('top:0;bottom:0;border:2px dashed rgba(0,190,0,.85);overflow:visible;');
         o.coverBand = mkDebugEl('top:0;bottom:0;background:rgba(0,90,255,.06);');
         o.edgeL = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
         o.edgeR = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
+        // part of the cover that overlaps the navigation area (hidden under it)
+        o.navCoverPart = mkDebugEl('top:0;bottom:0;background:rgba(255,220,0,.25);border-right:2px dashed rgba(255,200,0,.9);');
+        // extreme reachable positions of the cover's edges at the current
+        // zoom (free-area clamp AND OpenLayers' own view constraint combined)
+        o.limitL = mkDebugEl('top:0;bottom:0;width:0;border-left:3px dashed rgba(255,220,0,.95);');
+        o.limitR = mkDebugEl('top:0;bottom:0;width:0;border-left:3px dashed rgba(255,220,0,.95);');
+        // parts of the free area the cover can NOT reach at this zoom
+        o.deadL = mkDebugEl('top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,0,0,.28) 0 6px,rgba(255,0,0,.12) 6px 12px);');
+        o.deadR = mkDebugEl('top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,0,0,.28) 0 6px,rgba(255,0,0,.12) 6px 12px);');
         o.info = mkDebugEl('bottom:8px;left:12px;z-index:10000;background:rgba(0,0,0,.72);color:#cfeecf;padding:6px 8px;white-space:pre;border-radius:3px;');
-        o.freeBox.appendChild(o.coverBand);
-        o.freeBox.appendChild(o.edgeL);
-        o.freeBox.appendChild(o.edgeR);
+        // all overlays are absolute children of the map viewport (inset:0),
+        // so every "left:" value is directly in viewport CSS px
         mapEl.appendChild(o.root);
         o.root.appendChild(o.leftBlock);
         o.root.appendChild(o.rightBlock);
         o.root.appendChild(o.freeBox);
+        o.root.appendChild(o.coverBand);
+        o.root.appendChild(o.edgeL);
+        o.root.appendChild(o.edgeR);
+        o.root.appendChild(o.navCoverPart);
+        o.root.appendChild(o.deadL);
+        o.root.appendChild(o.deadR);
+        o.root.appendChild(o.limitL);
+        o.root.appendChild(o.limitR);
         o.root.appendChild(o.info);
     }
 
@@ -672,7 +693,6 @@ function initCoverFreeAreaClamping() {
             var coverW = (imgExtent[2] - imgExtent[0]) / resolution;
             var coverH = (imgExtent[3] - imgExtent[1]) / resolution;
             var leftPx = vpW / 2 + (imgExtent[0] - center[0]) / resolution;
-            var topPx = vpH / 2 - (imgExtent[3] - center[1]) / resolution;
 
             o.freeBox.style.left = free.x + 'px';
             o.freeBox.style.width = free.width + 'px';
@@ -698,15 +718,81 @@ function initCoverFreeAreaClamping() {
             o.edgeR.style.display = leftPx + coverW > 0 && leftPx + coverW < vpW ? 'block' : 'none';
             o.edgeR.style.left = Math.max(0, leftPx + coverW) + 'px';
 
+            // part of the cover that hides under the navigation (left) area
+            var navCoverW = Math.max(0, Math.min(leftPx + coverW, free.x) - leftPx);
+            o.navCoverPart.style.display = navCoverW > 1 ? 'block' : 'none';
+            if (navCoverW > 1) {
+                o.navCoverPart.style.left = leftPx + 'px';
+                o.navCoverPart.style.width = navCoverW + 'px';
+            }
+
+            // How far can the cover's LEFT edge move at this zoom? Two
+            // independent constraints apply and the reachable band is their
+            // INTERSECTION:
+            //   (1) free-area clamp (this feature): the cover has to stay in /
+            //       cover the green free rect
+            //   (2) OpenLayers' own view constraint (createOlView uses
+            //       "constrainOnlyCenter": true) keeps the viewport center on
+            //       the image, so the image can only slide until its edge
+            //       reaches the viewport center
+            //
+            // (1) free-area clamp, expressed as cover left-edge px:
+            //       left edge at free-left     -> free.x
+            //       right edge at free-right   -> free.x + free.width - coverW
+            var fLo = Math.min(free.x, free.x + free.width - coverW);
+            var fHi = Math.max(free.x, free.x + free.width - coverW);
+            //
+            // (2) OpenLayers constraint, expressed as cover left-edge px:
+            //     "constrainOnlyCenter": true keeps the viewport center point
+            //     on the image, i.e. the viewport center (vpW/2) must lie
+            //     inside the cover on screen [L, L + coverW]:
+            //        L <= vpW/2  and  L >= vpW/2 - coverW
+            var cLo = vpW / 2 - coverW;
+            var cHi = vpW / 2;
+            //
+            // intersection = the band the cover's left edge really can occupy
+            var limMin = Math.max(fLo, cLo);
+            var limMax = Math.min(fHi, cHi);
+
+            // parts of the green free rect the cover can never reach at this
+            // zoom (would go under the overlays / break OL's own constraint)
+            var dzLw = Math.max(0, limMin - free.x);
+            var dzRw = Math.max(0, (free.x + free.width) - (limMax + coverW));
+            var bandOk = limMin <= limMax;
+            o.deadL.style.display = bandOk && dzLw > 1 ? 'block' : 'none';
+            if (bandOk && dzLw > 1) {
+                o.deadL.style.left = free.x + 'px';
+                o.deadL.style.width = dzLw + 'px';
+            }
+            o.deadR.style.display = bandOk && dzRw > 1 ? 'block' : 'none';
+            if (bandOk && dzRw > 1) {
+                o.deadR.style.left = (limMax + coverW) + 'px';
+                o.deadR.style.width = dzRw + 'px';
+            }
+
+            // the two extremes: leftmost / rightmost position of the band
+            o.limitL.style.display = bandOk && limMin > -1 && limMin < vpW ? 'block' : 'none';
+            o.limitL.style.left = Math.max(0, limMin) + 'px';
+            o.limitR.style.display = bandOk && (limMax + coverW) > -1 && (limMax + coverW) < vpW ? 'block' : 'none';
+            o.limitR.style.left = Math.max(0, limMax + coverW) + 'px';
+
+            // which constraint actually binds on each side?
+            var bindL = (cLo > fLo) ? 'OL' : 'free';
+            var bindR = (cHi < fHi) ? 'OL' : 'free';
+
             o.info.textContent =
                 (debugLastClamped.x ? 'CLAMP-X  ' : '         ') +
                 (debugLastClamped.y ? 'CLAMP-Y  ' : '         ') + '\n' +
                 'free : ' + Math.round(free.width) + 'x' + Math.round(vpH) + ' px' +
                 ' (nav ' + Math.round(free.x) + ', ft ' + Math.round(rightWidth) + ')\n' +
                 'cover: ' + Math.round(coverW) + 'x' + Math.round(coverH) + ' px\n' +
-                'slack: x ' + (free.width - coverW).toFixed(0) + ' px' +
-                '   y ' + (vpH - coverH).toFixed(0) + ' px\n' +
-                'pos  : ' + Math.round(leftPx) + ',' + Math.round(topPx) + ' px (top-left)';
+                'band : ' + (bandOk ?
+                    'cover left edge ' + Math.round(limMin) + ' .. ' + Math.round(limMax) +
+                    ' px (L:' + bindL + ' R:' + bindR + ')' :
+                    'none (OL + free conflict)') + '\n' +
+                'dead : L ' + Math.round(dzLw) + ' px | R ' + Math.round(dzRw) + ' px ' +
+                '(free but unreachable)\n' +
+                'pos  : ' + Math.round(leftPx) + ' px (cover left)';
         } catch (e) {
             // debug helper must never break the viewer
         }
@@ -748,14 +834,18 @@ function initCoverFreeAreaClamping() {
             attributeFilter: ['class']
         });
 
-        // debug overlay: enable via ?coverdebug=1 in the URL, or at runtime
-        // with Ctrl/Cmd+Shift+D (console: window.__coverDebug(true/false))
+        // Debug-Overlay: per ?coverdebug=1 in der URL aktivieren oder zur
+        // Laufzeit per Ctrl+Alt+D bzw. Konsole (window.__coverDebug(true/false))
         debugEnabled = isDebugEnabled();
         if (debugEnabled) {
             createDebugOverlay();
         }
         $(document).on('keydown.coverdebug', function (e) {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.which === 68 || e.key === 'D' || e.key === 'd')) {
+            // Ctrl+Alt+D (Debug): kein Standard-Shortcut von Chrome/Firefox/Edge,
+            // daher keine Kollision (im Gegensatz zu Ctrl+Shift+D = Firefox
+            // "Alle Tabs in Lesezeichen").
+            if (e.ctrlKey && e.altKey && !e.shiftKey &&
+                (e.which === 68 || e.key === 'D' || e.key === 'd')) {
                 e.preventDefault();
                 toggleDebug(!debugEnabled);
             }
