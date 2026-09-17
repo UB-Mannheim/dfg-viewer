@@ -359,8 +359,15 @@ $(document).ready(function() {
     };
 
     // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
-    setTimeout(checkForChild, 500);    
+    setTimeout(checkForChild, 500);
 
+
+    // Der Viewer feuert "map-loadend", sobald Karte + Controls initialisiert sind.
+    // Danach darf die Ansicht so nachjustiert werden, dass das Bild (Cover) in
+    // den freien Bereich bleibt (außerhalb linke Navigation + geöffnetem Fulltext).
+    $(window).on('map-loadend', function () {
+        initCoverFreeAreaClamping();
+    });
 
 });
 
@@ -417,4 +424,376 @@ function close_all_submenues(environment = '') {
         $('nav .secondary-nav').removeClass('open');
         $('nav ul.viewer-nav').removeClass('open');
     };
+}
+/**
+ * Keeps the cover inside the free area of the viewport while zooming / panning.
+ *
+ * The cover is rendered by an OpenLayers map (tx_dlf_viewer.map). The left
+ * sidebar (toc + metadata) and the opened fulltext overlay may be drawn on
+ * top of the map, so both count as "not free" and the view is clamped to the
+ * remaining (free) rectangle.
+ *
+ * Behavior:
+ * - cover smaller than the free rect -> the cover has to stay completely
+ *   inside the free rect (background margin may remain around it), i.e. it can
+ *   never be moved underneath the sidebar or the fulltext overlay
+ * - cover larger than the free rect  -> the cover has to cover the free rect,
+ *   i.e. nothing under the sidebar / fulltext overlay may be revealed
+ *
+ * Both cases collapse into one constraint window. The view is clamped to that
+ * window only at rest (no dragging, no running zoom animation), so the native
+ * zoom / pan behavior and their "true" sizes stay untouched and no + / -
+ * jump asymmetry can occur.
+ *
+ * Everything is measured at runtime in CSS pixels, so it adapts automatically
+ * to all breakpoints, to mobile off-canvas layouts, collapsed sidebar and
+ * fullscreen mode.
+ */
+function initCoverFreeAreaClamping() {
+    if (typeof tx_dlf_viewer === 'undefined' || !tx_dlf_viewer.map || typeof ol === 'undefined') {
+        return;
+    }
+
+    var map = tx_dlf_viewer.map;
+    var view = map.getView();
+    var mapEl = map.getTargetElement();
+    if (!mapEl || !view || !mapEl.getBoundingClientRect) {
+        return;
+    }
+
+    // left overlay (toc + metadata)
+    var navEl = $('.control-bar')[0];
+
+    function isFulltextOverlayOpen() {
+        return document.body.classList && document.body.classList.contains('fulltext-visible');
+    }
+
+    // width of the overlay currently blocking the right side of the map,
+    // 0 if the fulltext is closed
+    function measureRightOverlayWidth() {
+        if (!isFulltextOverlayOpen()) {
+            return 0;
+        }
+
+        var rect = mapEl.getBoundingClientRect();
+        var candidates = [
+            document.getElementById('tx-dlf-toolbox-fulltext-selection'),
+            document.querySelector('.tx-dlf-toolbox-fulltext-container')
+        ];
+
+        var width = 0;
+        for (var i = 0; i < candidates.length; i++) {
+            var el = candidates[i];
+            if (!el || !el.getBoundingClientRect) {
+                continue;
+            }
+            var r = el.getBoundingClientRect();
+            if (r.left < rect.left) {
+                // degenerated layout, ignore this candidate
+                continue;
+            }
+            width = Math.max(width, rect.right - r.left);
+        }
+        return Math.max(0, width);
+    }
+
+    // free rectangle of the map viewport in CSS px (relative to the viewport)
+    function measureFreeArea() {
+        var rect = mapEl.getBoundingClientRect();
+        if (!rect || rect.width < 20 || rect.height < 20) {
+            return null;
+        }
+
+        // left overlay (toc + metadata) - only counts if it actually overlaps the map
+        var left = 0;
+        if (navEl && navEl.offsetWidth > 0 && navEl.getBoundingClientRect) {
+            left = Math.max(0, navEl.getBoundingClientRect().right - rect.left);
+        }
+
+        // right overlay (fulltext) - only counts while it is opened
+        var right = measureRightOverlayWidth();
+
+        return {
+            x: left,
+            width: Math.max(0, rect.width - left - right),
+            vpW: rect.width,
+            vpH: rect.height
+        };
+    }
+
+    var enforcing = false;
+    function clampView() {
+        if (enforcing) {
+            return;
+        }
+        enforcing = true;
+
+        try {
+            // clamping is only defined for unrotated views
+            if (view.getRotation() === undefined || Math.abs(view.getRotation()) > 1e-6) {
+                return;
+            }
+
+            var resolution = view.getResolution();
+            if (!resolution || resolution <= 0) {
+                return;
+            }
+
+            // image extent in map units (1 map unit == 1 image pixel)
+            var imgExtent = view.getProjection().getExtent();
+            if (!imgExtent) {
+                return;
+            }
+
+            var free = measureFreeArea();
+            if (!free || free.width < 20) {
+                return;
+            }
+
+            var center = view.getCenter();
+            if (!center) {
+                return;
+            }
+
+            var x0 = imgExtent[0];
+            var w = imgExtent[2] - imgExtent[0];
+            var fx = free.x;
+            var fw = free.width;
+            var vpW = free.vpW;
+            var vpH = free.vpH;
+
+            // The image's left/right edge as a function of the view center x
+            // (cx), in CSS px relative to the top-left of the map viewport:
+            //   leftPx  = vpW/2 - (cx - x0) / res
+            //   rightPx = leftPx + w / res
+            // The two "edge meets free-rect edge" positions give the center
+            // bounds; min/max over them enforces "inside the free rect" when the
+            // cover is narrower and "cover the free rect" when it is wider.
+            //   A: leftPx  == fx            -> cx = x0 + res * (vpW/2 - fx)
+            //   B: rightPx == fx + fw       -> cx = x0 + w - res * (fx + fw - vpW/2)
+            var boundA = x0 + resolution * (vpW / 2 - fx);
+            var boundB = x0 + w - resolution * (fx + fw - vpW / 2);
+            var minCx = Math.min(boundA, boundB);
+            var maxCx = Math.max(boundA, boundB);
+            var targetX = Math.min(Math.max(center[0], minCx), maxCx);
+
+            // vertical: the free rect spans the full map viewport height
+            //   topPx = vpH/2 - (y0 - cy) / res   (y0 = imgExtent[3], the top)
+            //   C: topPx  == 0            -> cy = y0 - res * (vpH/2)
+            //   D: bottom == vpH          -> cy = y1 + res * (vpH/2)
+            var boundC = imgExtent[3] - resolution * (vpH / 2);
+            var boundD = imgExtent[1] + resolution * (vpH / 2);
+            var minCy = Math.min(boundC, boundD);
+            var maxCy = Math.max(boundC, boundD);
+            var targetY = Math.min(Math.max(center[1], minCy), maxCy);
+
+            // only move when the deviation is more than a fraction of a
+            // screen pixel (avoids pointless updates / feedback loops)
+            var eps = Math.max(1e-6, 0.2 * resolution);
+            debugLastClamped.x = Math.abs(targetX - center[0]) > eps;
+            debugLastClamped.y = Math.abs(targetY - center[1]) > eps;
+            if (debugLastClamped.x || debugLastClamped.y) {
+                view.setCenter([targetX, targetY]);
+            }
+        } finally {
+            enforcing = false;
+        }
+    }
+    var debugLastClamped = { x: false, y: false };
+    var clampQueued = false;
+    var debugEnabled = false;
+    var debugOverlay = null;
+
+    function isDebugEnabled() {
+        var m = location.search.match(/[?&]coverdebug=([^&]*)/);
+        return !!m && m[1] !== '0' && m[1] !== 'off';
+    }
+
+    function mkDebugEl(cssText) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:absolute;' + cssText;
+        return el;
+    }
+
+    function createDebugOverlay() {
+        debugOverlay = {
+            root: mkDebugEl('inset:0;pointer-events:none;z-index:9999;font:11px/1.4 monospace;'),
+            leftBlock: null,
+            rightBlock: null,
+            freeBox: null,
+            coverBand: null,
+            edgeL: null,
+            edgeR: null,
+            info: null
+        };
+        var o = debugOverlay;
+
+        o.leftBlock = mkDebugEl('top:0;bottom:0;left:0;background:rgba(255,60,60,.15);border-right:2px solid rgba(255,60,60,.9);');
+        o.leftBlock.appendChild(document.createTextNode(' Navigation '));
+        o.rightBlock = mkDebugEl('top:0;bottom:0;right:0;background:rgba(255,150,0,.15);border-left:2px solid rgba(255,150,0,.9);');
+        o.freeBox = mkDebugEl('top:0;bottom:0;border:2px dashed rgba(0,190,0,.85);');
+        o.coverBand = mkDebugEl('top:0;bottom:0;background:rgba(0,90,255,.06);');
+        o.edgeL = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
+        o.edgeR = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
+        o.info = mkDebugEl('top:8px;background:rgba(0,0,0,.7);color:#cfeecf;padding:6px 8px;white-space:pre;border-radius:3px;');
+        o.freeBox.appendChild(o.coverBand);
+        o.freeBox.appendChild(o.edgeL);
+        o.freeBox.appendChild(o.edgeR);
+        mapEl.appendChild(o.root);
+        o.root.appendChild(o.leftBlock);
+        o.root.appendChild(o.rightBlock);
+        o.root.appendChild(o.freeBox);
+        o.root.appendChild(o.info);
+    }
+
+    function removeDebugOverlay() {
+        if (debugOverlay && debugOverlay.root && debugOverlay.root.parentNode) {
+            debugOverlay.root.parentNode.removeChild(debugOverlay.root);
+        }
+        debugOverlay = null;
+    }
+
+    function drawDebugOverlay() {
+        if (!debugEnabled || !debugOverlay) {
+            return;
+        }
+        try {
+            var resolution = view.getResolution();
+            var imgExtent = view.getProjection().getExtent();
+            var free = measureFreeArea();
+            var center = view.getCenter();
+            if (!resolution || !imgExtent || !free || !center) {
+                return;
+            }
+
+            var o = debugOverlay;
+            var vpW = free.vpW;
+            var vpH = free.vpH;
+            var coverW = (imgExtent[2] - imgExtent[0]) / resolution;
+            var coverH = (imgExtent[3] - imgExtent[1]) / resolution;
+            var leftPx = vpW / 2 + (imgExtent[0] - center[0]) / resolution;
+            var topPx = vpH / 2 - (imgExtent[3] - center[1]) / resolution;
+
+            o.freeBox.style.left = free.x + 'px';
+            o.freeBox.style.width = free.width + 'px';
+
+            o.leftBlock.style.display = free.x > 1 ? 'block' : 'none';
+            if (free.x > 1) {
+                o.leftBlock.style.width = free.x + 'px';
+            }
+
+            var rightPx = free.x + free.width;
+            var rightWidth = vpW - rightPx;
+            o.rightBlock.style.display = rightWidth > 1 ? 'block' : 'none';
+            if (rightWidth > 1) {
+                o.rightBlock.style.left = rightPx + 'px';
+                o.rightBlock.style.width = rightWidth + 'px';
+            }
+
+            o.coverBand.style.display = Math.min(leftPx, leftPx + coverW) < vpW && Math.max(leftPx, leftPx + coverW) > 0 ? 'block' : 'none';
+            o.coverBand.style.left = leftPx + 'px';
+            o.coverBand.style.width = Math.min(leftPx + coverW, vpW) - Math.max(leftPx, 0) + 'px';
+            o.edgeL.style.display = leftPx > 0 && leftPx < vpW ? 'block' : 'none';
+            o.edgeL.style.left = Math.max(0, leftPx) + 'px';
+            o.edgeR.style.display = leftPx + coverW > 0 && leftPx + coverW < vpW ? 'block' : 'none';
+            o.edgeR.style.left = Math.max(0, leftPx + coverW) + 'px';
+
+            o.info.style.left = (Math.max(free.x, 0) + 8) + 'px';
+            o.info.textContent =
+                (debugLastClamped.x ? 'CLAMP-X  ' : '         ') +
+                (debugLastClamped.y ? 'CLAMP-Y  ' : '         ') + '\n' +
+                'free : ' + Math.round(free.width) + 'x' + Math.round(vpH) + ' px' +
+                ' (nav ' + Math.round(free.x) + ', ft ' + Math.round(rightWidth) + ')\n' +
+                'cover: ' + Math.round(coverW) + 'x' + Math.round(coverH) + ' px\n' +
+                'slack: x ' + (free.width - coverW).toFixed(0) + ' px' +
+                '   y ' + (vpH - coverH).toFixed(0) + ' px\n' +
+                'pos  : ' + Math.round(leftPx) + ',' + Math.round(topPx) + ' px (top-left)';
+        } catch (e) {
+            // debug helper must never break the viewer
+        }
+    }
+
+    var tickQueued = false;
+    function tick() {
+        tickQueued = false;
+        // skip clamping while a zoom/pan animation is still running: clamping
+        // against an intermediate resolution would fight the animation and
+        // cause the asymmetric + / - jumps. only clamp once the view is at
+        // rest so the "true" size is settled.
+        if (view.getAnimating && view.getAnimating()) {
+            drawDebugOverlay();
+            requestAnimationFrame(tick);
+            return;
+        }
+        clampView();
+        drawDebugOverlay();
+    }
+    function scheduleClamp() {
+        if (tickQueued) {
+            return;
+        }
+        tickQueued = true;
+        requestAnimationFrame(tick);
+    }
+
+    var observer = null;
+    function start() {
+        view.on('change:center', scheduleClamp);
+        view.on('change:resolution', scheduleClamp);
+        window.addEventListener('resize', scheduleClamp);
+        // re-measure when the overlay layout changes (fullscreen, nav collapse,
+        // fulltext open/close, mobile off-canvas)
+        observer = new MutationObserver(scheduleClamp);
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        // debug overlay: enable via ?coverdebug=1 in the URL, or at runtime
+        // with Ctrl/Cmd+Shift+D (console: window.__coverDebug(true/false))
+        debugEnabled = isDebugEnabled();
+        if (debugEnabled) {
+            createDebugOverlay();
+        }
+        $(document).on('keydown.coverdebug', function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.which === 68 || e.key === 'D' || e.key === 'd')) {
+                e.preventDefault();
+                toggleDebug(!debugEnabled);
+            }
+        });
+        window.__coverDebug = function (on) {
+            toggleDebug(on === undefined ? !debugEnabled : on);
+        };
+
+        scheduleClamp();
+    }
+
+    function toggleDebug(on) {
+        debugEnabled = !!on;
+        if (debugEnabled) {
+            if (!debugOverlay) {
+                createDebugOverlay();
+            }
+            debugOverlay.root.style.display = 'block';
+            drawDebugOverlay();
+        } else if (debugOverlay && debugOverlay.root) {
+            debugOverlay.root.style.display = 'none';
+        }
+    }
+
+    function stop() {
+        view.un('change:center', scheduleClamp);
+        view.un('change:resolution', scheduleClamp);
+        window.removeEventListener('resize', scheduleClamp);
+        if (observer) {
+            observer.disconnect();
+            observer = null;
+        }
+        $(document).off('keydown.coverdebug');
+        window.__coverDebug = undefined;
+        removeDebugOverlay();
+    }
+
+    $(window).on('beforeunload', stop);
+    start();
 }
