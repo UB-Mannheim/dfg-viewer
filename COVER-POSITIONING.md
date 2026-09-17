@@ -77,7 +77,7 @@ sich wie folgt.
 | Methode | Befehl |
 |---|---|
 | **URL-Parameter** | an die Seite `?coverdebug=1` hängen |
-| **Tastenkombination** | `Ctrl/Cmd + Shift + D` |
+| **Tastenkombination** | `Ctrl + Alt + D` |
 | **Browser-Konsole** | `window.__coverDebug(true)` / `window.__coverDebug(false)` |
 
 > **Wichtig:** Nach einer Code-Änderung muss die Seite neu geladen
@@ -94,8 +94,18 @@ farbgemarkten Bereichen:
   ROTE Box links            → blockierte Fläche: linke Navigation (TOC + Metadata)
   ORANGE Box rechts         → blockierte Fläche: Volltext-Bereich (nur, wenn offen)
   GRÜNE gestrichelte Box    → freier, nutzbarer Bereich
-  BLAUES Band (horizontal)  → das Cover im Viewport (vertikaler Streifen)
+  BLAUES Band               → das Sichtbare des Covers im Viewport
     · 2 blaue Kanten im Band → linke bzw. rechte Cover-Kante
+  GELBER Teil im blauen Band → Anteil des Covers, der UNTER der Navigation
+    steckt (nicht sichtbar, daher "wird links nicht erreichbar")
+  ROTE gestreifte Flächen im grünen Bereich
+                              → "Dead Zones": Teile des freien Bereichs, die
+                                bei der aktuellen Zoomstufe NICHT erreichbar
+                                sind (Cover würde unter Navigation/Volltext
+                                ragen oder OL-Begrenzung verletzen)
+  2 GELBE gestrichelte Linien → die tatsächlich äußerste erreichbare Position
+    der linken bzw. rechten Cover-Kante (Schnittmenge aus Free-Rect-Clamp und
+    der OpenLayers-eigenen Begrenzung)
   TEXTFELD unten links      → Live-Messwerte
 ```
 
@@ -105,12 +115,32 @@ Zusätzlich werden im Textfeld (unten links) die aktuellen Messwerte angezeigt:
 CLAMP-X / CLAMP-Y   → ist gerade eine X- bzw. Y-Korrektur aktiv?
 freier Bereich      → Breite x Höhe in CSS-Pixel, inkl. Anteile Navigation/Volltext
 Cover               → Breite x Höhe im Viewport in CSS-Pixel
-slack               → positive Zahl = das Cover kann (noch) weiter verschoben
-                      werden; negative Zahl = das Cover überdeckt den freien
-                      Bereich (Korrektur wird nur eingeschnitten, wenn nötig)
-Position            → obere linke Ecke des Covers relativ zur Karten-Viewport-
-                      Ecke (oben-links = 0,0)
+band                → Bereich, in dem sich die linke Cover-Kante bewegen kann
+                      (L/R: welche Begrenzung greift hier – "free" =
+                      Free-Rect-Clamp, "OL" = OpenLayers-Selbstbegrenzung)
+dead                → Größe der unerreichenbaren Zonen links/rechts
+Position            → x-Koordinate der linken Cover-Kante
 ```
+
+> **Warum stoppt das Cover deutlich vor dem TOC-Rahmen?**
+> Es greifen **zwei** unabhängige Begrenzungen, deren **Schnittmenge**
+> den echten bewegbaren Bereich bestimmt:
+>
+> 1. **Free-Rect-Clamp** (dieses Feature): das Cover muss innerhalb des
+>    grünen freien Bereichs bleiben bzw. ihn überdecken.
+> 2. **OpenLayers-eigene View-Begrenzung**: Die View wird in
+>    `packages/presentation/.../PageView/Utility.js` mit
+>    `constrainOnlyCenter: true` erzeugt. OpenLayers erzwingt dadurch, dass
+>    der **Mittelpunkt des Viewports immer auf der Bildfläche** liegt –
+>    das Bild kann maximal bis zu seiner eigenen Mitte an die Viewport-Mitte
+>    herangeschoben werden.
+>
+> Bei kleinen Zoomstufen (kleines Bild, großer freier Bereich) ist Begrenzung
+> (2) oft die engere, weshalb das Cover "zu früh" vor der TOC-Kante stoppt.
+> Die rote Schraffur zeigt genau diese unerreichenbaren Zonen. Um dieses
+> Verhalten aufzuheben (Cover bis an die TOC-Kante schiebbar machen) müsste
+> das View-Constraint in `createOlView` (`packages/presentation`) deaktiviert
+> werden – das wäre eine Änderung außerhalb von `dfg-viewer`.
 
 ### Was sollte man testen?
 
