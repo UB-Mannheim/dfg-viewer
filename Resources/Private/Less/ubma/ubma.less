@@ -1487,13 +1487,20 @@ ul.tx-dlf-tableofcontents-list li a span span.meta-type-icon {
         display: inline;
     }
 
-    dl span.language-separator {
-        margin-right: 0.25em;
-    }
 
-    //dl dd.collection-entry {
-    //    display: block;
-    //}
+    dl span {
+        // '/'
+        &.author-separator,
+        &.date-separator {
+            margin-right: 0.25em;
+            margin-left: 0.25em;
+        }
+
+        // ','
+        &.language-separator {
+            margin-right: 0.25em;
+        }
+    }
 }
 
 /*
