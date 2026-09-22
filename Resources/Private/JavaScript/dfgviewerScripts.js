@@ -362,7 +362,7 @@ $(document).ready(function() {
     };
 
     // Wait for 500ms to give OpenLayers time to populate the .tx-dlf-map Element
-    setTimeout(checkForChild, 500);    
+    setTimeout(checkForChild, 500);
 
     // Toggle between "show all volumes" and "show fewer volumes" on the multi-volume cover gallery
     $('.volume-covers-toggle').on('click', function () {
@@ -383,6 +383,13 @@ $(document).ready(function() {
         }
     });
 
+
+    // Der Viewer feuert "map-loadend", sobald Karte + Controls initialisiert sind.
+    // Danach darf die Ansicht so nachjustiert werden, dass das Bild (Cover) in
+    // den freien Bereich bleibt (außerhalb linke Navigation + geöffnetem Fulltext).
+    $(window).on('map-loadend', function () {
+        initCoverFreeAreaClamping();
+    });
 
 });
 
@@ -439,4 +446,513 @@ function close_all_submenues(environment = '') {
         $('nav .secondary-nav').removeClass('open');
         $('nav ul.viewer-nav').removeClass('open');
     };
+}
+/**
+ * Keeps the cover inside the free area of the viewport while zooming / panning.
+ *
+ * The cover is rendered by an OpenLayers map (tx_dlf_viewer.map). The left
+ * sidebar (toc + metadata) and the opened fulltext overlay may be drawn on
+ * top of the map, so both count as "not free" and the view is clamped to the
+ * remaining (free) rectangle.
+ *
+ * Behavior:
+ * - cover smaller than the free rect -> the cover has to stay completely
+ *   inside the free rect (background margin may remain around it), i.e. it can
+ *   never be moved underneath the sidebar or the fulltext overlay
+ * - cover larger than the free rect  -> the cover has to cover the free rect,
+ *   i.e. nothing under the sidebar / fulltext overlay may be revealed
+ *
+ * Both cases collapse into one constraint window. The view is clamped to that
+ * window only at rest (no dragging, no running zoom animation), so the native
+ * zoom / pan behavior and their "true" sizes stay untouched and no + / -
+ * jump asymmetry can occur.
+ *
+ * Everything is measured at runtime in CSS pixels, so it adapts automatically
+ * to all breakpoints, to mobile off-canvas layouts, collapsed sidebar and
+ * fullscreen mode.
+ */
+function initCoverFreeAreaClamping() {
+    if (typeof tx_dlf_viewer === 'undefined' || !tx_dlf_viewer.map || typeof ol === 'undefined') {
+        return;
+    }
+
+    var map = tx_dlf_viewer.map;
+    var view = map.getView();
+    var mapEl = map.getTargetElement();
+    if (!mapEl || !view || !mapEl.getBoundingClientRect) {
+        return;
+    }
+
+    // left overlay (toc + metadata)
+    var navEl = $('.control-bar')[0];
+
+    /**
+     * Keep OpenLayers' own center constraint (the View is created with
+     * "constrainOnlyCenter": true, which keeps the viewport center on the
+     * image), but widen the *allowed window* from "center inside the image"
+     * to "cover occupies its Variant-A position within the free rect".
+     *
+     * Problem solved: with a small cover the old rule only allowed the cover
+     * to sit in a narrow band around the viewport center, so it stopped well
+     * short of the left/right frame of the free rect. Here the window becomes
+     * exactly the band the free-area clamp defines, so at small zoom levels
+     * the cover can slide the full way to the frames (and the rule still
+     * prevents leaving the free rect).
+     *
+     * OpenLayers reads this constraint live on setCenter/zoom/pan (view
+     * constraints_.center), so patching it changes the behavior everywhere,
+     * not only in our own code. The original constraint is kept as a
+     * fallback for the not-yet-measurable case.
+     */
+    function extendOlCenterConstraint() {
+        if (!view.constraints_ || typeof view.constraints_.center !== 'function') {
+            return;
+        }
+        if (view.__coverConstraintPatched) {
+            return;
+        }
+        view.__coverConstraintPatched = true;
+        var original = view.constraints_.center;
+
+        view.constraints_.center = function (center, resolution, viewportSize, animating, centerShift) {
+            if (!center) {
+                return undefined;
+            }
+            var free = measureFreeArea();
+            var img = view.getProjection ? view.getProjection().getExtent() : null;
+            if (!free || !resolution || !img) {
+                // not measurable yet -> keep native OpenLayers behavior
+                return original(center, resolution, viewportSize, animating, centerShift);
+            }
+
+            var vpW = free.vpW, vpH = free.vpH;
+            // same center anchor offset OpenLayers applies (only != 0 while
+            // the view has padding; ours does not - kept for compatibility)
+            var shiftX = centerShift ? centerShift[0] : 0;
+            var shiftY = centerShift ? centerShift[1] : 0;
+
+            // horizontal: keep the cover's left edge L inside the Variant-A
+            // band (fit if narrower, cover if wider). L <-> center:
+            //   cx = img[0] + (vpW/2 - L) * resolution
+            var coverWpx = (img[2] - img[0]) / resolution;
+            var aX = img[0] + (vpW / 2 - free.x) * resolution + shiftX;
+            var bX = img[0] + (vpW / 2 - (free.x + free.width - coverWpx)) * resolution + shiftX;
+            var x = Math.min(Math.max(center[0], Math.min(aX, bX)), Math.max(aX, bX));
+
+            // vertical: the free band spans the full viewport height [0, vpH],
+            // keep the cover's top edge T inside [0, vpH-coverHpx] (fit) /
+            // [vpH-coverHpx, 0] (cover). T <-> center:
+            //   cy = img[3] + (T - vpH/2) * resolution
+            var coverHpx = (img[3] - img[1]) / resolution;
+            var aY = img[3] + (0 - vpH / 2) * resolution + shiftY;
+            var bY = img[3] + ((vpH - coverHpx) - vpH / 2) * resolution + shiftY;
+            var y = Math.min(Math.max(center[1], Math.min(aY, bY)), Math.max(aY, bY));
+
+            return [x, y];
+        };
+    }
+    extendOlCenterConstraint();
+
+    function isFulltextOverlayOpen() {
+        return document.body.classList && document.body.classList.contains('fulltext-visible');
+    }
+
+    // width of the overlay currently blocking the right side of the map,
+    // 0 if the fulltext is closed
+    function measureRightOverlayWidth() {
+        if (!isFulltextOverlayOpen()) {
+            return 0;
+        }
+
+        var rect = mapEl.getBoundingClientRect();
+        var candidates = [
+            document.getElementById('tx-dlf-toolbox-fulltext-selection'),
+            document.querySelector('.tx-dlf-toolbox-fulltext-container')
+        ];
+
+        var width = 0;
+        for (var i = 0; i < candidates.length; i++) {
+            var el = candidates[i];
+            if (!el || !el.getBoundingClientRect) {
+                continue;
+            }
+            var r = el.getBoundingClientRect();
+            if (r.left < rect.left) {
+                // degenerated layout, ignore this candidate
+                continue;
+            }
+            width = Math.max(width, rect.right - r.left);
+        }
+        return Math.max(0, width);
+    }
+
+    // free rectangle of the map viewport in CSS px (relative to the viewport)
+    function measureFreeArea() {
+        var rect = mapEl.getBoundingClientRect();
+        if (!rect || rect.width < 20 || rect.height < 20) {
+            return null;
+        }
+
+        // left overlay (toc + metadata) - only counts if it actually overlaps the map
+        var left = 0;
+        if (navEl && navEl.offsetWidth > 0 && navEl.getBoundingClientRect) {
+            left = Math.max(0, navEl.getBoundingClientRect().right - rect.left);
+        }
+
+        // right overlay (fulltext) - only counts while it is opened
+        var right = measureRightOverlayWidth();
+
+        return {
+            x: left,
+            width: Math.max(0, rect.width - left - right),
+            vpW: rect.width,
+            vpH: rect.height
+        };
+    }
+
+    var enforcing = false;
+    function clampView() {
+        if (enforcing) {
+            return;
+        }
+        enforcing = true;
+
+        try {
+            // clamping is only defined for unrotated views
+            if (view.getRotation() === undefined || Math.abs(view.getRotation()) > 1e-6) {
+                return;
+            }
+
+            var resolution = view.getResolution();
+            if (!resolution || resolution <= 0) {
+                return;
+            }
+
+            // image extent in map units (1 map unit == 1 image pixel)
+            var imgExtent = view.getProjection().getExtent();
+            if (!imgExtent) {
+                return;
+            }
+
+            var free = measureFreeArea();
+            if (!free || free.width < 20) {
+                return;
+            }
+
+            var center = view.getCenter();
+            if (!center) {
+                return;
+            }
+
+            var x0 = imgExtent[0];
+            var w = imgExtent[2] - imgExtent[0];
+            var fx = free.x;
+            var fw = free.width;
+            var vpW = free.vpW;
+            var vpH = free.vpH;
+
+            // The image's left/right edge as a function of the view center x
+            // (cx), in CSS px relative to the top-left of the map viewport:
+            //   leftPx  = vpW/2 - (cx - x0) / res
+            //   rightPx = leftPx + w / res
+            // The two "edge meets free-rect edge" positions give the center
+            // bounds; min/max over them enforces "inside the free rect" when the
+            // cover is narrower and "cover the free rect" when it is wider.
+            //   A: leftPx  == fx            -> cx = x0 + res * (vpW/2 - fx)
+            //   B: rightPx == fx + fw       -> cx = x0 + w - res * (fx + fw - vpW/2)
+            var boundA = x0 + resolution * (vpW / 2 - fx);
+            var boundB = x0 + w - resolution * (fx + fw - vpW / 2);
+            var minCx = Math.min(boundA, boundB);
+            var maxCx = Math.max(boundA, boundB);
+            var targetX = Math.min(Math.max(center[0], minCx), maxCx);
+
+            // vertical: the free rect spans the full map viewport height
+            //   topPx = vpH/2 - (y0 - cy) / res   (y0 = imgExtent[3], the top)
+            //   C: topPx  == 0            -> cy = y0 - res * (vpH/2)
+            //   D: bottom == vpH          -> cy = y1 + res * (vpH/2)
+            var boundC = imgExtent[3] - resolution * (vpH / 2);
+            var boundD = imgExtent[1] + resolution * (vpH / 2);
+            var minCy = Math.min(boundC, boundD);
+            var maxCy = Math.max(boundC, boundD);
+            var targetY = Math.min(Math.max(center[1], minCy), maxCy);
+
+            // only move when the deviation is more than a fraction of a
+            // screen pixel (avoids pointless updates / feedback loops)
+            var eps = Math.max(1e-6, 0.2 * resolution);
+            debugLastClamped.x = Math.abs(targetX - center[0]) > eps;
+            debugLastClamped.y = Math.abs(targetY - center[1]) > eps;
+            if (debugLastClamped.x || debugLastClamped.y) {
+                view.setCenter([targetX, targetY]);
+            }
+        } finally {
+            enforcing = false;
+        }
+    }
+    var debugLastClamped = { x: false, y: false };
+    var clampQueued = false;
+    var debugEnabled = false;
+    var debugOverlay = null;
+
+    function isDebugEnabled() {
+        var m = location.search.match(/[?&]coverdebug=([^&]*)/);
+        return !!m && m[1] !== '0' && m[1] !== 'off';
+    }
+
+    function mkDebugEl(cssText) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:absolute;' + cssText;
+        return el;
+    }
+
+    function createDebugOverlay() {
+        debugOverlay = {
+            root: mkDebugEl('inset:0;pointer-events:none;z-index:9999;font:11px/1.4 monospace;'),
+            leftBlock: null,
+            rightBlock: null,
+            freeBox: null,
+            coverBand: null,
+            edgeL: null,
+            edgeR: null,
+            navCoverPart: null,
+            limitL: null,
+            limitR: null,
+            deadL: null,
+            deadR: null,
+            info: null
+        };
+        var o = debugOverlay;
+
+        o.leftBlock = mkDebugEl('top:0;bottom:0;left:0;background:rgba(255,60,60,.15);border-right:2px solid rgba(255,60,60,.9);');
+        o.leftBlock.appendChild(document.createTextNode(' Navigation '));
+        o.rightBlock = mkDebugEl('top:0;bottom:0;right:0;background:rgba(255,150,0,.15);border-left:2px solid rgba(255,150,0,.9);');
+        o.freeBox = mkDebugEl('top:0;bottom:0;border:2px dashed rgba(0,190,0,.85);overflow:visible;');
+        o.coverBand = mkDebugEl('top:0;bottom:0;background:rgba(0,90,255,.06);');
+        o.edgeL = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
+        o.edgeR = mkDebugEl('top:0;bottom:0;width:2px;background:rgba(0,90,255,.9);');
+        // part of the cover that overlaps the navigation area (hidden under it)
+        o.navCoverPart = mkDebugEl('top:0;bottom:0;background:rgba(255,220,0,.25);border-right:2px dashed rgba(255,200,0,.9);');
+        // extreme reachable positions of the cover's edges at the current
+        // zoom (free-area clamp AND OpenLayers' own view constraint combined)
+        o.limitL = mkDebugEl('top:0;bottom:0;width:0;border-left:3px dashed rgba(255,220,0,.95);');
+        o.limitR = mkDebugEl('top:0;bottom:0;width:0;border-left:3px dashed rgba(255,220,0,.95);');
+        // parts of the free area the cover can NOT reach at this zoom
+        o.deadL = mkDebugEl('top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,0,0,.28) 0 6px,rgba(255,0,0,.12) 6px 12px);');
+        o.deadR = mkDebugEl('top:0;bottom:0;background:repeating-linear-gradient(45deg,rgba(255,0,0,.28) 0 6px,rgba(255,0,0,.12) 6px 12px);');
+        o.info = mkDebugEl('bottom:8px;left:12px;z-index:10000;background:rgba(0,0,0,.72);color:#cfeecf;padding:6px 8px;white-space:pre;border-radius:3px;');
+        // all overlays are absolute children of the map viewport (inset:0),
+        // so every "left:" value is directly in viewport CSS px
+        mapEl.appendChild(o.root);
+        o.root.appendChild(o.leftBlock);
+        o.root.appendChild(o.rightBlock);
+        o.root.appendChild(o.freeBox);
+        o.root.appendChild(o.coverBand);
+        o.root.appendChild(o.edgeL);
+        o.root.appendChild(o.edgeR);
+        o.root.appendChild(o.navCoverPart);
+        o.root.appendChild(o.deadL);
+        o.root.appendChild(o.deadR);
+        o.root.appendChild(o.limitL);
+        o.root.appendChild(o.limitR);
+        o.root.appendChild(o.info);
+    }
+
+    function removeDebugOverlay() {
+        if (debugOverlay && debugOverlay.root && debugOverlay.root.parentNode) {
+            debugOverlay.root.parentNode.removeChild(debugOverlay.root);
+        }
+        debugOverlay = null;
+    }
+
+    function drawDebugOverlay() {
+        if (!debugEnabled || !debugOverlay) {
+            return;
+        }
+        try {
+            var resolution = view.getResolution();
+            var imgExtent = view.getProjection().getExtent();
+            var free = measureFreeArea();
+            var center = view.getCenter();
+            if (!resolution || !imgExtent || !free || !center) {
+                return;
+            }
+
+            var o = debugOverlay;
+            var vpW = free.vpW;
+            var vpH = free.vpH;
+            var coverW = (imgExtent[2] - imgExtent[0]) / resolution;
+            var coverH = (imgExtent[3] - imgExtent[1]) / resolution;
+            var leftPx = vpW / 2 + (imgExtent[0] - center[0]) / resolution;
+
+            o.freeBox.style.left = free.x + 'px';
+            o.freeBox.style.width = free.width + 'px';
+
+            o.leftBlock.style.display = free.x > 1 ? 'block' : 'none';
+            if (free.x > 1) {
+                o.leftBlock.style.width = free.x + 'px';
+            }
+
+            var rightPx = free.x + free.width;
+            var rightWidth = vpW - rightPx;
+            o.rightBlock.style.display = rightWidth > 1 ? 'block' : 'none';
+            if (rightWidth > 1) {
+                o.rightBlock.style.left = rightPx + 'px';
+                o.rightBlock.style.width = rightWidth + 'px';
+            }
+
+            o.coverBand.style.display = Math.min(leftPx, leftPx + coverW) < vpW && Math.max(leftPx, leftPx + coverW) > 0 ? 'block' : 'none';
+            o.coverBand.style.left = leftPx + 'px';
+            o.coverBand.style.width = Math.min(leftPx + coverW, vpW) - Math.max(leftPx, 0) + 'px';
+            o.edgeL.style.display = leftPx > 0 && leftPx < vpW ? 'block' : 'none';
+            o.edgeL.style.left = Math.max(0, leftPx) + 'px';
+            o.edgeR.style.display = leftPx + coverW > 0 && leftPx + coverW < vpW ? 'block' : 'none';
+            o.edgeR.style.left = Math.max(0, leftPx + coverW) + 'px';
+
+            // part of the cover that hides under the navigation (left) area
+            var navCoverW = Math.max(0, Math.min(leftPx + coverW, free.x) - leftPx);
+            o.navCoverPart.style.display = navCoverW > 1 ? 'block' : 'none';
+            if (navCoverW > 1) {
+                o.navCoverPart.style.left = leftPx + 'px';
+                o.navCoverPart.style.width = navCoverW + 'px';
+            }
+
+            // How far can the cover's LEFT edge move at this zoom?
+            //
+            // (1) free-area band (target, variant A):
+            //       left edge at free-left     -> free.x
+            //       right edge at free-right   -> free.x + free.width - coverW
+            var fLo = Math.min(free.x, free.x + free.width - coverW);
+            var fHi = Math.max(free.x, free.x + free.width - coverW);
+            //
+            // (2) OpenLayers constraint: we PATCHED it (extendOlCenterConstraint)
+            //     so its allowed window equals the free-area band, i.e. (2) == (1).
+            //     The *native* (unpatched) OL band, kept only for comparison,
+            //     comes from "constrainOnlyCenter" (viewport center on image):
+            //       native left-edge range = [vpW/2 - coverW, vpW/2]
+            var olNativeMin = vpW / 2 - coverW;
+            var olNativeMax = vpW / 2;
+            //
+            // reachable band = intersection of (1) and (2) = the free-area band
+            var limMin = fLo;
+            var limMax = fHi;
+            var bandOk = limMin <= limMax;
+
+            // (with the patched OL constraint) nothing inside the green free
+            // rect is unreachable anymore, so there are no dead zones
+            var dzLw = 0;
+            var dzRw = 0;
+            o.deadL.style.display = 'none';
+            o.deadR.style.display = 'none';
+
+            // the two current extremes (reachable band)
+            o.limitL.style.display = bandOk && limMin > -1 && limMin < vpW ? 'block' : 'none';
+            o.limitL.style.left = Math.max(0, limMin) + 'px';
+            o.limitR.style.display = bandOk && (limMax + coverW) > -1 && (limMax + coverW) < vpW ? 'block' : 'none';
+            o.limitR.style.left = Math.max(0, limMax + coverW) + 'px';
+
+            // room gained by widening the OL constraint vs the native band
+            var gainedL = Math.max(0, olNativeMin - fLo);
+            var gainedR = Math.max(0, fHi - olNativeMax);
+
+            o.info.textContent =
+                (debugLastClamped.x ? 'CLAMP-X  ' : '         ') +
+                (debugLastClamped.y ? 'CLAMP-Y  ' : '         ') + '\n' +
+                'free : ' + Math.round(free.width) + 'x' + Math.round(vpH) + ' px' +
+                ' (nav ' + Math.round(free.x) + ', ft ' + Math.round(rightWidth) + ')\n' +
+                'cover: ' + Math.round(coverW) + 'x' + Math.round(coverH) + ' px\n' +
+                'band : left edge ' + Math.round(limMin) + ' .. ' + Math.round(limMax) + ' px\n' +
+                'OL   : native was ' + Math.round(olNativeMin) + ' .. ' + Math.round(olNativeMax) +
+                ' -> +L ' + Math.round(gainedL) + ' / +R ' + Math.round(gainedR) + ' px\n' +
+                'pos  : ' + Math.round(leftPx) + ' px (cover left)';
+        } catch (e) {
+            // debug helper must never break the viewer
+        }
+    }
+
+    var tickQueued = false;
+    function tick() {
+        tickQueued = false;
+        // skip clamping while a zoom/pan animation is still running: clamping
+        // against an intermediate resolution would fight the animation and
+        // cause the asymmetric + / - jumps. only clamp once the view is at
+        // rest so the "true" size is settled.
+        if (view.getAnimating && view.getAnimating()) {
+            drawDebugOverlay();
+            requestAnimationFrame(tick);
+            return;
+        }
+        clampView();
+        drawDebugOverlay();
+    }
+    function scheduleClamp() {
+        if (tickQueued) {
+            return;
+        }
+        tickQueued = true;
+        requestAnimationFrame(tick);
+    }
+
+    var observer = null;
+    function start() {
+        view.on('change:center', scheduleClamp);
+        view.on('change:resolution', scheduleClamp);
+        window.addEventListener('resize', scheduleClamp);
+        // re-measure when the overlay layout changes (fullscreen, nav collapse,
+        // fulltext open/close, mobile off-canvas)
+        observer = new MutationObserver(scheduleClamp);
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        // Debug-Overlay: per ?coverdebug=1 in der URL aktivieren oder zur
+        // Laufzeit per Ctrl+Alt+D bzw. Konsole (window.__coverDebug(true/false))
+        debugEnabled = isDebugEnabled();
+        if (debugEnabled) {
+            createDebugOverlay();
+        }
+        $(document).on('keydown.coverdebug', function (e) {
+            // Ctrl+Alt+D (Debug): kein Standard-Shortcut von Chrome/Firefox/Edge,
+            // daher keine Kollision (im Gegensatz zu Ctrl+Shift+D = Firefox
+            // "Alle Tabs in Lesezeichen").
+            if (e.ctrlKey && e.altKey && !e.shiftKey &&
+                (e.which === 68 || e.key === 'D' || e.key === 'd')) {
+                e.preventDefault();
+                toggleDebug(!debugEnabled);
+            }
+        });
+        window.__coverDebug = function (on) {
+            toggleDebug(on === undefined ? !debugEnabled : on);
+        };
+
+        scheduleClamp();
+    }
+
+    function toggleDebug(on) {
+        debugEnabled = !!on;
+        if (debugEnabled) {
+            if (!debugOverlay) {
+                createDebugOverlay();
+            }
+            debugOverlay.root.style.display = 'block';
+            drawDebugOverlay();
+        } else if (debugOverlay && debugOverlay.root) {
+            debugOverlay.root.style.display = 'none';
+        }
+    }
+
+    function stop() {
+        view.un('change:center', scheduleClamp);
+        view.un('change:resolution', scheduleClamp);
+        window.removeEventListener('resize', scheduleClamp);
+        if (observer) {
+            observer.disconnect();
+            observer = null;
+        }
+        $(document).off('keydown.coverdebug');
+        window.__coverDebug = undefined;
+        removeDebugOverlay();
+    }
+
+    $(window).on('beforeunload', stop);
+    start();
 }
