@@ -68,6 +68,9 @@ page.bodyTag = <body class="website home">
 [END]
 
 [getTSFE() && getTSFE().id == {$plugin.tx_dfgviewer.kitodoPageView}]
+  # Band-/PURL-Requests ohne cHash (tx_dlf[id] ist ein dynamischer Route-Parameter)
+  # teilen sich sonst EINEN Page-Cache-Eintrag und liefern veralteten Bandinhalt.
+  config.no_cache = 1
   # Fullscreen-Status aus Cookie serverseitig initial setzen, damit der Layoutwechsel
   # nicht erst per JS nach dem ersten Paint stattfindet (Leiste springt sonst ~20px).
   [request && traverse(request.getCookieParams(), 'tx-dlf-pageview-zoomFullscreen') == 'true']
