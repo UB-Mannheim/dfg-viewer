@@ -73,14 +73,15 @@
                     <f:variable name="xChildId" value="{child.ownDocumentId}" />
                 </f:else>
             </f:if>
+            <f:comment><f:debug>{child}</f:debug></f:comment>
             <kitodo:link
                 viewData="{viewData}"
                 pageUid="{settings.targetPid}"
                 additionalParams="{f:if(condition:'{xChildId}', then:'{\'id\':xChildId, \'page\':child.page}', else: '{\'page\':child.page}')}"
                 excludedParams="{0: 'measure', 1: 'multiview'}"
                 section="{child.section}"
-                class="{child.type}"
-                title="{f:if(condition:'{child.title}', then: '{child.title}', else: '{child.type}')}">
+                class="{child.type} cl_ft_83 dfgPlugKito"
+                title="{f:if(condition:'{child.title}', then: '{child.translatedType}: {child.title}', else: '{child.translatedType}')}">
                     <f:render partial="TableOfContents/Title" arguments="{child: child}"/>
             </kitodo:link>
         </f:else>
