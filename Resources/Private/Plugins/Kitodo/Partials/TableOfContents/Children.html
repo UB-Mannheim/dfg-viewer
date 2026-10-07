@@ -56,11 +56,13 @@
             <!-- LINE 57: child.ownDocumentId: {child.ownDocumentId}, child.id: {child.id}, child.type: {child.type}, child.AnchorDocumentID: {child.AnchorDocumentID} -->
             <f:if condition="{child.id}">
                 <f:then>
-                    <f:if condition="{child.AnchorDocumentID}">
+                    <f:if condition="{child.AnchorDocumentID} && {child.type} == 'newspaper'">
                         <f:then>
                             <f:comment>
-                                if newspaper or periodika a child.AnchorDocumentID exists,
+                                if newspaper a child.AnchorDocumentID exists,
                                 then use this id instead of child.id, because this is in this case a url instead a id!
+                                For year/issue children AnchorDocumentID points to the main newspaper anchor,
+                                which would show the years list instead of the calendar — use child.id instead.
                             </f:comment>
                             <f:variable name="xChildId" value="{child.AnchorDocumentID}" />
                         </f:then>
