@@ -132,7 +132,7 @@
                         .transition();
                         transform-origin: center top;
                     }
-                    &.open {
+                    &.open, &.hover-open {
                         .contains-issues {
                             .transform(scale(1.2));
                             &:before {
@@ -142,7 +142,7 @@
                         }
                         ul.issues {
                             opacity: 1;
-                            // In the calendar view, with an open day, display date above the underlying text completely.
+                            // In the calendar view, with an open/hovered day, display date above the underlying text completely.
                             z-index: 100;
                             .transform(scaleY(1));
                             li {

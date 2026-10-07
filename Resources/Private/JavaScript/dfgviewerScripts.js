@@ -148,6 +148,15 @@ $(document).ready(function() {
         $(this).parent().toggleClass('open');
     });
 
+    // Preview day's issue list on hover (desktop only):
+    // hover the whole cell; keep click behaviour (toggle / navigate) intact by
+    // using a separate 'hover-open' state that is removed on mouseleave.
+    if (!mobileCheck()) {
+        $('.calendar-view td:has(.contains-issues)')
+            .on('mouseenter', function () { $(this).addClass('hover-open'); })
+            .on('mouseleave', function () { $(this).removeClass('hover-open'); });
+    }
+
     // add body class if any calendar is present
     $('.tx-dfgviewer-newspaper-calendar').parents('body').addClass('calendar');
     $('.tx-dfgviewer-newspaper-years').parents('body').addClass('calendar');
