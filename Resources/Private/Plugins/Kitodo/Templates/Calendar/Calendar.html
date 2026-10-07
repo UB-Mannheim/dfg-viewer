@@ -15,6 +15,7 @@
     LICENSE.txt file that was distributed with this source code.
 </f:comment>
 
+<!-- [2026-10-07 | my] body class 'calendar' — my commit 90cedb4 (add calendar body class to calendar templates) -->
 <script>document.body.classList.add('calendar');</script>
 <div class="tx-dfgviewer-newspaper-calendar">
     <div class="year-anchor">
@@ -53,6 +54,7 @@
 
                     <f:for each="{month.week}" as="week">
                         <tr>
+                            <!-- [2026-10-07 | my] 'days' class auf alle 7 Tageszellen — my commit 0033337 -->
                             <td class="days">
                                 <f:render partial="Calendar/Day" arguments="{'day': '{week.DAYMON}'}"></f:render>
                             </td>
@@ -84,6 +86,7 @@
     <div class="list-view">
         <ul>
             <f:for each="{issueData}" as="issues" key="dayTimestamp">
+                <!-- [2026-10-07 | up] sprachspezifisches Datumsformat (de: %d.%m.%Y, sonst %Y-%m-%d) — upstream commit 7e5c226 -->
                 <span class="listview-date">
                     <f:if condition="{language} == 'de'">
                         <f:then><f:format.date format="%A, %d.%m.%Y">{dayTimestamp}</f:format.date></f:then>
