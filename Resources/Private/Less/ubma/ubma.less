@@ -494,6 +494,107 @@ ul.tx-dlf-tableofcontents-list span.pagination {
     }
 }
 
+/* Band-Cover-Galerie für mehrbändige Werke (Hauptaufnahme ohne ausgewählten Band) */
+.tx-dlf-empty .tx-dlf-volume-covers {
+    text-align: left;
+    max-width: 96%;
+    margin: 0 auto;
+
+    &-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px 14px;
+    }
+
+    &-extra[hidden] {
+        display: none;
+    }
+}
+
+/* "Band auswählen" – wie eine H2 des Site-Themes (app_new: h2) */
+.headline_select_vol {
+    font-family: myriad-pro,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen-Sans,Ubuntu,Cantarell,'Helvetica Neue',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: inherit;
+    text-rendering: optimizeLegibility;
+    font-size: 1.75rem;
+    line-height: 1.4285714286;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tx-dlf-volume-cover {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 104px;
+    margin: 0;                // überschreibt .ubma a { margin: auto }
+    max-width: 100%;          // überschreibt .ubma a { max-width: 90% }
+    transition: transform 0.15s ease;
+
+    img {
+        display: block;
+        width: 100%;
+        height: 148px;
+        object-fit: contain;
+        // kurze (quere) Covers an die Box-Top kanten statt vertikal zentrieren
+        object-position: top;
+        //border: 1px solid @light-grey-border;
+        background-color: @ubma-white;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+
+    .volume-cover-label {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-top: 4px;
+        font-size: 0.75em;
+        line-height: 1.2;
+        color: #000;
+    }
+
+    &:hover,
+    &:focus {
+        // wie beim ol.tx-dlf-pagegrid-list li:hover – vergrössert das Cover
+        transform: scale(1.1);
+        z-index: 1;
+
+        img {
+            border-color: @base-blue;
+        }
+
+        .volume-cover-label {
+            color: @base-blue;
+        }
+    }
+}
+
+.volume-covers-toggle {
+    float: none;
+    display: block;
+    margin: 18px auto 0;
+    padding: 6px 18px;
+    border: 1px solid @base-blue;
+    border-radius: 3px;
+    background-color: @ubma-white;
+    color: @base-blue;
+    cursor: pointer;
+    font-size: 0.95em;
+
+    &:hover,
+    &:focus {
+        background-color: @base-blue;
+        color: @ubma-white;
+    }
+}
+
 body.dfgviewer.calendar .document-submenu {
   display: none;
 }
