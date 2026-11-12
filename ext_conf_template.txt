@@ -1,0 +1,2 @@
+# cat=General; type=int[0-100000]; label=PID of the configured Kitodo workview page
+workviewPageId = 21
