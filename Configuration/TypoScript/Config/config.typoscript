@@ -15,7 +15,10 @@ config {
   concatenateCss = 0
 
   #Cache
-  cache_clearAtMidnight = 1
+  # clearAtMidnight deaktiviert (17.11.2026): wuerde cache_period auf den
+  # naechsten Mitternachtspunkt kuerzen (CacheTimeout-Middleware).
+  cache_clearAtMidnight = 0
+  cache_period = 259200
   sendCacheHeaders = 1
   headerComment =
 
