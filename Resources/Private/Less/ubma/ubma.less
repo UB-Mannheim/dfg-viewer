@@ -570,7 +570,11 @@ ul.tx-dlf-tableofcontents-list span.pagination {
 .volume-covers-toggle {
     float: none;
     display: block;
-    margin: 18px auto 0;
+    // eigene Zeile im flex-grid: 100% Breite erzwingt den Zeilenumbruch,
+    // damit der Button nie neben dem letzten Band steht
+    width: 100%;
+    text-align: center;
+    margin: 18px 0 0;
     padding: 6px 18px;
     border: 1px solid @base-blue;
     border-radius: 3px;
