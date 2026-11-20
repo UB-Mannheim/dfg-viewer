@@ -49,10 +49,12 @@
                                     </f:for>
                                 </div>
                                 <f:if condition="{covers.hasMore}">
-                                    <button type="button" class="volume-covers-toggle" aria-expanded="false">
-                                        <span class="volume-covers-toggle-show">{f:translate(key: 'ubma.show-all-volumes', extensionName: 'dfgviewer')}</span>
-                                        <span class="volume-covers-toggle-hide" hidden>{f:translate(key: 'ubma.show-fewer-volumes', extensionName: 'dfgviewer')}</span>
-                                    </button>
+                                    <div class="volume-covers-toggle-row">
+                                        <button type="button" class="volume-covers-toggle" aria-expanded="false">
+                                            <span class="volume-covers-toggle-show">{f:translate(key: 'ubma.show-all-volumes', extensionName: 'dfgviewer')}</span>
+                                            <span class="volume-covers-toggle-hide" hidden>{f:translate(key: 'ubma.show-fewer-volumes', extensionName: 'dfgviewer')}</span>
+                                        </button>
+                                    </div>
                                 </f:if>
                             </div>
                         </div>
