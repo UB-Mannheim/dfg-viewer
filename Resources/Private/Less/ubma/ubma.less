@@ -567,16 +567,16 @@ ul.tx-dlf-tableofcontents-list span.pagination {
     }
 }
 
-/* Wrapper für den Toggle-Button: 100% Breite im flex-grid erzwingt die
-   eigene Zeile, der Button selbst bleibt textbreit und zentriert */
+/* Wrapper für den Toggle-Button: steht außerhalb des flex-grids (eigene
+   Zeile), zentriert den textbreiten Button */
 .volume-covers-toggle-row {
-    width: 100%;
+    text-align: center;
 }
 
 .volume-covers-toggle {
     float: none;
-    display: block;
-    margin: 18px auto 0;
+    display: inline-block;
+    margin: 18px 0 0;
     padding: 6px 18px;
     border: 1px solid @base-blue;
     border-radius: 3px;
