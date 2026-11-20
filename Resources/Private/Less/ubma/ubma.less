@@ -530,6 +530,7 @@ ul.tx-dlf-tableofcontents-list span.pagination {
     width: 104px;
     margin: 0;                // überschreibt .ubma a { margin: auto }
     max-width: 100%;          // überschreibt .ubma a { max-width: 90% }
+    .transition();
 
     img {
         display: block;
@@ -557,6 +558,8 @@ ul.tx-dlf-tableofcontents-list span.pagination {
 
     &:hover,
     &:focus {
+        .transform(scale(1.1));
+
         img {
             border-color: @base-blue;
         }
